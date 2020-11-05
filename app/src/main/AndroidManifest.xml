@@ -10,10 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
         <activity
-            android:name=".Tabbed_Activity"
-            android:label="@string/title_activity_tabbed_"
-            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar"></activity>
-        <activity
             android:name=".Settings"
             android:label="Settings" />
         <activity
