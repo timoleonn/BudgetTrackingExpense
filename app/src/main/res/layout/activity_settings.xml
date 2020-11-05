@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Settings">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Settings"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Bright mode:"
+        android:textSize="24sp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:onClick="theme"
+        android:text="Bright Mode:"
+        android:textOff="White"
+        android:textOn="Dark" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Which Currency do you want?"
+        android:textSize="24sp" />
+
+    <RadioGroup
+        android:id="@+id/rbGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <RadioButton
+            android:id="@+id/rbEuro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Euro" />
+
+        <RadioButton
+            android:id="@+id/rbDollars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dollars" />
+
+        <RadioButton
+            android:id="@+id/rbPound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="English Pound" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="In which Bank you have account:"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/cbCyprus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bank of Cyprus" />
+
+    <CheckBox
+        android:id="@+id/cbHellenic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hellenic Bank" />
+
+    <CheckBox
+        android:id="@+id/cbRcb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RCB Bank" />
+
+    <CheckBox
+        android:id="@+id/cbPiraeus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Piraeus Bank" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About us" />
+
+    <RatingBar
+        android:id="@+id/ratingStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
