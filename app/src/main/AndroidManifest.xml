@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
         <activity
+            android:name=".Tabbed_Bank_Activity"
+            android:label="@string/title_activity_tabbed__bank_"
+            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar"></activity>
+        <activity
             android:name=".Settings"
             android:label="Settings" />
         <activity
