@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.budgettrackingexpense.ui.main.SectionsPagerAdapter;
 
@@ -31,8 +32,7 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Toast.makeText(getApplicationContext(),"Here you can see the most important Banks in Cyprus",Toast.LENGTH_LONG).show();
             }
         });
     }

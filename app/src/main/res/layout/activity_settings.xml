@@ -93,10 +93,22 @@
         android:text="RCB Bank" />
 
     <CheckBox
-        android:id="@+id/cbPiraeus"
+        android:id="@+id/cbAstro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Piraeus Bank" />
+        android:text="AstroBank" />
+
+    <CheckBox
+        android:id="@+id/cbRevolut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Revolut" />
+
+    <CheckBox
+        android:id="@+id/cbAlpha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alpha Bank" />
 
     <TextView
         android:id="@+id/textView5"
