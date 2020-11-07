@@ -33,6 +33,22 @@
         </item>
 
         <item
+            android:title="Banks">
+
+            <menu>
+                <item
+                    android:id="@+id/action_my_banks"
+                    android:icon="@drawable/ic_baseline_account_balance_24"
+                    android:title="My Banks"/>
+                <item
+                    android:id="@+id/action_all_banks"
+                    android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+                    android:title="All Banks"/>
+            </menu>
+
+        </item>
+
+        <item
             android:title="Communicate">
 
             <menu>
