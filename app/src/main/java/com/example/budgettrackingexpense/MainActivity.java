@@ -1,13 +1,17 @@
 package com.example.budgettrackingexpense;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.action_home, R.id.action_profile)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -52,7 +56,23 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
 
+    //  CHECK IF SETTINGS IS CLICKED
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent in = new Intent(this, Settings.class);
+            startActivity(in);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -60,5 +80,30 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.action_home:
+                break;
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(MainActivity.this, Settings.class);
+                startActivity(settingsIntent);
+                break;
+            case R.id.action_profile:
+                Intent profileIntent = new Intent(MainActivity.this, ProfileFragment.class);
+                startActivity(profileIntent);
+                break;
+            case R.id.action_logout:
+                break;
+            case R.id.action_my_banks:
+                break;
+            case R.id.action_all_banks:
+                break;
+            case R.id.action_rate_us:
+                break;
+        }
+
+        return true;
     }
 }
