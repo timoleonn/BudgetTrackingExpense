@@ -12,20 +12,15 @@
             android:title="Home"/>
 
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="Settings"/>
-
-        <item
             android:title="Profile">
 
             <menu>
                 <item
-                    android:id="@+id/action_profile"
+                    android:id="@+id/nav_profile"
                     android:icon="@drawable/ic_baseline_person_24"
                     android:title="Profile"/>
                 <item
-                    android:id="@+id/action_logout"
+                    android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_baseline_reply_24"
                     android:title="Logout"/>
             </menu>
@@ -37,11 +32,11 @@
 
             <menu>
                 <item
-                    android:id="@+id/action_my_banks"
+                    android:id="@+id/nav_my_banks"
                     android:icon="@drawable/ic_baseline_account_balance_24"
                     android:title="My Banks"/>
                 <item
-                    android:id="@+id/action_all_banks"
+                    android:id="@+id/nav_all_banks"
                     android:icon="@drawable/ic_baseline_format_list_bulleted_24"
                     android:title="All Banks"/>
             </menu>
@@ -54,7 +49,7 @@
             <menu>
 
                 <item
-                    android:id="@+id/action_rate_us"
+                    android:id="@+id/nav_rate_us"
                     android:icon="@drawable/ic_baseline_star_rate_24"
                     android:title="Rate Us"/>
 
