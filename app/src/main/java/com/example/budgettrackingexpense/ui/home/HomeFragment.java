@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.budgettrackingexpense.R;
+import com.example.budgettrackingexpense.Tabbed_Bank_Activity;
 
 public class HomeFragment extends Fragment {
 
@@ -33,4 +35,5 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
+
 }

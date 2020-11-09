@@ -133,4 +133,11 @@
         android:onClick="submit"
         android:text="Submit"
         app:backgroundTint="#F44336" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="test"
+        android:text="test" />
 </LinearLayout>
