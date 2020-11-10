@@ -2,8 +2,13 @@ package com.example.budgettrackingexpense;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class Settings extends AppCompatActivity {
 
@@ -11,13 +16,30 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.settings_menu, menu);
-        return true;
+
+    public void submit(View v)
+    {
+        RadioGroup group=findViewById(R.id.rbGroup);
+
+        String currency="";
+
+        int selection=group.getCheckedRadioButtonId();
+
+        if (selection==R.id.rbEuro)
+        {
+            currency="Euros";
+        }else if (selection==R.id.rbDollars)
+        {
+            currency="Dollars";
+        }else if(selection==R.id.rbPound)
+        {
+            currency="Pound";
+        }
+
+
 
     }
 }

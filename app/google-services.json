@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "725568994437",
+    "firebase_url": "https://budgettrackingexpense.firebaseio.com",
+    "project_id": "budgettrackingexpense",
+    "storage_bucket": "budgettrackingexpense.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725568994437:android:86efaf36d542d023887dec",
+        "android_client_info": {
+          "package_name": "com.example.budgettrackingexpense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725568994437-3en9gv4i04ikfotirninuo4oo28b20vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHI7FrauL9g-R-ppZ1NBc8cSpg4qnALjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725568994437-3en9gv4i04ikfotirninuo4oo28b20vg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

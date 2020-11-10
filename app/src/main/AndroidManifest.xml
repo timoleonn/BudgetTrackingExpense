@@ -10,8 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
         <activity
+            android:name=".Tabbed_Bank_Activity"
+            android:label="Banks"
+            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar"></activity>
+        <activity
             android:name=".Settings"
-            android:label="Settings" />
+            android:label="Settings"
+            android:parentActivityName=".Tabbed_Bank_Activity"/>
         <activity
             android:name=".add_income"
             android:label="Add Income" />

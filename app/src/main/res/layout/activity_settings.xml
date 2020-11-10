@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF5722"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".Settings">
 
@@ -15,7 +15,9 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="Settings"
-        android:textSize="36sp" />
+        android:textColor="#3F51B5"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView4"
@@ -23,15 +25,17 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="Bright mode:"
-        android:textSize="24sp" />
+        android:textColor="#3F51B5"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <Switch
-        android:id="@+id/switch1"
-        android:layout_width="match_parent"
+        android:id="@+id/theme"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:onClick="theme"
         android:text="Bright Mode:"
+        android:textColor="@android:color/holo_red_dark"
         android:textOff="White"
         android:textOn="Dark" />
 
@@ -40,7 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Which Currency do you want?"
-        android:textSize="24sp" />
+        android:textColor="#3F51B5"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <RadioGroup
         android:id="@+id/rbGroup"
@@ -52,19 +58,22 @@
             android:id="@+id/rbEuro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Euro" />
+            android:text="Euro"
+            android:textColor="@android:color/holo_red_dark" />
 
         <RadioButton
             android:id="@+id/rbDollars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dollars" />
+            android:text="Dollars"
+            android:textColor="@android:color/holo_red_dark" />
 
         <RadioButton
             android:id="@+id/rbPound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="English Pound" />
+            android:text="English Pound"
+            android:textColor="@android:color/holo_red_dark" />
     </RadioGroup>
 
     <TextView
@@ -72,40 +81,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="In which Bank you have account:"
-        android:textSize="24sp" />
+        android:textColor="#3F51B5"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <CheckBox
         android:id="@+id/cbCyprus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bank of Cyprus" />
+        android:text="Bank of Cyprus"
+        android:textColor="@android:color/holo_red_dark" />
 
     <CheckBox
         android:id="@+id/cbHellenic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hellenic Bank" />
+        android:text="Hellenic Bank"
+        android:textColor="@android:color/holo_red_dark" />
 
     <CheckBox
         android:id="@+id/cbRcb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RCB Bank" />
+        android:text="RCB Bank"
+        android:textColor="@android:color/holo_red_dark" />
 
     <CheckBox
-        android:id="@+id/cbPiraeus"
+        android:id="@+id/cbAstro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Piraeus Bank" />
+        android:text="AstroBank"
+        android:textColor="@android:color/holo_red_dark" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <CheckBox
+        android:id="@+id/cbRevolut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About us" />
+        android:text="Revolut"
+        android:textColor="@android:color/holo_red_dark" />
 
-    <RatingBar
-        android:id="@+id/ratingStar"
+    <CheckBox
+        android:id="@+id/cbAlpha"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Alpha Bank"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="submit"
+        android:text="Submit"
+        app:backgroundTint="#F44336" />
 </LinearLayout>
