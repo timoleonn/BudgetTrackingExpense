@@ -6,13 +6,11 @@
 
     <group android:checkableBehavior="single">
 
-        <!-- HOME -->
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Home"/>
 
-        <!-- PROFILE -->
         <item
             android:title="Profile">
 
@@ -29,20 +27,6 @@
 
         </item>
 
-        <!-- CATEGORIES -->
-        <item
-            android:title="Categories">
-
-            <menu>
-                <item
-                    android:id="@+id/nav_all_categories"
-                    android:icon="@drawable/ic_baseline_category_24"
-                    android:title="All Categories"/>
-            </menu>
-
-        </item>
-
-        <!-- BANKS -->
         <item
             android:title="Banks">
 
@@ -59,7 +43,6 @@
 
         </item>
 
-        <!-- COMMUNICATE -->
         <item
             android:title="Communicate">
 
