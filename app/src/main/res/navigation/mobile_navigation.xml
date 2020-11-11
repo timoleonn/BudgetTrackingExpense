@@ -7,11 +7,16 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.budgettrackingexpense.HomeFragment"
-        android:label="Home"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_categories"
         android:name="com.example.budgettrackingexpense.CategoriesFragment"
         android:label="Categories"
         tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/nav_my_banks"
+        android:name="com.example.budgettrackingexpense.MyBanksFragment"
+        android:label="My Banks"
+        tools:layout="@layout/fragment_my_banks" />
 </navigation>
