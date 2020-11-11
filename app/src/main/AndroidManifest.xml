@@ -9,10 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
-        <activity
-            android:name=".CategoriesActivity"
-            android:label="@string/title_activity_categories"
-            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar"></activity>
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".Tabbed_Bank_Activity"
