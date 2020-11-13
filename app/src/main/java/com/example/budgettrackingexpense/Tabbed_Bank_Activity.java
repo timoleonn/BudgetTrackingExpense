@@ -7,10 +7,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+=======
+>>>>>>> parent of 3de0361... Started on Rate us page
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,10 +37,13 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+<<<<<<< HEAD
 
 
         
 
+=======
+>>>>>>> parent of 3de0361... Started on Rate us page
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
