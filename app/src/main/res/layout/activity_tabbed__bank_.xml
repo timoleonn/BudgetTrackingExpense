@@ -15,6 +15,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
@@ -26,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
+            app:tabGravity="center"
             app:tabRippleColor="@color/design_default_color_error"
             app:tabSelectedTextColor="@color/teal_200"
             app:tabTextColor="@color/white" />
