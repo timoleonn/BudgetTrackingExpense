@@ -27,7 +27,6 @@
     <string name="tab_text_3">Bank of Cyprus</string>
     <string name="tab_text_4">Hellenic Bank</string>
     <string name="tab_text_5">RCB Bank</string>
-    <string name="tab_text_6">Revolut</string>
     <string name="title_activity_tabbed_">Banks in Cyprus</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <!-- Strings used for fragments for navigation -->
