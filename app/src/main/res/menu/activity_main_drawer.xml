@@ -4,60 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Dashboard"/>
+    <item
+        android:id="@+id/nav_categories"
+        android:icon="@drawable/ic_baseline_category_24"
+        android:title="Categories"/>
+    <item
+        android:id="@+id/nav_my_banks"
+        android:icon="@drawable/ic_baseline_account_balance_24"
+        android:title="My Banks"/>
+    <item
+        android:id="@+id/nav_all_banks"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:title="All Banks"/>
 
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_baseline_home_24"
-            android:title="Home"/>
+    <!-- PROFILE -->
+    <item android:title="Profile">
+        <menu>
+            <!-- MY PROFILE -->
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:title="My Profile" />
+            <!-- LOGOUT -->
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_baseline_reply_24"
+                android:title="Logout"/>
+        </menu>
+    </item>
 
-        <item
-            android:title="Profile">
+    <!-- COMMUNICATE -->
+    <item android:title="Communicate">
+        <menu>
+            <!-- RATE US -->
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_baseline_star_rate_24"
+                android:title="Rate Us"/>
+        </menu>
+    </item>
 
-            <menu>
-                <item
-                    android:id="@+id/nav_profile"
-                    android:icon="@drawable/ic_baseline_person_24"
-                    android:title="Profile"/>
-                <item
-                    android:id="@+id/nav_logout"
-                    android:icon="@drawable/ic_baseline_reply_24"
-                    android:title="Logout"/>
-            </menu>
 
-        </item>
 
-        <item
-            android:title="Banks">
 
-            <menu>
-                <item
-                    android:id="@+id/nav_my_banks"
-                    android:icon="@drawable/ic_baseline_account_balance_24"
-                    android:title="My Banks"/>
-                <item
-                    android:id="@+id/nav_all_banks"
-                    android:icon="@drawable/ic_baseline_format_list_bulleted_24"
-                    android:title="All Banks"/>
-            </menu>
 
-        </item>
 
-        <item
-            android:title="Communicate">
 
-            <menu>
 
-                <item
-                    android:id="@+id/nav_rate_us"
-                    android:icon="@drawable/ic_baseline_star_rate_24"
-                    android:title="Rate Us"/>
 
-            </menu>
-
-        </item>
-
-    </group>
 
 
 </menu>
