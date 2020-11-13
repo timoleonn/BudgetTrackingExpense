@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    public static final String FULLNAME = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_categories, R.id.nav_my_banks,
-                R.id.nav_rate_us)
+                R.id.nav_home, R.id.nav_categories, R.id.nav_my_banks)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -52,14 +49,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Intent in = new Intent(this, Settings.class);
             startActivity(in);
-        } else if (id == R.id.nav_rate_us) {
-            String fullName = "Timoleon Charilaou";
-
-            Bundle bundle = new Bundle();
-            bundle.putString("fullName", fullName);
-
-            RateUsFragment fragObj = new RateUsFragment();
-            fragObj.setArguments(bundle);
         }
 
         return super.onOptionsItemSelected(item);
@@ -77,10 +66,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    public void goToBanks(View view) {
-        Intent in = new Intent(this, Tabbed_Bank_Activity.class);
-        startActivity(in);
     }
 }

@@ -19,9 +19,4 @@
         android:name="com.example.budgettrackingexpense.MyBanksFragment"
         android:label="My Banks"
         tools:layout="@layout/fragment_my_banks" />
-    <fragment
-        android:id="@+id/nav_rate_us"
-        android:name="com.example.budgettrackingexpense.RateUsFragment"
-        android:label="fragment_rate_us"
-        tools:layout="@layout/fragment_rate_us" />
 </navigation>
