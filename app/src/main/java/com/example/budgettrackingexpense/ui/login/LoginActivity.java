@@ -5,7 +5,6 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -24,14 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.budgettrackingexpense.R;
-import com.example.budgettrackingexpense.RegisterActivity;
 import com.example.budgettrackingexpense.ui.login.LoginViewModel;
 import com.example.budgettrackingexpense.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-    private TextView register;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

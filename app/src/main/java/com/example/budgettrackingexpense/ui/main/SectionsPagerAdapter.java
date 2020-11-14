@@ -22,7 +22,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             R.string.tab_text_2,
             R.string.tab_text_3,
             R.string.tab_text_4,
-            R.string.tab_text_5};
+            R.string.tab_text_5,
+            R.string.tab_text_6};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -46,6 +47,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 5;
+        return 6;
     }
 }

@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.nav_rate_us) {
             String fullName = "Timoleon Charilaou";
 
-            Bundle bundle = new Bundle();
-            bundle.putString("fullName", fullName);
-
-            RateUsFragment fragObj = new RateUsFragment();
-            fragObj.setArguments(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("fullName", fullName);
+//
+//            RateUsFragment fragObj = new RateUsFragment();
+//            fragObj.setArguments(bundle);
         }
 
         return super.onOptionsItemSelected(item);
