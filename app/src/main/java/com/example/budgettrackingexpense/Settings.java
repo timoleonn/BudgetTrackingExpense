@@ -46,7 +46,7 @@ public class Settings extends AppCompatActivity {
 
     public void submit(View v)
     {
-        RadioGroup group=findViewById(R.id.rbGroupGender);
+        RadioGroup group=findViewById(R.id.rbGroup);
 
         String currency="";
 

@@ -11,6 +11,9 @@ import com.example.budgettrackingexpense.data.Result;
 import com.example.budgettrackingexpense.data.model.LoggedInUser;
 import com.example.budgettrackingexpense.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
@@ -57,14 +60,26 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
         if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
+            return true;
         } else {
-            return !username.trim().isEmpty();
+            return false;
         }
     }
 
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+       // return password != null && password.trim().length() > 5;
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN ="(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        if ((password.length()>5) && !matcher.equals(""))
+        {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
