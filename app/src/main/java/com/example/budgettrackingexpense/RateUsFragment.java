@@ -35,21 +35,34 @@ public class RateUsFragment extends Fragment {
         Button btn = root.findViewById(R.id.btnSubmitFeedback);
         EditText etFeedback = root.findViewById(R.id.etFeedback);
         RatingBar rbFeedback = root.findViewById(R.id.rbFeedback);
-        TextView tvFeedbackResult = root.findViewById(R.id.tvFeedbackResult);
+        EditText etFullName = root.findViewById(R.id.etFullName);
+        etFullName.setText(fullName);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String etFeedbackText = etFeedback.getText().toString();
                 double FeedbackRating = rbFeedback.getRating();
                 String RatingBarMessage = FeedbackRating + "/6";
+                String etFeedbackText = etFeedback.getText().toString();
 
-                String message = "Thank you for submitting your feedback!\n" +
-                        "\nName: " + fullName +
-                        "\nRating: " + RatingBarMessage +
-                        "\nMessage: " + etFeedbackText;
+//                String message = "Thank you for submitting your feedback!\n" +
+//                        "\nName: " + fullName +
+//                        "\nRating: " + RatingBarMessage +
+//                        "\nMessage: " + etFeedbackText;
 
-                tvFeedbackResult.setText(message);
+//                tvFeedbackResult.setText(message);
+                CardView cvFeedback = root.findViewById(R.id.cvFeedback);
+                cvFeedback.setVisibility(View.VISIBLE);
+
+                TextView tvThanks = root.findViewById(R.id.tvThanks);
+                TextView tvName = root.findViewById(R.id.tvName);
+                TextView tvRating = root.findViewById(R.id.tvRating);
+                TextView tvFeedback = root.findViewById(R.id.tvFeedback);
+
+                tvThanks.setText("Thank you for submitting your feedback!");
+                tvName.setText("Name: " + etFullName.getText().toString());
+                tvRating.setText("Rating: " + RatingBarMessage);
+                tvFeedback.setText("Message: " + etFeedbackText);
             }
         });
 

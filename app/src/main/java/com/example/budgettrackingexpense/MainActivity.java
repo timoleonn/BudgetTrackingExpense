@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Intent in = new Intent(this, Settings.class);
             startActivity(in);
+        } else if (id == R.id.action_all_banks) {
+            Intent in = new Intent(this, Tabbed_Bank_Activity.class);
+            startActivity(in);
         } else if (id == R.id.nav_rate_us) {
             String fullName = "Timoleon Charilaou";
 

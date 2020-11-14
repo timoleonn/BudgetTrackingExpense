@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,8 +41,8 @@ public class HomeFragment extends Fragment {
         fab_add_income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "ADDED INCOME", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent in = new Intent(getContext(), add_income.class);
+                startActivity(in);
             }
         });
 

@@ -26,36 +26,26 @@ public class add_income extends AppCompatActivity {
         etDate = (TextView)
                 findViewById(R.id.etDate);
 
-        calendar
-                .setOnDateChangeListener(
-                        new CalendarView
-                                .OnDateChangeListener() {
-                            @Override
+        calendar.setOnDateChangeListener(
+                new CalendarView.OnDateChangeListener() {
+                    @Override
 
-                            // In this Listener have one method
-                            // and in this method we will
-                            // get the value of DAYS, MONTH, YEARS
-                            public void onSelectedDayChange(
-                                    @NonNull CalendarView view,
-                                    int year,
-                                    int month,
-                                    int dayOfMonth) {
+                    // In this Listener have one method
+                    // and in this method we will
+                    // get the value of DAYS, MONTH, YEARS
+                    public void onSelectedDayChange(@NonNull CalendarView view, int year,  int month,  int dayOfMonth) {
+                        // Store the value of date with
+                        // format in String type Variable
+                        // Add 1 in month because month
+                        // index is start with 0
+                        String Date = dayOfMonth + "-"
+                                + (month + 1) + "-" + year;
 
-                                // Store the value of date with
-                                // format in String type Variable
-                                // Add 1 in month because month
-                                // index is start with 0
-                                String Date
-                                        = dayOfMonth + "-"
-                                        + (month + 1) + "-" + year;
-
-                                // set this date in TextView for Display
-                                etDate.setText(Date);
-                            }
-                        });
+                        // set this date in TextView for Display
+                        etDate.setText(Date);
+                    }
+                });
     }
-
-
 
 
     @Override
