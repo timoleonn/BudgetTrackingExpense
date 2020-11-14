@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.example.budgettrackingexpense.ui.main.SectionsPagerAdapter;
@@ -30,12 +32,17 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"Here you can see the most important Banks in Cyprus",Toast.LENGTH_LONG).show();
             }
         });
+
+
+
 
     }
     @Override

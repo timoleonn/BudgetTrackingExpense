@@ -46,7 +46,7 @@ public class PlaceholderFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
+        View root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        pageViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
@@ -56,28 +56,25 @@ public class PlaceholderFragment extends Fragment {
 //        });
         if(getArguments().getInt(ARG_SECTION_NUMBER)==1)
         {
-             root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
+             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==2)
         {
-            root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
+            root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==3)
         {
-            root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
+            root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         }
         else if(getArguments().getInt(ARG_SECTION_NUMBER)==4)
         {
-            root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
+            root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==5)
         {
-            root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
+            root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         }
-        else if (getArguments().getInt(ARG_SECTION_NUMBER)==6)
-        {
-            root = inflater.inflate(R.layout.fragment_tabbed__bank_, container, false);
-        }
+
 
         return root;
     }
