@@ -75,11 +75,12 @@ public class LoginViewModel extends ViewModel {
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
 
-        if ((password.length()>5) && !matcher.equals(""))
+        if ((password.trim().length()>5) && !matcher.equals(""))
         {
             return true;
         }else{
             return false;
         }
     }
+
 }

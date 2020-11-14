@@ -13,10 +13,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.budgettrackingexpense.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,6 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String emailText=email.getText().toString();
+                String usernameText = username.getText().toString();
+                String countryText=country.getText().toString();
                 String  passwordText = password.getText().toString();
                 String passwordconfText = passwordConfirm.getText().toString();
 
@@ -102,16 +106,34 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 pb2.setVisibility(View.VISIBLE);
+
                 // REGISTER THE USER IN THE FIREBASE
                  fAuth.createUserWithEmailAndPassword(emailText,passwordconfText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                      @Override
                      public void onComplete(@NonNull Task<AuthResult> task) {
                          if (task.isSuccessful())
                          {
-                             Toast.makeText(RegisterActivity.this,"User succesfully Registerd",Toast.LENGTH_SHORT).show();
-                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                             User user = new User(usernameText,countryText,emailText);
+                             FirebaseDatabase.getInstance().getReference("Users")
+                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+                                     if (task.isSuccessful())
+                                     {
+                                         Toast.makeText(RegisterActivity.this,"User succesfully Registerd",Toast.LENGTH_SHORT).show();
+                                         pb2.setVisibility(View.VISIBLE);
+                                         //LOGIN THE USER AUTOMATICLY
+                                     }else
+                                     {
+                                         Toast.makeText(RegisterActivity.this,"Their was an error with our resgistration"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                         pb2.setVisibility(View.GONE);
+                                     }
+                                 }
+                             });
                          }else{
                              Toast.makeText(RegisterActivity.this,"Their was an error with our resgistration"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                             pb2.setVisibility(View.GONE);
                          }
                      }
                  });
