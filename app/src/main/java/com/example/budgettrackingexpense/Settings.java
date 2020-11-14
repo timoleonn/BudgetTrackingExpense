@@ -2,6 +2,7 @@ package com.example.budgettrackingexpense;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -37,5 +38,11 @@ public class Settings extends AppCompatActivity {
 
 
 
+    }
+
+    public void test(View v)
+    {
+        Intent in=new Intent(this, add_income.class);
+        startActivity(in);
     }
 }
