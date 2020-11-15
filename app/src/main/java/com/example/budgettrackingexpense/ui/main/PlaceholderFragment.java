@@ -103,9 +103,8 @@ public class PlaceholderFragment extends Fragment {
             web.loadUrl("https://online.rcbcy.com/netteller-war/");
 
             return root;
+
         }
-
-
         return root;
     }
 }
