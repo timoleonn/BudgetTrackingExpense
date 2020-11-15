@@ -75,27 +75,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //  CHECK WHAT MENU ITEM IN NAVIGATION DRAWER IS PRESSED
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                goToFragment(new HomeFragment());
-            case R.id.nav_categories:
-                startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
-                overridePendingTransition(0, 0);
-            case R.id.nav_my_banks:
-                goToFragment(new MyBanksFragment());
-            case R.id.nav_all_banks:
-                startActivity(new Intent(getApplicationContext(), Tabbed_Bank_Activity.class));
-                overridePendingTransition(0, 0);
-            case R.id.nav_profile:
-//                goToFragment(new ProfileFragment());
-            case R.id.nav_rate_us:
-                goToFragment(new RateUsFragment());
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            goToFragment(new HomeFragment());
+        } else if (id == R.id.nav_categories) {
+            startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+            overridePendingTransition(0, 0);
+        } else if (id == R.id.nav_my_banks) {
+            goToFragment(new MyBanksFragment());
+        } else if (id == R.id.nav_all_banks) {
+            startActivity(new Intent(getApplicationContext(), Tabbed_Bank_Activity.class));
+            overridePendingTransition(0, 0);
+        } else if (id == R.id.nav_profile) {
+            //
+        } else if (id == R.id.nav_logout) {
+            //
+        } else if (id == R.id.nav_rate_us) {
+            goToFragment(new RateUsFragment());
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     //  CALL FRAGMENT
     public void goToFragment(Fragment f) {
