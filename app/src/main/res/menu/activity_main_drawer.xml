@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_baseline_account_balance_24"
         android:title="My Banks"/>
     <item
-        android:id="@+id/action_all_banks"
+        android:id="@+id/nav_all_banks"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
         android:title="@string/action_all_banks" />
 
