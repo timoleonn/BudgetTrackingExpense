@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String FULLNAME = "";
 
+    DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,18 +34,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_categories, R.id.nav_my_banks,
+                R.id.nav_home, R.id.nav_my_banks,
                 R.id.nav_rate_us)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_categories:
+                        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -55,14 +72,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.action_all_banks) {
             Intent in = new Intent(this, Tabbed_Bank_Activity.class);
             startActivity(in);
-        } else if (id == R.id.nav_rate_us) {
-            String fullName = "Timoleon Charilaou";
-
-//            Bundle bundle = new Bundle();
-//            bundle.putString("fullName", fullName);
-//
-//            RateUsFragment fragObj = new RateUsFragment();
-//            fragObj.setArguments(bundle);
         }
 
         return super.onOptionsItemSelected(item);
@@ -80,10 +89,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    public void goToBanks(View view) {
-        Intent in = new Intent(this, Tabbed_Bank_Activity.class);
-        startActivity(in);
     }
 }
