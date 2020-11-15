@@ -35,14 +35,5 @@ public class Settings extends AppCompatActivity {
         {
             currency="Pound";
         }
-
-
-
-    }
-
-    public void test(View v)
-    {
-        Intent in=new Intent(this, add_income.class);
-        startActivity(in);
     }
 }

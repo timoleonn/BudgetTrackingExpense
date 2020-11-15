@@ -38,8 +38,8 @@ public class add_income extends AppCompatActivity {
                         // format in String type Variable
                         // Add 1 in month because month
                         // index is start with 0
-                        String Date = dayOfMonth + "-"
-                                + (month + 1) + "-" + year;
+                        String Date = dayOfMonth + "/"
+                                + (month + 1) + "/" + year;
 
                         // set this date in TextView for Display
                         etDate.setText(Date);

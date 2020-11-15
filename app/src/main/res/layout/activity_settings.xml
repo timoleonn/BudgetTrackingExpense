@@ -114,13 +114,6 @@
         android:textColor="@android:color/holo_red_dark" />
 
     <CheckBox
-        android:id="@+id/cbRevolut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Revolut"
-        android:textColor="@android:color/holo_red_dark" />
-
-    <CheckBox
         android:id="@+id/cbAlpha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,10 +127,4 @@
         android:text="Submit"
         app:backgroundTint="#F44336" />
 
-    <Button
-        android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="test"
-        android:text="Button" />
 </LinearLayout>
