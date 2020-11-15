@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -57,22 +59,50 @@ public class PlaceholderFragment extends Fragment {
         if(getArguments().getInt(ARG_SECTION_NUMBER)==1)
         {
              root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://aeb.alphabank.com.cy/netteller-war/Login.xhtml");
+
+            return root;
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==2)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://www.piraeusbank.com/sites/cyprus/el/Pages/default.aspx");
+
+            return root;
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==3)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://online.bankofcyprus.com/netteller-web/");
+
+            return root;
         }
         else if(getArguments().getInt(ARG_SECTION_NUMBER)==4)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://www.hellenicbank.com/portalserver/hb-en-portal/en/personal-banking/ways-to-bank/i-need-a/web-banking");
+
+            return root;
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==5)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://online.rcbcy.com/netteller-war/");
+
+            return root;
         }
 
 
