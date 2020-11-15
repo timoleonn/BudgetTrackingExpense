@@ -51,10 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null ) {
-            fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.nav_host_fragment, new HomeFragment());
-            fragmentTransaction.commit();
+            goToFragment(new HomeFragment());
         }
     }
 

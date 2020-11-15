@@ -20,6 +20,7 @@
             android:name=".Tabbed_Bank_Activity"
             android:label="Banks"
             android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".Settings"
             android:label="Settings"

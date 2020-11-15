@@ -27,7 +27,12 @@ public class RateUsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         String fullName = "Timoleon Charilaou";
+
+        //  SET FRAGMENT TITLE
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Rate us");
+
 
         View root = inflater.inflate(R.layout.fragment_rate_us, container, false);
 
@@ -38,6 +43,7 @@ public class RateUsFragment extends Fragment {
         EditText etFullName = root.findViewById(R.id.etFullName);
         etFullName.setText(fullName);
 
+        //  PROCESS SUBMIT FEEDBACK
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
