@@ -10,13 +10,13 @@
         android:label="Dashboard"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/nav_my_banks"
-        android:name="com.example.budgettrackingexpense.MyBanksFragment"
-        android:label="My Banks"
-        tools:layout="@layout/fragment_my_banks" />
-    <fragment
         android:id="@+id/nav_rate_us"
         android:name="com.example.budgettrackingexpense.RateUsFragment"
         android:label="fragment_rate_us"
         tools:layout="@layout/fragment_rate_us" />
+    <fragment
+        android:id="@+id/nav_my_banks"
+        android:name="com.example.budgettrackingexpense.MyBanksFragment"
+        android:label="My Banks"
+        tools:layout="@layout/fragment_my_banks" />
 </navigation>

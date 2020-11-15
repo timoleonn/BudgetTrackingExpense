@@ -11,6 +11,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,11 +23,11 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-
-    public static final String FULLNAME = "";
-
     DrawerLayout drawer;
+    private AppBarConfiguration mAppBarConfiguration;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    public static final String FULLNAME = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +50,32 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_categories:
-                        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                }
-
-                return false;
-            }
-        });
+//        //  CHECK WHAT MENU ITEM IN NAVIGATION DRAWER IS PRESSED
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.nav_categories:
+////                        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+////                        overridePendingTransition(0, 0);
+//                    case R.id.nav_my_banks:
+//                        fragmentManager = getSupportFragmentManager();
+//                        fragmentTransaction = fragmentManager.beginTransaction();
+//                        fragmentTransaction.add(R.id.nav_host_fragment,new MyBanksFragment());
+//                        fragmentTransaction.commit();
+//                }
+//
+//                return false;
+//            }
+//        });
     }
 
+    //  CHECK WHAT BUTTON IS PRESSED ON TOOLBAR TOP
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
             Intent in = new Intent(this, Settings.class);
-            startActivity(in);
-        } else if (id == R.id.action_all_banks) {
-            Intent in = new Intent(this, Tabbed_Bank_Activity.class);
             startActivity(in);
         }
 
