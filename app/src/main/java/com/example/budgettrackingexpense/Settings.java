@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
@@ -19,8 +20,6 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
     public void submit(View v) {
@@ -49,19 +48,18 @@ public class Settings extends AppCompatActivity {
 
         public void theme(View v)
         {
-            Switch sw=findViewById(R.id.switchBright);
-            ConstraintLayout layout=findViewById(R.id.layout);
+            Switch sw = findViewById(R.id.switchBright);
+            LinearLayout layout = findViewById(R.id.LinearLayoutSettings);
 
-        if (sw.isChecked())
-        {
-            layout.setBackgroundColor(Color.GRAY);
-            sw.setText("Dark Mode:on");
-        }else
-        {
-            layout.setBackgroundColor(Color.WHITE);
-            sw.setText("Dark Mode:off");
+            if (sw.isChecked())
+            {
+                layout.setBackgroundColor(Color.GRAY);
+                sw.setText("Dark Mode: On");
+            } else {
+                layout.setBackgroundColor(Color.WHITE);
+                sw.setText("Dark Mode: Off");
+
+            }
 
         }
-
-    }
 }
