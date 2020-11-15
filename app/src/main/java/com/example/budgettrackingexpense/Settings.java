@@ -44,8 +44,6 @@ public class Settings extends AppCompatActivity {
             currency = "Pound";
         }
     }
-
-
         public void theme(View v)
         {
             Switch sw = findViewById(R.id.switchBright);
