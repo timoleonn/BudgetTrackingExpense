@@ -1,14 +1,22 @@
 package com.example.budgettrackingexpense;
 
 public class User {
-    public String fullname , age, email;
+    public String email;
+    public String password;
+    public String fullname;
+    public String country;
+    public String username;
+    public String gender;
 
-    public User(){
-
+    public User() {
     }
-    public User(String fullname,String age,String email){
-        this.fullname=fullname;
-        this.age=age;
-        this.email=email;
+
+    public User(String emailText,String nameText, String passwordText, String usernameText, String countryText,String gender) {
+        this.email = emailText;
+        this.password = passwordText;
+        this.fullname = nameText;
+        this.country = countryText;
+        this.username = usernameText;
+        this.gender = gender;
     }
 }

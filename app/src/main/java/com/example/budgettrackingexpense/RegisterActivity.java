@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,19 +20,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText name,country,username,password,passwordConfirm,email;
-    Button submit;
-    ProgressBar pb2;
-    String gender;
-    TextView loginHere;
-    FirebaseAuth fAuth;
+    private EditText name,country,username,password,passwordConfirm,email;
+    private Button submit;
+    private ProgressBar pb2;
+    private String gender;
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,102 +50,145 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
 
         submit = findViewById(R.id.submit);
-        fAuth = FirebaseAuth.getInstance();
-        loginHere = findViewById(R.id.loginHere);
+        pb2 = findViewById(R.id.pb2);
 
-        pb2=findViewById(R.id.pb2);
+        /*database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference();*/
+        mAuth = FirebaseAuth.getInstance();
+
+
 
         RadioGroup group = findViewById(R.id.rbGroup);
-        int selection= group.getCheckedRadioButtonId();
-        if(selection == R.id.male)
-        {
-            gender="male";
-        }else if(selection == R.id.female)
-        {
-            gender ="female";
-        }else if(selection == R.id.other)
-        {
+        int selection = group.getCheckedRadioButtonId();
+        if (selection == R.id.male) {
+            gender = "male";
+        } else if (selection == R.id.female) {
+            gender = "female";
+        } else if (selection == R.id.other) {
             gender = "other";
         }
+    }
 
-        if (fAuth.getCurrentUser() != null)
+    @Override
+    public void onClick(View  v) {
+        if(v.getId() == R.id.submit)
         {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+            registerUser();
         }
-        submit.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void registerUser()
+    {
+        String nameText = name.getText().toString().trim();
+        String emailText = email.getText().toString().trim();
+        String usernameText = username.getText().toString().trim();
+        String countryText = country.getText().toString().trim();
+        String passwordText = password.getText().toString().trim();
+        String passwordconfText = passwordConfirm.getText().toString().trim();
+
+        if (emailText.isEmpty())
+        {
+            email.setError("Fullname is required");
+            email.requestFocus();
+            return;
+        }
+        if (usernameText.isEmpty())
+        {
+            email.setError("username is required");
+            email.requestFocus();
+            return;
+        }
+        if (countryText.isEmpty())
+        {
+            email.setError("Country is required");
+            email.requestFocus();
+            return;
+        }
+        if (passwordText.isEmpty())
+        {
+            email.setError("password is required");
+            email.requestFocus();
+            return;
+        }
+        if (passwordText != passwordconfText)
+        {
+            email.setError("The two password have to match");
+            email.requestFocus();
+            return;
+        }
+        pb2.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(emailText,passwordconfText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onClick(View view) {
-
-                String emailText=email.getText().toString();
-                String usernameText = username.getText().toString();
-                String countryText=country.getText().toString();
-                String  passwordText = password.getText().toString();
-                String passwordconfText = passwordConfirm.getText().toString();
-
-                // CHECK FOR THE VALID EMAIL AND PASSWORD
-                if (emailText.isEmpty())
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
                 {
-                    email.setError("Email must not be empty");
-                    return;
-                }
-                /*if (passwordText.isEmpty() )
-                    {
-                        password.setError("The password must not be empty");
-                        return;
-                    }
-                else*/
-                Pattern pattern;
-                Matcher matcher;
-                final String PASSWORD_PATTERN ="(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])";
-                pattern = Pattern.compile(PASSWORD_PATTERN);
-                matcher = pattern.matcher(passwordText);
+                    User user = new User(emailText,nameText,passwordText,usernameText,countryText,gender);
+                    FirebaseDatabase.getInstance().getReference("User")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                            {
+                                Toast.makeText(RegisterActivity.this,"The user has been registered succesfully",Toast.LENGTH_SHORT);
+                                pb2.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                Toast.makeText(RegisterActivity.this,"The user has not been registered succesfully",Toast.LENGTH_SHORT);
+                                pb2.setVisibility(View.GONE);
+                            }
+                        }
+                    });
 
-                if ((passwordText.length()<5) || matcher.equals("")) {
-                    password.setError("Not a valid password. Your password must be at least 5 characters and contain at least one letter, one number and one special character(@#$%^+=!)");
-                }
-
-                if (passwordconfText != passwordText )
+                }else
                 {
-                    passwordConfirm.setError("Please check again the password. The two fields do not match");
-                    return;
-                }
-
-                pb2.setVisibility(View.VISIBLE);
-
-                // REGISTER THE USER IN THE FIREBASE
-                 fAuth.createUserWithEmailAndPassword(emailText,passwordconfText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                     @Override
-                     public void onComplete(@NonNull Task<AuthResult> task) {
-                         if (task.isSuccessful())
-                         {
-                             User user = new User(usernameText,countryText,emailText);
-                             FirebaseDatabase.getInstance().getReference("Users")
-                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
-                                     if (task.isSuccessful())
-                                     {
-                                         Toast.makeText(RegisterActivity.this,"User succesfully Registerd",Toast.LENGTH_SHORT).show();
-                                         pb2.setVisibility(View.VISIBLE);
-                                         //LOGIN THE USER AUTOMATICLY
-                                     }else
-                                     {
-                                         Toast.makeText(RegisterActivity.this,"Their was an error with our resgistration"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                         pb2.setVisibility(View.GONE);
-                                     }
-                                 }
-                             });
-                         }else{
-                             Toast.makeText(RegisterActivity.this,"Their was an error with our resgistration"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                             pb2.setVisibility(View.GONE);
-                         }
-                     }
-                 });
+                    Toast.makeText(RegisterActivity.this,"The user has not been registered succesfully",Toast.LENGTH_SHORT);
+                    pb2.setVisibility(View.GONE);                }
             }
         });
-
-
     }
+
+
 }
+
+
+
+
+
+
+ /* nameText = name.getText().toString();
+                 emailText = email.getText().toString();
+                 usernameText = username.getText().toString();
+                 countryText = country.getText().toString();
+                 passwordText = password.getText().toString();
+                 passwordconfText = passwordConfirm.getText().toString();
+                 if(nameText.isEmpty())
+                 {
+                     Toast.makeText(RegisterActivity.this, "Please make sure the name field is not empty",
+                             Toast.LENGTH_SHORT).show();
+                 }
+                 if(emailText.isEmpty())
+                 {
+                     Toast.makeText(RegisterActivity.this, "Please make sure the email field is not empty",
+                             Toast.LENGTH_SHORT).show();
+                 }
+                if(usernameText.isEmpty())
+                {
+                    Toast.makeText(RegisterActivity.this, "Please make sure the username field is not empty",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(password.length()<5 )
+                {
+                    Toast.makeText(RegisterActivity.this, "Please make sure the password field is more than 5 characters",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if(password != passwordConfirm )
+                {
+                    Toast.makeText(RegisterActivity.this, "Please make sure the two password fields match each other",
+                            Toast.LENGTH_SHORT).show();
+                }*/
+
+
+
+
+
