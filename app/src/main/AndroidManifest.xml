@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
+        <activity android:name=".AddCategoryActivity"></activity>
         <activity
             android:name=".CategoriesActivity"
             android:label="@string/title_activity_categories"
-            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar"></activity>
+            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".Tabbed_Bank_Activity"
             android:label="Banks"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".Settings"
             android:label="Settings"

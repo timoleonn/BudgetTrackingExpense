@@ -8,18 +8,13 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgettrackingexpense.R;
 import com.example.budgettrackingexpense.Settings;
-import com.example.budgettrackingexpense.Tabbed_Bank_Activity;
 import com.example.budgettrackingexpense.add_income;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -60,7 +55,7 @@ public class PlaceholderFragment extends Fragment {
         View fabRoot = inflater.inflate(R.layout.activity_tabbed__bank_, container, false);
 
         Button btnGoToMaps = root.findViewById(R.id.btnGoToMaps);
-        FloatingActionButton fab = fabRoot.findViewById(R.id.fabGoToBanks);
+        FloatingActionButton fab = fabRoot.findViewById(R.id.fabAddCategory);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        pageViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
