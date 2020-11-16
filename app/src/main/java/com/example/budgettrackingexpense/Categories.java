@@ -1,25 +1,31 @@
 package com.example.budgettrackingexpense;
 
 public class Categories {
-    private String Name;
-    private Double Budget;
+    String name;
+    Double budget;
+
+    public Categories(String name, Double budget) {
+        this.name = name;
+        this.budget = budget;
+    }
 
     public Categories() {
+
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Double getBudget() {
-        return Budget;
+        return budget;
     }
 
     public void setBudget(Double budget) {
-        Budget = budget;
+        this.budget = budget;
     }
 }

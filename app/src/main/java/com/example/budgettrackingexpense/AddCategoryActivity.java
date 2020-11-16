@@ -22,7 +22,6 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     DatabaseReference reff;
     Categories categories;
-//    long maxID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +35,6 @@ public class AddCategoryActivity extends AppCompatActivity {
         categories = new Categories();
 
         reff = FirebaseDatabase.getInstance().getReference().child("categories");
-//        reff.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    maxID = (snapshot.getChildrenCount());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
         btnCreateCategory.setOnClickListener(new View.OnClickListener() {
             @Override
