@@ -11,6 +11,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,9 +24,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 
     private AppBarConfiguration mAppBarConfiguration;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
 
     public static final String FULLNAME = "";
 
@@ -32,37 +42,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_categories, R.id.nav_my_banks,
-                R.id.nav_rate_us)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null ) {
+            goToFragment(new HomeFragment());
+        }
     }
 
+    //  CHECK WHAT BUTTON IS PRESSED ON TOOLBAR TOP
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
             Intent in = new Intent(this, Settings.class);
             startActivity(in);
-        } else if (id == R.id.action_all_banks) {
-            Intent in = new Intent(this, Tabbed_Bank_Activity.class);
-            startActivity(in);
-        } else if (id == R.id.nav_rate_us) {
-            String fullName = "Timoleon Charilaou";
-
-//            Bundle bundle = new Bundle();
-//            bundle.putString("fullName", fullName);
-//
-//            RateUsFragment fragObj = new RateUsFragment();
-//            fragObj.setArguments(bundle);
         }
 
         return super.onOptionsItemSelected(item);
@@ -75,15 +74,40 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    //  CHECK WHAT MENU ITEM IN NAVIGATION DRAWER IS PRESSED
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            goToFragment(new HomeFragment());
+        } else if (id == R.id.nav_categories) {
+            startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
+            overridePendingTransition(0, 0);
+        } else if (id == R.id.nav_my_banks) {
+            goToFragment(new MyBanksFragment());
+        } else if (id == R.id.nav_all_banks) {
+            startActivity(new Intent(getApplicationContext(), Tabbed_Bank_Activity.class));
+            overridePendingTransition(0, 0);
+        } else if (id == R.id.nav_profile) {
+            //
+        } else if (id == R.id.nav_logout) {
+            //
+        } else if (id == R.id.nav_rate_us) {
+            goToFragment(new RateUsFragment());
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
-    public void goToBanks(View view) {
-        Intent in = new Intent(this, Tabbed_Bank_Activity.class);
-        startActivity(in);
+
+    //  CALL FRAGMENT
+    public void goToFragment(Fragment f) {
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, f);
+        fragmentTransaction.commit();
     }
+
+
 }

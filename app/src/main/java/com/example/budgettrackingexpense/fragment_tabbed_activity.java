@@ -65,9 +65,11 @@ public class fragment_tabbed_activity extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
 
-        WebView web=(WebView)root.findViewById(R.id.web);
+        WebView web=root.findViewById(R.id.web);
         web.setWebViewClient(new WebViewClient());
         web.loadUrl("https://www.bankofcyprus.com/");
+
+
 
         return root;
     }

@@ -37,8 +37,8 @@
 
     <EditText
         android:id="@+id/etNumber"
-        android:layout_width="141dp"
-        android:layout_height="57dp"
+        android:layout_width="145dp"
+        android:layout_height="59dp"
         android:ems="10"
         android:hint="Income"
         android:inputType="number"
@@ -55,7 +55,6 @@
         android:ems="10"
         android:hint="Insert Notes"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,11 +62,11 @@
         app:layout_constraintVertical_bias="0.864" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="add"
-        android:text="Add"
+        android:text="Add Income"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

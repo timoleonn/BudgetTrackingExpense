@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class add_income extends AppCompatActivity {
@@ -38,8 +40,8 @@ public class add_income extends AppCompatActivity {
                         // format in String type Variable
                         // Add 1 in month because month
                         // index is start with 0
-                        String Date = dayOfMonth + "-"
-                                + (month + 1) + "-" + year;
+                        String Date = dayOfMonth + "/"
+                                + (month + 1) + "/" + year;
 
                         // set this date in TextView for Display
                         etDate.setText(Date);
@@ -64,5 +66,16 @@ public class add_income extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void add(View v)
+    {
+        EditText number=findViewById(R.id.etNumber);
+        EditText notes=findViewById(R.id.etNotes);
+        EditText date=findViewById(R.id.etDate);
+
+
+
+
     }
 }

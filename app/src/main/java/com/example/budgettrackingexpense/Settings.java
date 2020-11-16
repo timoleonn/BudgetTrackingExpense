@@ -1,13 +1,19 @@
 package com.example.budgettrackingexpense;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 
 public class Settings extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,33 +22,42 @@ public class Settings extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void submit(View v) {
+        CheckBox cyprus = findViewById(R.id.cbCyprus);
+        CheckBox astro = findViewById(R.id.cbAstro);
+        CheckBox hellenic = findViewById(R.id.cbHellenic);
+        CheckBox rcb = findViewById(R.id.cbRcb);
+        CheckBox alpha = findViewById(R.id.cbAlpha);
 
-    public void submit(View v)
-    {
-        RadioGroup group=findViewById(R.id.rbGroup);
 
-        String currency="";
+        RadioGroup group = findViewById(R.id.rbGroup);
 
-        int selection=group.getCheckedRadioButtonId();
+        String currency = "";
 
-        if (selection==R.id.rbEuro)
-        {
-            currency="Euros";
-        }else if (selection==R.id.rbDollars)
-        {
-            currency="Dollars";
-        }else if(selection==R.id.rbPound)
-        {
-            currency="Pound";
+        int selection = group.getCheckedRadioButtonId();
+
+        if (selection == R.id.rbEuro) {
+            currency = "Euros";
+        } else if (selection == R.id.rbDollars) {
+            currency = "Dollars";
+        } else if (selection == R.id.rbPound) {
+            currency = "Pound";
         }
-
-
-
     }
+        public void theme(View v)
+        {
+            Switch sw = findViewById(R.id.switchBright);
+            LinearLayout layout = findViewById(R.id.LinearLayoutSettings);
 
-    public void test(View v)
-    {
-        Intent in=new Intent(this, add_income.class);
-        startActivity(in);
-    }
+            if (sw.isChecked())
+            {
+                layout.setBackgroundColor(Color.GRAY);
+                sw.setText("Dark Mode: On");
+            } else {
+                layout.setBackgroundColor(Color.WHITE);
+                sw.setText("Dark Mode: Off");
+
+            }
+
+        }
 }

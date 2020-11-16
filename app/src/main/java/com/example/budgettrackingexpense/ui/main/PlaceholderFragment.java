@@ -1,9 +1,13 @@
 package com.example.budgettrackingexpense.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -13,6 +17,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgettrackingexpense.R;
+import com.example.budgettrackingexpense.Settings;
+import com.example.budgettrackingexpense.Tabbed_Bank_Activity;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -46,7 +52,10 @@ public class PlaceholderFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+        Button btnGoToMaps = root.findViewById(R.id.btnGoToMaps);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        pageViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
@@ -54,28 +63,94 @@ public class PlaceholderFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        if(getArguments().getInt(ARG_SECTION_NUMBER)==1)
+        if(getArguments().getInt(ARG_SECTION_NUMBER) ==1)
         {
              root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://aeb.alphabank.com.cy/netteller-war/Login.xhtml");
+
+            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    startActivity(new Intent(getContext(), Settings.class));
+                    System.out.println("SUCCESS");
+                }
+
+            });
+
+            return root;
+
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==2)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://www.piraeusbank.com/sites/cyprus/el/Pages/default.aspx");
+
+            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            return root;
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==3)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://online.bankofcyprus.com/netteller-web/");
+
+            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            return root;
         }
         else if(getArguments().getInt(ARG_SECTION_NUMBER)==4)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://www.hellenicbank.com/portalserver/hb-en-portal/en/personal-banking/ways-to-bank/i-need-a/web-banking");
+
+            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            return root;
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==5)
         {
             root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+
+            WebView web=root.findViewById(R.id.web);
+            web.setWebViewClient(new WebViewClient());
+            web.loadUrl("https://online.rcbcy.com/netteller-war/");
+
+            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            return root;
+
         }
-
-
         return root;
     }
 }
