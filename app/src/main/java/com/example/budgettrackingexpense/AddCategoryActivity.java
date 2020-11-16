@@ -20,7 +20,8 @@ public class AddCategoryActivity extends AppCompatActivity {
     EditText etCategoryName, etBudget;
     Button btnCreateCategory;
 
-    DatabaseReference reff;
+    DatabaseReference reffCategories;
+    DatabaseReference reffUsers_Categories;
     Categories categories;
 
     @Override
@@ -34,16 +35,16 @@ public class AddCategoryActivity extends AppCompatActivity {
 
         categories = new Categories();
 
-        reff = FirebaseDatabase.getInstance().getReference().child("categories");
+        reffCategories = FirebaseDatabase.getInstance().getReference().child("categories");
 
         btnCreateCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Double budget = Double.parseDouble(etBudget.getText().toString().trim());
                 categories.setName(etCategoryName.getText().toString());
-                categories.setBudget(budget);
+//                categories.setBudget(budget);
 
-                reff.push().setValue(categories);
+                reffCategories.push().setValue(categories);
 
                 Toast.makeText(getApplicationContext(), "Category inserted successfully!", Toast.LENGTH_LONG).show();
             }
