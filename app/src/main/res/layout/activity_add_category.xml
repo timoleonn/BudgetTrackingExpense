@@ -8,7 +8,7 @@
     tools:context=".AddCategoryActivity">
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tvUpdateTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -41,7 +41,7 @@
         android:drawablePadding="5dp"/>
 
     <Button
-        android:id="@+id/btnCreateCategory"
+        android:id="@+id/btnUpdateCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

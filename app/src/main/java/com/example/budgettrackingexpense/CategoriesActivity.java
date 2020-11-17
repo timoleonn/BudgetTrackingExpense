@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.AttributeSet;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -46,13 +48,31 @@ public class CategoriesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         String successMessageFromAddCategory;
+        String successMessageFromUpdateCategory;
+        String noDataChangeMessage;
 
         //  GET INTENT FROM AddCategoryActivity (SUCCESS MESSAGE)
         try {
             successMessageFromAddCategory = getIntent().getStringExtra(AddCategoryActivity.SUCCESSMESSAGE);
             Toast.makeText(getApplicationContext(), successMessageFromAddCategory, Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
-            //  DO NOTHING
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+
+        //  GET INTENT FROM UpdateCategoryActivity (SUCCESS MESSAGE)
+        try {
+            successMessageFromUpdateCategory = getIntent().getStringExtra(UpdateCategoryActivity.UPDATEMESSAGE);
+            Toast.makeText(getApplicationContext(), successMessageFromUpdateCategory, Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+
+        //  GET INTENT FROM UpdateCategoryActivity (NO DATA CHANGE MESSAGE)
+        try {
+            noDataChangeMessage = getIntent().getStringExtra(UpdateCategoryActivity.NODATACHANGEMESSAGE);
+            Toast.makeText(getApplicationContext(), noDataChangeMessage, Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            System.out.println("ERROR: " + ex.getMessage());
         }
 
         recyclerView = findViewById(R.id.rvCategories);
@@ -118,6 +138,24 @@ public class CategoriesActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.standard_menu, menu);
+        return true;
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_go_to_home) {
+            Intent in = new Intent(this, MainActivity.class);
+            startActivity(in);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

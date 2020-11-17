@@ -1,6 +1,7 @@
 package com.example.budgettrackingexpense;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent in = new Intent(itemView.getContext(), Settings.class);
+                    Bundle categoryInfo = new Bundle();
+                    categoryInfo.putString("categoryName", name.getText().toString());
+                    categoryInfo.putString("budget", budget.getText().toString());
+
+                    Intent in = new Intent(itemView.getContext(), UpdateCategoryActivity.class);
+                    in.putExtras(categoryInfo);
                     itemView.getContext().startActivity(in);
                 }
             });
