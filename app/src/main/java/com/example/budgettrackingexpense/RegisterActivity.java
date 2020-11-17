@@ -32,19 +32,21 @@ public class RegisterActivity extends AppCompatActivity  {
     EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf;
     RadioGroup rbgroup;
     Button submit;
-    FirebaseAuth fAuth;
+
     ProgressBar pb2;
     int selection;
     String gender;
+
+    FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         mname = findViewById(R.id.name);
-        musername = findViewById(R.id.username);
+        musername = findViewById(R.id.newUsername);
         memail = findViewById(R.id.email);
-        musername = findViewById(R.id.username);
         mpassword = findViewById(R.id.newPassword);
         mpasswordconf = findViewById(R.id.confirmPassword);
         mcountry = findViewById(R.id.country);
@@ -69,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity  {
 
         if (fAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
 
@@ -90,29 +92,29 @@ public class RegisterActivity extends AppCompatActivity  {
                 }
                 if(TextUtils.isEmpty(name))
                 {
-                    memail.setError("Name is requested");
+                    mname.setError("Name is requested");
                     return;
                 }
                 if(TextUtils.isEmpty(username))
                 {
-                    memail.setError("username is requested");
+                    musername.setError("username is requested");
                     return;
                 }
                 if(TextUtils.isEmpty(password) || (password.length()<4))
                 {
-                    memail.setError("Password is requested or the password is too short");
+                    mpassword.setError("Password is requested or the password is too short");
                     return;
                 }
                 if(TextUtils.isEmpty(country) )
                 {
-                    memail.setError("Country is requested");
+                    mcountry.setError("Country is requested");
                     return;
                 }
-                if (password != passwordconf)
-                {
-                    memail.setError("The 2 passwords have to match");
-                    return;
-                }
+//                if (password != passwordconf)
+//                {
+//                    mpasswordconf.setError("The 2 passwords have to match");
+//                    return;
+//                }
 
                 pb2.setVisibility(View.VISIBLE);
 
@@ -123,9 +125,11 @@ public class RegisterActivity extends AppCompatActivity  {
                         {
                             Toast.makeText(RegisterActivity.this, "THe user registered succesfully",Toast.LENGTH_SHORT);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }else
+                        }
+                        else
                         {
                             Toast.makeText(RegisterActivity.this, "THe user  was notregistered succesfully",Toast.LENGTH_SHORT);
+                            System.out.println("SOMETHING WENT WRONG " + task.getException().getMessage());
                         }
                     }
                 });
