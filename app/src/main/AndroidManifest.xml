@@ -33,7 +33,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".Tabbed_Bank_Activity"></activity>
         <activity
             android:name=".CategoriesActivity"
             android:label="@string/title_activity_categories"
