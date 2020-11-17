@@ -21,6 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,20 +45,38 @@ public class CategoriesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String successMessageFromAddCategory;
+
+        //  GET INTENT FROM AddCategoryActivity (SUCCESS MESSAGE)
+        try {
+            successMessageFromAddCategory = getIntent().getStringExtra(AddCategoryActivity.SUCCESSMESSAGE);
+            Toast.makeText(getApplicationContext(), successMessageFromAddCategory, Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            //  DO NOTHING
+        }
+
         recyclerView = findViewById(R.id.rvCategories);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         categories = new ArrayList<>();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("categories");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child("-sdfsdfsdfsdf").child("categories");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds:snapshot.getChildren()) {
-                    Categories data = ds.getValue(Categories.class);
-                    categories.add(data);
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds:snapshot.getChildren()) {
+                        Categories data = ds.getValue(Categories.class);
+                        categories.add(data);
+                    }
+                    categoriesAdapter = new CategoriesAdapter(categories);
+                    recyclerView.setAdapter(categoriesAdapter);
+                } else {
+                    LinearLayout linearLayoutCategoriesMessage = findViewById(R.id.linearLayoutCategoriesMessage);
+                    TextView tvCategoriesMessage = findViewById(R.id.tvCategoriesMessage);
+                    linearLayoutCategoriesMessage.setVisibility(View.VISIBLE);
+                    tvCategoriesMessage.setText("No categories to display. Please start by clicking on the floating action button to add categories!");
                 }
-                categoriesAdapter = new CategoriesAdapter(categories);
-                recyclerView.setAdapter(categoriesAdapter);
+
             }
 
             @Override
@@ -73,6 +97,8 @@ public class CategoriesActivity extends AppCompatActivity {
             }
         });
 
+
+
         //  BACK BUTTON
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -87,6 +113,7 @@ public class CategoriesActivity extends AppCompatActivity {
         return super.onCreateView(name, context, attrs);
     }
 
+    //  FOR BACK BUTTON
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

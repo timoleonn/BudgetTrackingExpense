@@ -2,10 +2,11 @@ package com.example.budgettrackingexpense;
 
 public class Categories {
     String name;
-//    Double budget;
+    Double budget;
 
-    public Categories(String name) {
+    public Categories(String name, Double budget) {
         this.name = name;
+        this.budget = budget;
     }
 
     public Categories() {
@@ -20,11 +21,11 @@ public class Categories {
         this.name = name;
     }
 
-//    public Double getBudget() {
-//        return budget;
-//    }
-//
-//    public void setBudget(Double budget) {
-//        this.budget = budget;
-//    }
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
 }

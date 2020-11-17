@@ -34,7 +34,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
 
         Categories categories = categoriesList.get(position);
         viewHolderClass.name.setText(categories.getName());
-//        viewHolderClass.budget.setText(String.valueOf(categories.getBudget()));
+        viewHolderClass.budget.setText(String.valueOf(categories.getBudget()));
     }
 
     @Override
@@ -44,12 +44,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
 
     public class ViewHolderClass extends RecyclerView.ViewHolder {
 
-        TextView name;
+        TextView name, budget;
 
         public ViewHolderClass(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.tvCategoryName);
-//            budget = itemView.findViewById(R.id.tvBudget);
+            budget = itemView.findViewById(R.id.tvBudget);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
