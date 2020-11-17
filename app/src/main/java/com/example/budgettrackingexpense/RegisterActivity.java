@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,168 +28,108 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private EditText name,country,username,password,passwordConfirm,email;
-    private Button submit;
-    private ProgressBar pb2;
-    private String gender;
-    private FirebaseDatabase database;
-    private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-
+public class RegisterActivity extends AppCompatActivity  {
+    EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf;
+    RadioGroup rbgroup;
+    Button submit;
+    FirebaseAuth fAuth;
+    ProgressBar pb2;
+    int selection;
+    String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        name = findViewById(R.id.name);
-        country = findViewById(R.id.country);
-        username = findViewById(R.id.newUsername);
-        password = findViewById(R.id.password);
-        passwordConfirm = findViewById(R.id.confirmPassword);
-        email = findViewById(R.id.email);
-
+        mname = findViewById(R.id.name);
+        musername = findViewById(R.id.username);
+        memail = findViewById(R.id.email);
+        musername = findViewById(R.id.username);
+        mpassword = findViewById(R.id.newPassword);
+        mpasswordconf = findViewById(R.id.confirmPassword);
+        mcountry = findViewById(R.id.country);
         submit = findViewById(R.id.submit);
+
+        rbgroup = findViewById(R.id.rbGroup);
+        selection = rbgroup.getCheckedRadioButtonId();
+        if(selection == R.id.male)
+        {
+            gender ="male";
+        }else if(selection == R.id.female)
+        {
+            gender ="female";
+        }else if(selection == R.id.other)
+        {
+            gender ="other";
+        }
+
         pb2 = findViewById(R.id.pb2);
 
-        /*database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference();*/
-        mAuth = FirebaseAuth.getInstance();
+        fAuth = FirebaseAuth.getInstance();
 
+        if (fAuth.getCurrentUser() != null)
+        {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            finish();
+        }
 
-
-        RadioGroup group = findViewById(R.id.rbGroup);
-        int selection = group.getCheckedRadioButtonId();
-        if (selection == R.id.male) {
-            gender = "male";
-        } else if (selection == R.id.female) {
-            gender = "female";
-        } else if (selection == R.id.other) {
-            gender = "other";
-        }
-    }
-
-    @Override
-    public void onClick(View  v) {
-        if(v.getId() == R.id.submit)
-        {
-            registerUser();
-        }
-    }
-
-    private void registerUser()
-    {
-        String nameText = name.getText().toString().trim();
-        String emailText = email.getText().toString().trim();
-        String usernameText = username.getText().toString().trim();
-        String countryText = country.getText().toString().trim();
-        String passwordText = password.getText().toString().trim();
-        String passwordconfText = passwordConfirm.getText().toString().trim();
-
-        if (emailText.isEmpty())
-        {
-            email.setError("Fullname is required");
-            email.requestFocus();
-            return;
-        }
-        if (usernameText.isEmpty())
-        {
-            email.setError("username is required");
-            email.requestFocus();
-            return;
-        }
-        if (countryText.isEmpty())
-        {
-            email.setError("Country is required");
-            email.requestFocus();
-            return;
-        }
-        if (passwordText.isEmpty())
-        {
-            email.setError("password is required");
-            email.requestFocus();
-            return;
-        }
-        if (passwordText != passwordconfText)
-        {
-            email.setError("The two password have to match");
-            email.requestFocus();
-            return;
-        }
-        pb2.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(emailText,passwordconfText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
-                {
-                    User user = new User(emailText,nameText,passwordText,usernameText,countryText,gender);
-                    FirebaseDatabase.getInstance().getReference("User")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful())
-                            {
-                                Toast.makeText(RegisterActivity.this,"The user has been registered succesfully",Toast.LENGTH_SHORT);
-                                pb2.setVisibility(View.VISIBLE);
-                            }
-                            else{
-                                Toast.makeText(RegisterActivity.this,"The user has not been registered succesfully",Toast.LENGTH_SHORT);
-                                pb2.setVisibility(View.GONE);
-                            }
-                        }
-                    });
+            public void onClick(View view) {
+                String email = memail.getText().toString().trim();
+                String name = mname.getText().toString().trim();
+                String username = musername.getText().toString().trim();
+                String password = mpassword.getText().toString().trim();
+                String passwordconf = mpasswordconf.getText().toString().trim();
+                String country = mcountry.getText().toString().trim();
 
-                }else
+                if(TextUtils.isEmpty(email))
                 {
-                    Toast.makeText(RegisterActivity.this,"The user has not been registered succesfully",Toast.LENGTH_SHORT);
-                    pb2.setVisibility(View.GONE);                }
+                    memail.setError("Email is requested");
+                    return;
+                }
+                if(TextUtils.isEmpty(name))
+                {
+                    memail.setError("Name is requested");
+                    return;
+                }
+                if(TextUtils.isEmpty(username))
+                {
+                    memail.setError("username is requested");
+                    return;
+                }
+                if(TextUtils.isEmpty(password) || (password.length()<4))
+                {
+                    memail.setError("Password is requested or the password is too short");
+                    return;
+                }
+                if(TextUtils.isEmpty(country) )
+                {
+                    memail.setError("Country is requested");
+                    return;
+                }
+                if (password != passwordconf)
+                {
+                    memail.setError("The 2 passwords have to match");
+                    return;
+                }
+
+                pb2.setVisibility(View.VISIBLE);
+
+                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+                            Toast.makeText(RegisterActivity.this, "THe user registered succesfully",Toast.LENGTH_SHORT);
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }else
+                        {
+                            Toast.makeText(RegisterActivity.this, "THe user  was notregistered succesfully",Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
             }
         });
     }
-
-
 }
-
-
-
-
-
-
- /* nameText = name.getText().toString();
-                 emailText = email.getText().toString();
-                 usernameText = username.getText().toString();
-                 countryText = country.getText().toString();
-                 passwordText = password.getText().toString();
-                 passwordconfText = passwordConfirm.getText().toString();
-                 if(nameText.isEmpty())
-                 {
-                     Toast.makeText(RegisterActivity.this, "Please make sure the name field is not empty",
-                             Toast.LENGTH_SHORT).show();
-                 }
-                 if(emailText.isEmpty())
-                 {
-                     Toast.makeText(RegisterActivity.this, "Please make sure the email field is not empty",
-                             Toast.LENGTH_SHORT).show();
-                 }
-                if(usernameText.isEmpty())
-                {
-                    Toast.makeText(RegisterActivity.this, "Please make sure the username field is not empty",
-                            Toast.LENGTH_SHORT).show();
-                }
-                if(password.length()<5 )
-                {
-                    Toast.makeText(RegisterActivity.this, "Please make sure the password field is more than 5 characters",
-                            Toast.LENGTH_SHORT).show();
-                }
-                if(password != passwordConfirm )
-                {
-                    Toast.makeText(RegisterActivity.this, "Please make sure the two password fields match each other",
-                            Toast.LENGTH_SHORT).show();
-                }*/
-
-
-
-
-
