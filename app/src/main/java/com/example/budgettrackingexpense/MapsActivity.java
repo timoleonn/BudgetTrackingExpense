@@ -31,23 +31,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mainIntent = new Intent(getApplicationContext(), MainActivity.class);
 
-        ActionBar actionBar = getActionBar();
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(mainIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+   
 
     /**
      * Manipulates the map once available.

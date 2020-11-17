@@ -26,7 +26,7 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fabAddCategory);
+        FloatingActionButton fab = findViewById(R.id.fabGoToBanks);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         break;
                     case 2:
                         Intent in2 = new Intent(Tabbed_Bank_Activity.this,
-                                add_income.class);
+                                Settings.class);
 //                        intent.putExtra("USER_ID",USER_ID);
 //                        intent.putExtra("FRAGMENT",0);
 //

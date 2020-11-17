@@ -59,7 +59,7 @@ public class PlaceholderFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         View fabRoot = inflater.inflate(R.layout.activity_tabbed__bank_, container, false);
 
-        Button btnGoToMaps = root.findViewById(R.id.btnGoToMaps);
+//        Button btnGoToMaps = root.findViewById(R.id.btnGoToMaps);
         FloatingActionButton fab = fabRoot.findViewById(R.id.fabGoToBanks);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        pageViewModel.getText().observe(this, new Observer<String>() {
@@ -75,13 +75,6 @@ public class PlaceholderFragment extends Fragment {
             web.setWebViewClient(new WebViewClient());
             web.loadUrl("https://aeb.alphabank.com.cy/netteller-war/Login.xhtml");
 
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent in = new Intent(getContext(), Settings.class);
-                    startActivity(in);
-                }
-            });
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==2)
         {
@@ -89,13 +82,7 @@ public class PlaceholderFragment extends Fragment {
             web.setWebViewClient(new WebViewClient());
             web.loadUrl("https://www.piraeusbank.com/sites/cyprus/el/Pages/default.aspx");
 
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent in = new Intent(getContext(), add_income.class);
-                    startActivity(in);
-                }
-            });
+
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==3)
         {
@@ -103,12 +90,7 @@ public class PlaceholderFragment extends Fragment {
             web.setWebViewClient(new WebViewClient());
             web.loadUrl("https://online.bankofcyprus.com/netteller-web/");
 
-            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
         else if(getArguments().getInt(ARG_SECTION_NUMBER)==4)
         {
@@ -116,12 +98,7 @@ public class PlaceholderFragment extends Fragment {
             web.setWebViewClient(new WebViewClient());
             web.loadUrl("https://www.hellenicbank.com/portalserver/hb-en-portal/en/personal-banking/ways-to-bank/i-need-a/web-banking");
 
-            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
         else if (getArguments().getInt(ARG_SECTION_NUMBER)==5)
         {
@@ -129,15 +106,6 @@ public class PlaceholderFragment extends Fragment {
             WebView web=root.findViewById(R.id.web);
             web.setWebViewClient(new WebViewClient());
             web.loadUrl("https://online.rcbcy.com/netteller-war/");
-
-            btnGoToMaps.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-
         }
         return root;
     }
