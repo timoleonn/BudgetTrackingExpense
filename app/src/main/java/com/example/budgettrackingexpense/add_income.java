@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -47,6 +48,21 @@ public class add_income extends AppCompatActivity {
                         etDate.setText(Date);
                     }
                 });
+
+        //  PREPARE AND READ JSON
+        Expense expenseData = new Expense("17/11/2020", "Salad", "Food", 4.55);
+
+//        Object
+
+
+        Button btnTestingTim = findViewById(R.id.btnTestingTim);
+
+        btnTestingTim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 
