@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -56,22 +57,8 @@ public class fragment_tabbed_activity extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
 
-        WebView web=root.findViewById(R.id.web);
-        web.setWebViewClient(new WebViewClient());
-        web.loadUrl("https://www.bankofcyprus.com/");
-
-
-
-        return root;
-    }
 
 }
