@@ -51,7 +51,7 @@ public class Settings extends AppCompatActivity {
 
             if (sw.isChecked())
             {
-                layout.setBackgroundColor(Color.GRAY);
+                layout.setBackgroundColor(Color.BLACK);
                 sw.setText("Dark Mode: On");
             } else {
                 layout.setBackgroundColor(Color.WHITE);
