@@ -1,5 +1,7 @@
 package com.example.budgettrackingexpense;
 
+import android.widget.EditText;
+
 public class User {
     public String email;
     public String password;

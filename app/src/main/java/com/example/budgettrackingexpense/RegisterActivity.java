@@ -32,13 +32,10 @@ public class RegisterActivity extends AppCompatActivity  {
     EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf;
     RadioGroup rbgroup;
     Button submit;
-
+    FirebaseAuth fAuth;
     ProgressBar pb2;
     int selection;
     String gender;
-
-    FirebaseAuth fAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,11 +66,11 @@ public class RegisterActivity extends AppCompatActivity  {
 
         fAuth = FirebaseAuth.getInstance();
 
-        if (fAuth.getCurrentUser() != null)
+        /*if (fAuth.getCurrentUser() != null)
         {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
-        }
+        }*/
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,26 +107,43 @@ public class RegisterActivity extends AppCompatActivity  {
                     mcountry.setError("Country is requested");
                     return;
                 }
-//                if (password != passwordconf)
-//                {
-//                    mpasswordconf.setError("The 2 passwords have to match");
-//                    return;
-//                }
+                /*if (password != passwordconf)
+                {
+                    mpasswordconf.setError("The 2 passwords have to match");
+                    return;
+                }*/
 
                 pb2.setVisibility(View.VISIBLE);
-
+                System.out.println("SOMETHING WENT WRONG 1" );
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            Toast.makeText(RegisterActivity.this, "THe user registered succesfully",Toast.LENGTH_SHORT);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            System.out.println("SOMETHING WENT WRONG2" + task.getException().getMessage());
+                            User user = new User(email,name,password,username,country,gender);
+                            FirebaseDatabase.getInstance().getReference("users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        Toast.makeText(RegisterActivity.this, "THe user registered succesfully",Toast.LENGTH_SHORT);
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(RegisterActivity.this, "THe user  was not registered succesfully",Toast.LENGTH_SHORT);
+                                    }
+                                    System.out.println("SOMETHING WENT WRONG 3" + task.getException().getMessage());
+                                }
+                            });
+
                         }
                         else
                         {
-                            Toast.makeText(RegisterActivity.this, "THe user  was notregistered succesfully",Toast.LENGTH_SHORT);
-                            System.out.println("SOMETHING WENT WRONG " + task.getException().getMessage());
+                            Toast.makeText(RegisterActivity.this, "THe user  was not registered succesfully",Toast.LENGTH_SHORT);
                         }
                     }
                 });
