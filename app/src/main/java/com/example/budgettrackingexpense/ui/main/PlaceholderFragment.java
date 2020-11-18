@@ -59,7 +59,6 @@ public class PlaceholderFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
         View fabRoot = inflater.inflate(R.layout.activity_tabbed__bank_, container, false);
 
-//        Button btnGoToMaps = root.findViewById(R.id.btnGoToMaps);
         FloatingActionButton fab = fabRoot.findViewById(R.id.fabGoToBanks);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        pageViewModel.getText().observe(this, new Observer<String>() {
