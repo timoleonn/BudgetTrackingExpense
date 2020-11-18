@@ -36,34 +36,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity  {
 
     private LoginViewModel loginViewModel;
-    private TextView register;
-    private EditText editTextemail,editTextPassword;
-    private Button login;
-    private FirebaseAuth fAuth;
-    private ProgressBar pb1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        register = (Button) findViewById(R.id.register);
-        register.setOnClickListener(this);
-
-        login = (Button) findViewById(R.id.login);
-        login.setOnClickListener(this);
-
-        editTextemail = (EditText) findViewById(R.id.username);
-        editTextemail.setOnClickListener(this);
-
-        editTextPassword = (EditText) findViewById(R.id.password);
-        editTextPassword.setOnClickListener(this);
-
-        pb1 = (ProgressBar) findViewById(R.id.loading);
-
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -94,12 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
+                loadingProgressBar.setVisibility(View.VISIBLE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                    goToMain();
                 }
                 setResult(Activity.RESULT_OK);
 
@@ -148,6 +128,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+    private void goToMain(){
+        Intent in = new Intent(this, MainActivity.class);
+        startActivity(in);
+    }
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
@@ -157,54 +141,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.register:
-                startActivity(new Intent(this,RegisterActivity.class));
-                break;
-            case R.id.login :
-                userLogin();
-                break;
-
-        }
-    }
-
-    private void userLogin() {
-        String email = editTextemail.getText().toString();
-        String password = editTextPassword.getText().toString();
-
-        if(email.isEmpty()){
-            editTextemail.setError("email is required");
-            editTextemail.requestFocus();
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
-            editTextemail.setError("enter a valid email");
-            editTextemail.requestFocus();
-            return;
-        }
-        if(password.isEmpty()||password.length()<5){
-            editTextPassword.setError("Please enter a valid password");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        pb1.setVisibility(View.VISIBLE);
-         fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-             @Override
-             public void onComplete(@NonNull Task<AuthResult> task) {
-                 if(task.isSuccessful()){
-                     startActivity(new Intent(LoginActivity.this , MainActivity.class));
-                 }else
-                 {
-                     Toast.makeText(LoginActivity.this,"Failed to login please check your credentials",Toast.LENGTH_LONG).show();
-                 }
-             }
-         });
     }
 }
