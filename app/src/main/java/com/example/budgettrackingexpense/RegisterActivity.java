@@ -42,9 +42,8 @@ public class RegisterActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_register);
 
         mname = findViewById(R.id.name);
-        musername = findViewById(R.id.username);
+        musername = findViewById(R.id.newUsername);
         memail = findViewById(R.id.email);
-        musername = findViewById(R.id.username);
         mpassword = findViewById(R.id.newPassword);
         mpasswordconf = findViewById(R.id.confirmPassword);
         mcountry = findViewById(R.id.country);
@@ -90,29 +89,29 @@ public class RegisterActivity extends AppCompatActivity  {
                 }
                 if(TextUtils.isEmpty(name))
                 {
-                    memail.setError("Name is requested");
+                    mname.setError("Name is requested");
                     return;
                 }
                 if(TextUtils.isEmpty(username))
                 {
-                    memail.setError("username is requested");
+                    musername.setError("username is requested");
                     return;
                 }
                 if(TextUtils.isEmpty(password) || (password.length()<4))
                 {
-                    memail.setError("Password is requested or the password is too short");
+                    mpassword.setError("Password is requested or the password is too short");
                     return;
                 }
                 if(TextUtils.isEmpty(country) )
                 {
-                    memail.setError("Country is requested");
+                    mcountry.setError("Country is requested");
                     return;
                 }
-                if (password != passwordconf)
+                /*if (password != passwordconf)
                 {
-                    memail.setError("The 2 passwords have to match");
+                    mpasswordconf.setError("The 2 passwords have to match");
                     return;
-                }
+                }*/
 
                 pb2.setVisibility(View.VISIBLE);
 
@@ -121,11 +120,25 @@ public class RegisterActivity extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            Toast.makeText(RegisterActivity.this, "THe user registered succesfully",Toast.LENGTH_SHORT);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            User user = new User(email,name,password,username,country,gender);
+                            FirebaseDatabase.getInstance().getReference("badgettrackingexpenes")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, "THe user registered succesfully", Toast.LENGTH_SHORT);
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    }else
+                                    {
+                                        Toast.makeText(RegisterActivity.this, "THe user has not been registered succesfully", Toast.LENGTH_SHORT);
+                                    }
+                                }
+                            });
+
                         }else
                         {
-                            Toast.makeText(RegisterActivity.this, "THe user  was notregistered succesfully",Toast.LENGTH_SHORT);
+                            Toast.makeText(RegisterActivity.this, "THe user  was not registered succesfully",Toast.LENGTH_SHORT);
                         }
                     }
                 });
