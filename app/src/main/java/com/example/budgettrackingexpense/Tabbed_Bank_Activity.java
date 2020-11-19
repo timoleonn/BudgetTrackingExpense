@@ -35,8 +35,11 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-//                        fab.setImageDrawable(ContextCompat.getDrawable(Tabbed_Bank_Activity.this, iconIntArray[0]));
-                        LatLng coords = new LatLng(35.13, 33.43);
+                        //  Coordinates for Alpha Bank
+                        LatLng alpha = new LatLng(34.917018, 33.608868);
+                        LatLng alpha1 = new LatLng(34.916695, 33.623988);
+                        LatLng alpha2 = new LatLng(34.928053, 33.616646);
+                        LatLng alpha3 = new LatLng(34.930513, 33.637572);
 
                         //  array/list
                         //  x, y
@@ -47,28 +50,40 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
 
 
 
-                        Bundle boc = new Bundle();
-                        boc.putString("marker", "Bank of Cyprus");
-                        boc.putParcelable("coordinates", coords);
+                        Bundle alphab = new Bundle();
+                        alphab.putString("marker", "Alpha Bank");
+                        alphab.putParcelable("coordinates", alpha);
+                        alphab.putParcelable("coordinates1", alpha1);
+                        alphab.putParcelable("coordinates2", alpha2);
+                        alphab.putParcelable("coordinates3", alpha3);
 
                         Intent in = new Intent(Tabbed_Bank_Activity.this,
                                 MapsActivity.class);
-                        in.putExtras(boc);
-//                        intent.putExtra("USER_ID",USER_ID);
-//                        intent.putExtra("FRAGMENT",0);
-//                        intent.putExtra("TITLE",getResources().getString(R.string.Enter_Expense_title));
-//                        intent.putExtra("FILED",getResources().getString(R.string.Enter_Expense_text));
+                        in.putExtras(alphab);
                         startActivity(in);
                         break;
                     case 1:
-                        Intent in1 = new Intent(Tabbed_Bank_Activity.this,
-                                MapsActivity.class);
+
+                        LatLng astro = new LatLng(34.917018, 33.608868);
+                        LatLng astro1 = new LatLng(34.916695, 33.623988);
+                        LatLng astro2 = new LatLng(34.928053, 33.616646);
+                        LatLng astro3 = new LatLng(34.930513, 33.637572);
+
+                        Bundle astrob = new Bundle();
+                        astrob.putString("marker", "AstroBank");
+                        astrob.putParcelable("coordinates7", astro);
+                        astrob.putParcelable("coordinates4", astro1);
+                        astrob.putParcelable("coordinates5", astro2);
+                        astrob.putParcelable("coordinates6", astro3);
+
+
 //                        intent.putExtra("USER_ID",USER_ID);
 //                        intent.putExtra("FRAGMENT",0);
 //
 //                        intent.putExtra("TITLE",getResources().getString(R.string.Enter_Expense_title));
 //                        intent.putExtra("FILED",getResources().getString(R.string.Enter_Expense_text));
-
+                        Intent in1 = new Intent(Tabbed_Bank_Activity.this,
+                                MapsActivity.class);
                         startActivity(in1);
                         break;
                     case 2:

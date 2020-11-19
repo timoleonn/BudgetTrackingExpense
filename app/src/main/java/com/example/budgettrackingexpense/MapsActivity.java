@@ -69,24 +69,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         Intent in = getIntent();
+        Bundle location = in.getExtras();
+        String marker = location.getString("marker");
 
-        //  check if intent is from BOC
+        if (marker.equals("Alpha Bank")) {
+            LatLng alpha = location.getParcelable("coordinates");
+            LatLng alpha1 = location.getParcelable("coordinates1");
+            LatLng alpha2 = location.getParcelable("coordinates2");
+            LatLng alpha3 = location.getParcelable("coordinates3");
 
-        Bundle args = in.getExtras();
-        String location = args.getString("marker");
-        LatLng coords = args.getParcelable("coordinates");
+            mMap.addMarker(new MarkerOptions().position(alpha).title("Alpha Bank"));
+            mMap.addMarker(new MarkerOptions().position(alpha1).title("Alpha Bank"));
+            mMap.addMarker(new MarkerOptions().position(alpha2).title("Alpha Bank"));
+            mMap.addMarker(new MarkerOptions().position(alpha3).title("Alpha Bank"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(alpha, 8));
 
-        if (location.equals("BOC")) {
-            mMap.addMarker(new MarkerOptions().position(coords).title("Bank of Cyprus"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coords, 8));
+        } else if (marker.equals("AstroBank")) {
+            LatLng astro = location.getParcelable("coordinates7");
+            LatLng astro1 = location.getParcelable("coordinates4");
+            LatLng astro2 = location.getParcelable("coordinates5");
+            LatLng astro3 = location.getParcelable("coordinates6");
+
+            mMap.addMarker(new MarkerOptions().position(astro).title("AstroBank"));
+            mMap.addMarker(new MarkerOptions().position(astro1).title("AstroBank"));
+            mMap.addMarker(new MarkerOptions().position(astro2).title("AstroBank"));
+            mMap.addMarker(new MarkerOptions().position(astro3).title("AstroBank"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(astro, 8));
         }
 
-        //check if from hellenic to intent
-
-
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        // Add a marker in Sydney and move the camera
     }
 
 
