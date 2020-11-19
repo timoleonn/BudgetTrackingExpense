@@ -7,24 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.budgettrackingexpense.R;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,10 +26,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     PieChart pieChart;
+
+    int LineCount = 0;
+    ArrayList<ArrayList<String>> finalArrayList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,22 +62,66 @@ public class HomeFragment extends Fragment {
         Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
 
         //  SET FILE NAME
-        String file_name = "test2.txt";
+        String file_name = "test3.txt";
 
         //  READ FILE
         btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //  GET NUMBER OF LINES SO THAT WE KNOW HOW BIG THE ARRAY WILL BE
+                try {
+                    FileInputStream fin = getActivity().openFileInput(file_name);
+                    DataInputStream din = new DataInputStream(fin);
+                    InputStreamReader isr = new InputStreamReader(din);
+                    BufferedReader br = new BufferedReader(isr);
+                    int lines = 0;
+                    while (br.readLine() != null) lines++;
+                    System.out.println("LINES: " + lines);
+                    br.close();
+
+                    LineCount = lines;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
+                //  AND SAVE IT TO AN ARRAY
                 try {
                     FileInputStream fin = getActivity().openFileInput(file_name);
                     DataInputStream din = new DataInputStream(fin);
                     InputStreamReader isr = new InputStreamReader(din);
                     BufferedReader br = new BufferedReader(isr);
 
+                    //  CREATE ARRAY
+                    String[][] income = new String[LineCount][3];
+                    ArrayList<String> lineIncome = new ArrayList<>();
+
+                    ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
+
                     String strLine;
                     while((strLine = br.readLine()) != null) {
-                        System.out.println(strLine);
+                        String[] res = strLine.split("[,]", 0);
+                        System.out.println(res);
+                        for(String myStr: res) {
+                            System.out.println(myStr);
+                            //  ADDS THE THREE VARIABLES TO AN ARRAY LIST
+                            lineIncome.add(myStr);
+
+                            System.out.println("Line Income BEFORE: " + lineIncome);
+//                            arrayList.add(res);
+                        }
+                        arrayList.add(lineIncome);
+                        System.out.println("Array List: " + arrayList);
+                        finalArrayList = arrayList;
+                        lineIncome.removeAll(lineIncome);
+                        System.out.println("Line Income AFTER: " + lineIncome);
+                        System.out.println("Array List AFTER: " + arrayList);
                     }
+
+                    System.out.println("\nARRAYLIST\n");
+                    System.out.println(finalArrayList);
 
                     fin.close();
                     Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();

@@ -80,10 +80,10 @@ public class add_income extends AppCompatActivity {
         String date = "20/11/2020";
         String note = "Monthly Cheque";
         Double amount = 2000.0;
-        String final_to_write = date + ";" + note + ";" + amount.toString() + "\n";
+        String final_to_write = date + "," + note + "," + amount.toString() + "\n";
 
         //  SET FILE NAME
-        String file_name = "test2.txt";
+        String file_name = "test3.txt";
 
         //  WRITE TO FILE
         btnTestingTim.setOnClickListener(new View.OnClickListener() {
