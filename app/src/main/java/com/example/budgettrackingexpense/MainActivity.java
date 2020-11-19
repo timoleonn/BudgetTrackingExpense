@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.budgettrackingexpense.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+    private Button logout;
+
 
     public static final String FULLNAME = "";
 
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        logout = findViewById(R.id.nav_logout);
 
         drawer = findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -94,6 +103,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //
         } else if (id == R.id.nav_rate_us) {
             goToFragment(new RateUsFragment());
+        }else if (id== R.id.nav_logout)
+        {
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                }
+            });
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -108,6 +126,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.nav_host_fragment, f);
         fragmentTransaction.commit();
     }
-
 
 }

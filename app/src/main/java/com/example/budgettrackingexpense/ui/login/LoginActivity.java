@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense.ui.login;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
@@ -39,9 +40,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity  {
 
     private LoginViewModel loginViewModel;
-
+     FirebaseAuth fAuth;
+    @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
@@ -52,6 +55,12 @@ public class LoginActivity extends AppCompatActivity  {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
+        fAuth = FirebaseAuth.getInstance();
+        /*if (fAuth.getCurrentUser() != null)
+        {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }*/
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -128,10 +137,11 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
     }
-    private void goToMain(){
+    void goToMain(){
         Intent in = new Intent(this, MainActivity.class);
         startActivity(in);
     }
+
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
@@ -142,4 +152,9 @@ public class LoginActivity extends AppCompatActivity  {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+    public void goToNext(View view){
+        Intent in = new Intent(this, RegisterActivity.class);
+        startActivity(in);
+    }
+
 }

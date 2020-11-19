@@ -1,8 +1,14 @@
 package com.example.budgettrackingexpense.data;
 
+import android.content.Intent;
+
+import com.example.budgettrackingexpense.MainActivity;
 import com.example.budgettrackingexpense.data.model.LoggedInUser;
+import com.example.budgettrackingexpense.ui.login.LoginActivity;
 
 import java.io.IOException;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -25,5 +31,6 @@ public class LoginDataSource {
 
     public void logout() {
         // TODO: revoke authentication
+
+        }
     }
-}

@@ -73,6 +73,7 @@
         android:id="@+id/register"
         android:layout_width="143dp"
         android:layout_height="54dp"
+        android:onClick="goToNext"
         android:text="REGISTER"
         android:textColor="@color/design_default_color_on_secondary"
         android:textStyle="bold"
