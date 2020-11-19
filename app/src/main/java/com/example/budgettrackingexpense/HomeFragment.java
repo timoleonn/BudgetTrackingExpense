@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -53,6 +61,38 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Snackbar.make(view, "ADDED EXPENSE", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
+
+        //  SET FILE NAME
+        String file_name = "test2.txt";
+
+        //  READ FILE
+        btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    FileInputStream fin = getActivity().openFileInput(file_name);
+                    DataInputStream din = new DataInputStream(fin);
+                    InputStreamReader isr = new InputStreamReader(din);
+                    BufferedReader br = new BufferedReader(isr);
+
+                    String strLine;
+                    while((strLine = br.readLine()) != null) {
+                        System.out.println(strLine);
+                    }
+
+                    fin.close();
+                    Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    System.out.println("1: " + e.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("2: " + e.getMessage());
+                }
             }
         });
 
