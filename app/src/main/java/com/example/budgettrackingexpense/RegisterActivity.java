@@ -32,10 +32,12 @@ public class RegisterActivity extends AppCompatActivity  {
     EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf;
     RadioGroup rbgroup;
     Button submit;
+    String gender;
+    Integer selection;
+
     FirebaseAuth fAuth;
     ProgressBar pb2;
-    int selection;
-    String gender;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +68,11 @@ public class RegisterActivity extends AppCompatActivity  {
 
         fAuth = FirebaseAuth.getInstance();
 
-        /*if (fAuth.getCurrentUser() != null)
+        if (fAuth.getCurrentUser() != null)
         {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
-        }*/
+        }
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,8 +122,8 @@ public class RegisterActivity extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            System.out.println("SOMETHING WENT WRONG2" + task.getException().getMessage());
-                            User user = new User(email,name,password,username,country,gender);
+
+                            User user = new User(country,name,gender,username);
                             FirebaseDatabase.getInstance().getReference("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -139,13 +141,15 @@ public class RegisterActivity extends AppCompatActivity  {
                                     System.out.println("SOMETHING WENT WRONG 3" + task.getException().getMessage());
                                 }
                             });
-
                         }
                         else
                         {
-                            Toast.makeText(RegisterActivity.this, "THe user  was not registered succesfully",Toast.LENGTH_SHORT);
+//                            Toast.makeText(RegisterActivity.this, "The user has not been registered succesfully",Toast.LENGTH_SHORT);
+
+                            System.out.println("SOMETHING WENT WRONG3" + task.getException().getMessage());
                         }
                     }
+
                 });
             }
         });

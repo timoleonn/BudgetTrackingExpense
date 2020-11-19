@@ -3,8 +3,6 @@ package com.example.budgettrackingexpense;
 import android.widget.EditText;
 
 public class User {
-    public String email;
-    public String password;
     public String fullname;
     public String country;
     public String username;
@@ -13,9 +11,7 @@ public class User {
     public User() {
     }
 
-    public User(String emailText,String nameText, String passwordText, String usernameText, String countryText,String gender) {
-        this.email = emailText;
-        this.password = passwordText;
+    public User(String nameText, String usernameText, String countryText,String gender) {
         this.fullname = nameText;
         this.country = countryText;
         this.username = usernameText;
