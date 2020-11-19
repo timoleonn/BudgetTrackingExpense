@@ -33,7 +33,6 @@ public class HomeFragment extends Fragment {
     PieChart pieChart;
 
     int LineCount = 0;
-    ArrayList<List> finalArrayList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class HomeFragment extends Fragment {
         Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
 
         //  SET FILE NAME
-        String file_name = "test3.txt";
+        String file_name = "test4.txt";
 
         //  READ FILE
         btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
@@ -87,21 +86,24 @@ public class HomeFragment extends Fragment {
                 }
 
                 //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
-                //  AND SAVE IT TO AN ARRAY
+                //  AND SAVE IT TO AN ARRAY LIST OF LISTS
                 try {
                     FileInputStream fin = getActivity().openFileInput(file_name);
                     DataInputStream din = new DataInputStream(fin);
                     InputStreamReader isr = new InputStreamReader(din);
                     BufferedReader br = new BufferedReader(isr);
 
-                    //  CREATE ARRAY
-                    String[][] income = new String[LineCount][3];
-                    ArrayList<String> lineIncome = new ArrayList<>();
-
-                    ArrayList<String[]> arrayList = new ArrayList<>();
+                    //  CREATE ARRAY LIST, LIST AND VARIABLE TO HOLD EACH LINE
+                    ArrayList<List> finalArrayList = new ArrayList<>();
                     List<String> strList = new ArrayList<String>();
-
                     String strLine;
+
+                    //  READ EVERY LINE
+                    //  SPLIT EACH LINE BASED ON THE COMMA (SEPARATOR)
+                    //  EACH VALUE IS ADDED IN A LIST
+                    //  LIST GETS ADDED TO ARRAY LIST
+                    //  LIST GETS INITIALIZED AGAIN
+                    //  REPEAT UNTIL TEXT FILE IS READ THROUGH
                     while((strLine = br.readLine()) != null) {
                         String[] res = strLine.split("[,]", 0);
                         System.out.println(res);
@@ -114,11 +116,32 @@ public class HomeFragment extends Fragment {
                         System.out.println("1.strList BEFORE: " + strList);
                         finalArrayList.add(strList);
                         System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
-                        strList.remove(0);
+                        //  INITIALIZE AGAIN THE STRLIST SO IT CAN GET NEW VALUES
+                        strList = new ArrayList<String>();
+
                         System.out.println("1.strList AFTER: " + strList);
                         System.out.println("2. finalArrayList AFTER: " + finalArrayList);
                     }
                     System.out.println("\nFINAL: " + finalArrayList);
+
+                    //  SOME LOCAL VARIABLES
+                    Double total = 0.0;
+
+                    //  ITERATE THROUGH EACH LIST IN THE ARRAY LIST
+                    //  TO GRAB THE VALUES AND PROCESS THEM
+                    for (int i = 0; i < finalArrayList.size(); i++) {
+//                        System.out.println(finalArrayList.get(i) + " ");
+                        for (int j = 0; j < finalArrayList.get(i).size(); j++) {
+                            System.out.println(finalArrayList.get(i).get(j) + " ");
+                            //  PARSE TO DOUBLE THE AMOUNT
+                            if (j == 2) {
+                                total += Double.parseDouble((String) finalArrayList.get(i).get(j));
+                            }
+
+                        }
+                    }
+
+                    System.out.println("TOTAL: " + total);
 
 //                    System.out.println("3.Array List AFTER: " + finalArrayList);
 

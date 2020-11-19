@@ -79,11 +79,11 @@ public class add_income extends AppCompatActivity {
         //  IN THE APP, WE WILL BE GRABING THE DATA FROM THE FORM
         String date = "20/11/2020";
         String note = "Monthly Cheque";
-        Double amount = 2000.0;
+        Double amount = 2550.50;
         String final_to_write = date + "," + note + "," + amount.toString() + "\n";
 
         //  SET FILE NAME
-        String file_name = "test3.txt";
+        String file_name = "test4.txt";
 
         //  WRITE TO FILE
         btnTestingTim.setOnClickListener(new View.OnClickListener() {
