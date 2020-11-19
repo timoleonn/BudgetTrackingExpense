@@ -13,6 +13,10 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 public class add_income extends AppCompatActivity {
 
     CalendarView calendar;
@@ -52,7 +56,7 @@ public class add_income extends AppCompatActivity {
         //  PREPARE AND READ JSON
         Expense expenseData = new Expense("17/11/2020", "Salad", "Food", 4.55);
 
-//        Object
+        Gson gson = new Gson();
 
 
         Button btnTestingTim = findViewById(R.id.btnTestingTim);
@@ -60,7 +64,7 @@ public class add_income extends AppCompatActivity {
         btnTestingTim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                System.out.println(gson.toJson(expenseData));
             }
         });
     }
