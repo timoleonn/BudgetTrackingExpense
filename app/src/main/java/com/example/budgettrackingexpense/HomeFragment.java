@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     PieChart pieChart;
 
     int LineCount = 0;
-    ArrayList<ArrayList<String>> finalArrayList = new ArrayList<>();
+    ArrayList<List> finalArrayList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -98,7 +98,8 @@ public class HomeFragment extends Fragment {
                     String[][] income = new String[LineCount][3];
                     ArrayList<String> lineIncome = new ArrayList<>();
 
-                    ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
+                    ArrayList<String[]> arrayList = new ArrayList<>();
+                    List<String> strList = new ArrayList<String>();
 
                     String strLine;
                     while((strLine = br.readLine()) != null) {
@@ -106,22 +107,21 @@ public class HomeFragment extends Fragment {
                         System.out.println(res);
                         for(String myStr: res) {
                             System.out.println(myStr);
-                            //  ADDS THE THREE VARIABLES TO AN ARRAY LIST
-                            lineIncome.add(myStr);
-
-                            System.out.println("Line Income BEFORE: " + lineIncome);
-//                            arrayList.add(res);
+                            //  ADDS THE THREE VARIABLES TO THE STRING ARRAY
+                            strList.add(myStr);
+                            System.out.println(strList);
                         }
-                        arrayList.add(lineIncome);
-                        System.out.println("Array List: " + arrayList);
-                        finalArrayList = arrayList;
-                        lineIncome.removeAll(lineIncome);
-                        System.out.println("Line Income AFTER: " + lineIncome);
-                        System.out.println("Array List AFTER: " + arrayList);
+                        System.out.println("1.strList BEFORE: " + strList);
+                        finalArrayList.add(strList);
+                        System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
+                        strList.remove(0);
+                        System.out.println("1.strList AFTER: " + strList);
+                        System.out.println("2. finalArrayList AFTER: " + finalArrayList);
                     }
+                    System.out.println("\nFINAL: " + finalArrayList);
 
-                    System.out.println("\nARRAYLIST\n");
-                    System.out.println(finalArrayList);
+//                    System.out.println("3.Array List AFTER: " + finalArrayList);
+
 
                     fin.close();
                     Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();
