@@ -38,7 +38,12 @@
             android:label="@string/title_activity_categories"
             android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar" />
         <activity android:name=".AddCategoryActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Tabbed_Bank_Activity"
             android:label="Banks"
@@ -54,11 +59,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
 
         </activity>
         <activity
