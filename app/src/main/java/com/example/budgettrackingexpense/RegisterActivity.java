@@ -138,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity  {
                                     {
                                         Toast.makeText(RegisterActivity.this, "THe user  was not registered succesfully",Toast.LENGTH_SHORT);
                                     }
-                                    System.out.println("SOMETHING WENT WRONG 3" + task.getException().getMessage());
+
                                 }
                             });
                         }
@@ -146,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity  {
                         {
 //                            Toast.makeText(RegisterActivity.this, "The user has not been registered succesfully",Toast.LENGTH_SHORT);
 
-                            System.out.println("SOMETHING WENT WRONG3" + task.getException().getMessage());
+
                         }
                     }
 

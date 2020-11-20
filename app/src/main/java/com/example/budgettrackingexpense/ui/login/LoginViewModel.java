@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel;
 
 import android.content.Intent;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.budgettrackingexpense.MainActivity;
@@ -49,14 +51,17 @@ public class LoginViewModel extends ViewModel {
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-            userLogin(username, password);
+
+
 
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }
+
+
     }
 
-    public void userLogin( String username, String password) {
+    /*public void userLogin( String username, String password) {
         fAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -70,7 +75,7 @@ public class LoginViewModel extends ViewModel {
                 }
             }
         });
-    }
+    }*/
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
@@ -109,6 +114,8 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
     }
+
+
 
 
 }
