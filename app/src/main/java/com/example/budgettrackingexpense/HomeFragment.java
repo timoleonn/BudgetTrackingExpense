@@ -6,31 +6,33 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.budgettrackingexpense.R;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     PieChart pieChart;
+
+    int LineCount = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +55,106 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Snackbar.make(view, "ADDED EXPENSE", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
+
+        //  SET FILE NAME
+        String file_name = "test4.txt";
+
+        //  READ FILE
+        btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  GET NUMBER OF LINES SO THAT WE KNOW HOW BIG THE ARRAY WILL BE
+                try {
+                    FileInputStream fin = getActivity().openFileInput(file_name);
+                    DataInputStream din = new DataInputStream(fin);
+                    InputStreamReader isr = new InputStreamReader(din);
+                    BufferedReader br = new BufferedReader(isr);
+                    int lines = 0;
+                    while (br.readLine() != null) lines++;
+                    System.out.println("LINES: " + lines);
+                    br.close();
+
+                    LineCount = lines;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
+                //  AND SAVE IT TO AN ARRAY LIST OF LISTS
+                try {
+                    FileInputStream fin = getActivity().openFileInput(file_name);
+                    DataInputStream din = new DataInputStream(fin);
+                    InputStreamReader isr = new InputStreamReader(din);
+                    BufferedReader br = new BufferedReader(isr);
+
+                    //  CREATE ARRAY LIST, LIST AND VARIABLE TO HOLD EACH LINE
+                    ArrayList<List> finalArrayList = new ArrayList<>();
+                    List<String> strList = new ArrayList<String>();
+                    String strLine;
+
+                    //  READ EVERY LINE
+                    //  SPLIT EACH LINE BASED ON THE COMMA (SEPARATOR)
+                    //  EACH VALUE IS ADDED IN A LIST
+                    //  LIST GETS ADDED TO ARRAY LIST
+                    //  LIST GETS INITIALIZED AGAIN
+                    //  REPEAT UNTIL TEXT FILE IS READ THROUGH
+                    while((strLine = br.readLine()) != null) {
+                        String[] res = strLine.split("[,]", 0);
+                        System.out.println(res);
+                        for(String myStr: res) {
+                            System.out.println(myStr);
+                            //  ADDS THE THREE VARIABLES TO THE STRING ARRAY
+                            strList.add(myStr);
+                            System.out.println(strList);
+                        }
+                        System.out.println("1.strList BEFORE: " + strList);
+                        finalArrayList.add(strList);
+                        System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
+                        //  INITIALIZE AGAIN THE STRLIST SO IT CAN GET NEW VALUES
+                        strList = new ArrayList<String>();
+
+                        System.out.println("1.strList AFTER: " + strList);
+                        System.out.println("2. finalArrayList AFTER: " + finalArrayList);
+                    }
+                    System.out.println("\nFINAL: " + finalArrayList);
+
+                    //  SOME LOCAL VARIABLES
+                    Double total = 0.0;
+
+                    //  ITERATE THROUGH EACH LIST IN THE ARRAY LIST
+                    //  TO GRAB THE VALUES AND PROCESS THEM
+                    for (int i = 0; i < finalArrayList.size(); i++) {
+//                        System.out.println(finalArrayList.get(i) + " ");
+                        for (int j = 0; j < finalArrayList.get(i).size(); j++) {
+                            System.out.println(finalArrayList.get(i).get(j) + " ");
+                            //  PARSE TO DOUBLE THE AMOUNT
+                            if (j == 2) {
+                                total += Double.parseDouble((String) finalArrayList.get(i).get(j));
+                            }
+
+                        }
+                    }
+
+                    System.out.println("TOTAL: " + total);
+
+//                    System.out.println("3.Array List AFTER: " + finalArrayList);
+
+
+                    fin.close();
+                    Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    System.out.println("1: " + e.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("2: " + e.getMessage());
+                }
             }
         });
 
