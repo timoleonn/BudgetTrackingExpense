@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -85,10 +86,10 @@ public class RegisterActivity extends AppCompatActivity  {
                     gender = "Other";
                 }
 
-                pb2.setVisibility(View.VISIBLE);
-
                 //  CHECK IF THE FORM IS OKAY WITH NO ERRORS
-                if (validateName() && validateSurname()) {
+                if (validateFullName() && validateGender() && validateCountry() && validateUsername() && validateEmail() && validatePassword() && validateConfPass()) {
+                    pb2.setVisibility(View.VISIBLE);
+
                     fAuth.createUserWithEmailAndPassword(emailtext,passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -122,10 +123,10 @@ public class RegisterActivity extends AppCompatActivity  {
 
     //  VALIDATIONS
     public boolean validateFullName() {
-        EditText nameText = findViewById(R.id.etName);
+        EditText nameText = findViewById(R.id.name);
         String val = nameText.getText().toString().trim();
         if (val.isEmpty()) {
-            nameText.setError("Name can not be empty");
+            nameText.setError("Full name cannot be empty");
             return false;
         } else {
             nameText.setError(null);
@@ -133,40 +134,44 @@ public class RegisterActivity extends AppCompatActivity  {
         }
     }
 
-    public boolean validateSurname() {
-        EditText surnameText = findViewById(R.id.etSurname);
-        String val = surnameText.getText().toString().trim();
-        if (val.isEmpty()) {
-            surnameText.setError("Surname can not be empty");
+    public boolean validateGender() {
+        int selection = rbgroup.getCheckedRadioButtonId();
+        RadioButton rbLastOption = findViewById(R.id.other);
+
+        if (selection == -1) {
+            rbLastOption.setError("You must specify your gender");
             return false;
         } else {
-            surnameText.setError(null);
+            rbLastOption.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validateCountry() {
+        EditText countryText = findViewById(R.id.country);
+        String val = countryText.getText().toString().trim();
+        if (val.isEmpty()) {
+            countryText.setError("Country cannot be empty");
+            return false;
+        } else {
+            countryText.setError(null);
             return true;
         }
     }
 
     public boolean validateUsername() {
-        EditText usernameText = findViewById(R.id.etEmailAddress);
+        EditText usernameText = findViewById(R.id.newUsername);
         String val = usernameText.getText().toString().trim();
         int count = 0;
 
-        for(int i=0 ; i<val.length();i++) {
-            if (Character.isDigit(val.charAt(i))) {
-                count++;
-            }
-        }
-
-        if(count == 0) {
-            usernameText.setError("Username must contains at least one number");
-            return false;
-        }  else if (val.isEmpty()) {
-            usernameText.setError("Username can not be empty");
+        if (val.isEmpty()) {
+            usernameText.setError("Username cannot be empty");
             return false;
         } else if (val.length() > 20) {
             usernameText.setError("Username is too large");
             return false;
         } else if (val.length() < 6) {
-            usernameText.setError("Username must contains up to 6 characters");
+            usernameText.setError("Username must have a length > 6");
             return false;
         } else {
             usernameText.setError(null);
@@ -175,13 +180,13 @@ public class RegisterActivity extends AppCompatActivity  {
     }
 
     private boolean validateEmail() {
-        EditText emailText = findViewById(R.id.etEmail);
+        EditText emailText = findViewById(R.id.email);
         String val = emailText.getText().toString().trim();
         if (val.isEmpty()) {
-            emailText.setError("Email can not be empty");
+            emailText.setError("Email cannot be empty");
             return false;
         } else if (!val.contains("@")) {
-            emailText.setError("Email must contains @");
+            emailText.setError("Email must contain '@'");
             return false;
         }else {
             emailText.setError(null);
@@ -190,38 +195,33 @@ public class RegisterActivity extends AppCompatActivity  {
     }
 
     private boolean validatePassword() {
-        EditText password = findViewById(R.id.etPassword);
+        EditText password = findViewById(R.id.newPassword);
         String val = password.getText().toString().trim();
 
         String passType = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@#$%^&+=])(?=\\S+$).{6,30}$";
 
-        if(!val.matches(passType))
-        {
-            password.setError("Password must contains more tha 6 characters,lower case,capital case,number and symbol");
+        if (!val.matches(passType)) {
+            password.setError("Password must contain more tha 6 characters, a lower case character, a capital case character, a number and symbol");
             return false;
-        }
-        else if(val.isEmpty())
-        {
-            password.setError("Field can not be empty");
+        } else if (val.isEmpty()) {
+            password.setError("Password cannot be empty");
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
 
     private boolean validateConfPass() {
-        EditText password = findViewById(R.id.etPassword);
+        EditText password = findViewById(R.id.newPassword);
         String val1 = password.getText().toString().trim();
-        EditText conf = findViewById(R.id.etConfirmPass);
+        EditText conf = findViewById(R.id.confirmPassword);
         String val2 = conf.getText().toString().trim();
 
-        if(val2.isEmpty()) {
-            password.setError("Field can not be empty");
+        if (val2.isEmpty()) {
+            password.setError("Password cannot be empty");
             return false;
-        } else if(!val1.equals(val2)) {
-            conf.setError("Passwords do not match!");
+        } else if (!val1.equals(val2)) {
+            conf.setError("Passwords do not match");
             return false;
         } else {
             return true;
