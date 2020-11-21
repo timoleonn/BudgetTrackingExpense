@@ -30,10 +30,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity  {
-    EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf;
-    RadioGroup rbgroup;
+    EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf, moccupation;
+    RadioGroup rbgroup, rbOccupation;
     Button submit;
-    String gender = "";
+    String gender, occupation = "";
     ProgressBar pb2;
 
     FirebaseAuth fAuth;
@@ -53,15 +53,10 @@ public class RegisterActivity extends AppCompatActivity  {
         submit = findViewById(R.id.submit);
 
         rbgroup = findViewById(R.id.rbGroup);
+        rbOccupation = findViewById(R.id.rbOccupation);
 
         reff = FirebaseDatabase.getInstance().getReference("users");
         fAuth = FirebaseAuth.getInstance();
-
-        /*if (fAuth.getCurrentUser() != null)
-        {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }*/
 
         //  LOADING
         pb2 = findViewById(R.id.pb2);
@@ -86,8 +81,15 @@ public class RegisterActivity extends AppCompatActivity  {
                     gender = "Other";
                 }
 
+                int selection2 = rbOccupation.getCheckedRadioButtonId();
+                if (selection2 == R.id.rbOccupationStudent) {
+                    occupation = "Student";
+                } else if (selection2 == R.id.rbOccupationOther) {
+                    occupation = "Other";
+                }
+
                 //  CHECK IF THE FORM IS OKAY WITH NO ERRORS
-                if (validateFullName() && validateGender() && validateCountry() && validateUsername() && validateEmail() && validatePassword() && validateConfPass()) {
+                if (validateFullName() && validateGender() && validateCountry() && validateUsername() && validateEmail() && validatePassword() && validateConfPass() && validateOccupation()) {
                     pb2.setVisibility(View.VISIBLE);
 
                     fAuth.createUserWithEmailAndPassword(emailtext,passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -95,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity  {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                User information = new User(name, gender, username, country);
+                                User information = new User(name, gender, username, country, occupation);
 
                                 FirebaseDatabase.getInstance().getReference("users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -113,6 +115,7 @@ public class RegisterActivity extends AppCompatActivity  {
                                 });
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                pb2.setVisibility(View.INVISIBLE);
                             }
                         }
                     });
@@ -224,6 +227,19 @@ public class RegisterActivity extends AppCompatActivity  {
             conf.setError("Passwords do not match");
             return false;
         } else {
+            return true;
+        }
+    }
+
+    public boolean validateOccupation() {
+        int selection = rbOccupation.getCheckedRadioButtonId();
+        RadioButton rbLastOption = findViewById(R.id.rbOccupationOther);
+
+        if (selection == -1) {
+            rbLastOption.setError("You must specify your occupation");
+            return false;
+        } else {
+            rbLastOption.setError(null);
             return true;
         }
     }
