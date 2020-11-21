@@ -100,12 +100,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_profile) {
             //
         } else if (id == R.id.nav_logout) {
-            System.out.println("SOMETHING WENT WRONG 1" );
             signOut();
-            startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.nav_rate_us) {
             goToFragment(new RateUsFragment());
         }
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -118,18 +117,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.nav_host_fragment, f);
         fragmentTransaction.commit();
     }
+
+    //  SIGN OUT
     public void signOut()
     {
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("SOMETHING WENT WRONG2" );
-                FirebaseAuth.getInstance().signOut();
-                System.out.println("SOMETHING WENT WRONG3" );
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                System.out.println("SOMETHING WENT WRONG4" );
-            }
-        });
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
 }

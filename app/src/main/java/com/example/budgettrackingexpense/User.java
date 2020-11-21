@@ -8,9 +8,6 @@ public class User {
     public String username;
     public String gender;
 
-    public User() {
-    }
-
     public User(String nameText, String gender, String usernameText , String countryText) {
         this.fullname = nameText;
         this.country = countryText;
