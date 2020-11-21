@@ -77,14 +77,14 @@ public class RegisterActivity extends AppCompatActivity  {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = memail.getText().toString().trim();
+                String emailtext = memail.getText().toString().trim();
                 String name = mname.getText().toString().trim();
                 String username = musername.getText().toString().trim();
-                String password = mpassword.getText().toString().trim();
+                String passwordtext = mpassword.getText().toString().trim();
                 String passwordconf = mpasswordconf.getText().toString().trim();
                 String country = mcountry.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email))
+                if(TextUtils.isEmpty(emailtext))
                 {
                     memail.setError("Email is requested");
                     return;
@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity  {
                     musername.setError("username is requested");
                     return;
                 }
-                if(TextUtils.isEmpty(password) || (password.length()<4))
+                if(TextUtils.isEmpty(passwordtext) || (passwordtext.length()<4))
                 {
                     mpassword.setError("Password is requested or the password is too short");
                     return;
@@ -109,21 +109,21 @@ public class RegisterActivity extends AppCompatActivity  {
                     mcountry.setError("Country is requested");
                     return;
                 }
-                /*if (password != passwordconf)
+                if (!passwordtext.equals(passwordconf))
                 {
                     mpasswordconf.setError("The 2 passwords have to match");
                     return;
-                }*/
+                }
 
                 pb2.setVisibility(View.VISIBLE);
                 System.out.println("SOMETHING WENT WRONG 1" );
-                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(emailtext,passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-
-                            User user = new User(country,name,gender,username);
+                            System.out.println("SOMETHING WENT WRONG 2" );
+                            User user = new User(name,gender,username,country);
                             FirebaseDatabase.getInstance().getReference("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -144,7 +144,7 @@ public class RegisterActivity extends AppCompatActivity  {
                         }
                         else
                         {
-//                            Toast.makeText(RegisterActivity.this, "The user has not been registered succesfully",Toast.LENGTH_SHORT);
+                           Toast.makeText(RegisterActivity.this, "The user has not been registered succesfully",Toast.LENGTH_SHORT);
 
 
                         }

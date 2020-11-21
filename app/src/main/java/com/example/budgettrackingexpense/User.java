@@ -11,7 +11,7 @@ public class User {
     public User() {
     }
 
-    public User(String nameText, String usernameText, String countryText,String gender) {
+    public User(String nameText, String gender, String usernameText , String countryText) {
         this.fullname = nameText;
         this.country = countryText;
         this.username = usernameText;

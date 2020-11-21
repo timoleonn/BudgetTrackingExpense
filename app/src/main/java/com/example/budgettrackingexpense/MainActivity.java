@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_logout) {
             System.out.println("SOMETHING WENT WRONG 1" );
             signOut();
+            startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.nav_rate_us) {
             goToFragment(new RateUsFragment());
         }
