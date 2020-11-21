@@ -1,45 +1,37 @@
 package com.example.budgettrackingexpense;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.icu.util.BuddhistCalendar;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
-import java.io.DataInput;
 import java.io.DataInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.nio.Buffer;
-import java.util.Arrays;
+import java.util.Calendar;
 
 public class add_income extends AppCompatActivity {
 
-    CalendarView calendar;
-    TextView etDate;
+    //TextView tvDate;
+    EditText etDate;
+     DatePickerDialog.OnDateSetListener setListener;
+
+
+
+    //CalendarView calendar;
+    //TextView etDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,30 +39,76 @@ public class add_income extends AppCompatActivity {
         setContentView(R.layout.activity_add_income);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        calendar = (CalendarView)
-                findViewById(R.id.calendar);
-        etDate = (TextView)
-                findViewById(R.id.etDate);
 
-        calendar.setOnDateChangeListener(
-                new CalendarView.OnDateChangeListener() {
+
+        //tvDate=findViewById(R.id.tv_Date);
+        etDate=findViewById(R.id.etDate);
+        Calendar calendar=Calendar.getInstance();
+
+
+
+
+
+        final int year=calendar.get(Calendar.YEAR);
+        final int month=calendar.get(Calendar.MONTH);
+        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+
+        //tvDate.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View v) {
+              //  DatePickerDialog datePickerDialog=new DatePickerDialog(
+                //        add_income.this, android.R.style.Theme_Black,
+                  //      setListener,year,month,day);
+                //datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //datePickerDialog.show();
+
+            //}
+        //});
+        //setListener=new DatePickerDialog.OnDateSetListener() {
+          //  @Override
+           // public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+             //   month=month+1;
+               // String date=day+"/"+month+"/"+year;
+                //tvDate.setText(date);
+           // }
+        //};
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(
+                        add_income.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
-
-                    // In this Listener have one method
-                    // and in this method we will
-                    // get the value of DAYS, MONTH, YEARS
-                    public void onSelectedDayChange(@NonNull CalendarView view, int year,  int month,  int dayOfMonth) {
-                        // Store the value of date with
-                        // format in String type Variable
-                        // Add 1 in month because month
-                        // index is start with 0
-                        String Date = dayOfMonth + "/"
-                                + (month + 1) + "/" + year;
-
-                        // set this date in TextView for Display
-                        etDate.setText(Date);
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        month=month+1;
+                        String date=day+"/"+month+"/"+year;
+                        etDate.setText(date);
                     }
-                });
+                },year,month,day);
+                datePickerDialog.show();
+            }
+        });
+
+
+
+
+
+
+
+
+        //calendar = (CalendarView)
+               // findViewById(R.id.calendar);
+        //etDate = (TextView)
+               // findViewById(R.id.etDate);
+
+        //calendar.setOnDateChangeListener(
+                //new CalendarView.OnDateChangeListener() {
+                  //  @Override
+                    //public void onSelectedDayChange(@NonNull CalendarView view, int year,  int month,  int dayOfMonth) {
+                      //  String Date = dayOfMonth + "/"
+                        //        + (month + 1) + "/" + year;
+                        //etDate.setText(Date);
+                   // }
+                //});
 
         Button btnTestingTim = findViewById(R.id.btnTestingTim);
         Button btnTestingTimRead = findViewById(R.id.btnTestingTimRead);
