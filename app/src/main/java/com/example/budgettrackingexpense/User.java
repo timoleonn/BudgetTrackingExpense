@@ -7,14 +7,13 @@ public class User {
     public String country;
     public String username;
     public String gender;
+    public String occupation;
 
-    public User() {
-    }
-
-    public User(String nameText, String usernameText, String countryText,String gender) {
+    public User(String nameText, String gender, String usernameText , String countryText, String occupation) {
         this.fullname = nameText;
         this.country = countryText;
         this.username = usernameText;
         this.gender = gender;
+        this.occupation = occupation;
     }
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -29,14 +30,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity  {
-    EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf;
-    RadioGroup rbgroup;
+    EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf, moccupation;
+    RadioGroup rbgroup, rbOccupation;
     Button submit;
-    String gender;
-    Integer selection;
+    String gender, occupation = "";
+    ProgressBar pb2;
 
     FirebaseAuth fAuth;
-    ProgressBar pb2;
+    DatabaseReference reff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,106 +53,194 @@ public class RegisterActivity extends AppCompatActivity  {
         submit = findViewById(R.id.submit);
 
         rbgroup = findViewById(R.id.rbGroup);
-        selection = rbgroup.getCheckedRadioButtonId();
-        if(selection == R.id.male)
-        {
-            gender ="male";
-        }else if(selection == R.id.female)
-        {
-            gender ="female";
-        }else if(selection == R.id.other)
-        {
-            gender ="other";
-        }
+        rbOccupation = findViewById(R.id.rbOccupation);
 
-        pb2 = findViewById(R.id.pb2);
-
+        reff = FirebaseDatabase.getInstance().getReference("users");
         fAuth = FirebaseAuth.getInstance();
 
-        /*if (fAuth.getCurrentUser() != null)
-        {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }*/
+        //  LOADING
+        pb2 = findViewById(R.id.pb2);
 
+        //  REGISTER BUTTON
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = memail.getText().toString().trim();
+                String emailtext = memail.getText().toString().trim();
                 String name = mname.getText().toString().trim();
                 String username = musername.getText().toString().trim();
-                String password = mpassword.getText().toString().trim();
+                String passwordtext = mpassword.getText().toString().trim();
                 String passwordconf = mpasswordconf.getText().toString().trim();
                 String country = mcountry.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email))
-                {
-                    memail.setError("Email is requested");
-                    return;
+                int selection = rbgroup.getCheckedRadioButtonId();
+                if (selection == R.id.male) {
+                    gender = "Male";
+                } else if(selection == R.id.female)  {
+                    gender = "Female";
+                } else if(selection == R.id.other) {
+                    gender = "Other";
                 }
-                if(TextUtils.isEmpty(name))
-                {
-                    mname.setError("Name is requested");
-                    return;
-                }
-                if(TextUtils.isEmpty(username))
-                {
-                    musername.setError("username is requested");
-                    return;
-                }
-                if(TextUtils.isEmpty(password) || (password.length()<4))
-                {
-                    mpassword.setError("Password is requested or the password is too short");
-                    return;
-                }
-                if(TextUtils.isEmpty(country) )
-                {
-                    mcountry.setError("Country is requested");
-                    return;
-                }
-                /*if (password != passwordconf)
-                {
-                    mpasswordconf.setError("The 2 passwords have to match");
-                    return;
-                }*/
 
-                pb2.setVisibility(View.VISIBLE);
-                System.out.println("SOMETHING WENT WRONG 1" );
-                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
+                int selection2 = rbOccupation.getCheckedRadioButtonId();
+                if (selection2 == R.id.rbOccupationStudent) {
+                    occupation = "Student";
+                } else if (selection2 == R.id.rbOccupationOther) {
+                    occupation = "Other";
+                }
 
-                            User user = new User(country,name,gender,username);
-                            FirebaseDatabase.getInstance().getReference("users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        Toast.makeText(RegisterActivity.this, "THe user registered succesfully",Toast.LENGTH_SHORT);
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //  CHECK IF THE FORM IS OKAY WITH NO ERRORS
+                if (validateFullName() && validateGender() && validateCountry() && validateUsername() && validateEmail() && validatePassword() && validateConfPass() && validateOccupation()) {
+                    pb2.setVisibility(View.VISIBLE);
+
+                    fAuth.createUserWithEmailAndPassword(emailtext,passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful())
+                            {
+                                User information = new User(name, gender, username, country, occupation);
+
+                                FirebaseDatabase.getInstance().getReference("users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()) {
+                                            Toast.makeText(RegisterActivity.this, "The user registered succesfully",Toast.LENGTH_SHORT);
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        }
+                                        else {
+                                            Toast.makeText(RegisterActivity.this, "The user  was not registered succesfully",Toast.LENGTH_SHORT);
+                                        }
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(RegisterActivity.this, "THe user  was not registered succesfully",Toast.LENGTH_SHORT);
-                                    }
-
-                                }
-                            });
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Error: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                pb2.setVisibility(View.INVISIBLE);
+                            }
                         }
-                        else
-                        {
-//                            Toast.makeText(RegisterActivity.this, "The user has not been registered succesfully",Toast.LENGTH_SHORT);
-
-
-                        }
-                    }
-
-                });
+                    });
+                }
             }
         });
+    }
+
+    //  VALIDATIONS
+    public boolean validateFullName() {
+        EditText nameText = findViewById(R.id.name);
+        String val = nameText.getText().toString().trim();
+        if (val.isEmpty()) {
+            nameText.setError("Full name cannot be empty");
+            return false;
+        } else {
+            nameText.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validateGender() {
+        int selection = rbgroup.getCheckedRadioButtonId();
+        RadioButton rbLastOption = findViewById(R.id.other);
+
+        if (selection == -1) {
+            rbLastOption.setError("You must specify your gender");
+            return false;
+        } else {
+            rbLastOption.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validateCountry() {
+        EditText countryText = findViewById(R.id.country);
+        String val = countryText.getText().toString().trim();
+        if (val.isEmpty()) {
+            countryText.setError("Country cannot be empty");
+            return false;
+        } else {
+            countryText.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validateUsername() {
+        EditText usernameText = findViewById(R.id.newUsername);
+        String val = usernameText.getText().toString().trim();
+        int count = 0;
+
+        if (val.isEmpty()) {
+            usernameText.setError("Username cannot be empty");
+            return false;
+        } else if (val.length() > 20) {
+            usernameText.setError("Username is too large");
+            return false;
+        } else if (val.length() < 6) {
+            usernameText.setError("Username must have a length > 6");
+            return false;
+        } else {
+            usernameText.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateEmail() {
+        EditText emailText = findViewById(R.id.email);
+        String val = emailText.getText().toString().trim();
+        if (val.isEmpty()) {
+            emailText.setError("Email cannot be empty");
+            return false;
+        } else if (!val.contains("@")) {
+            emailText.setError("Email must contain '@'");
+            return false;
+        }else {
+            emailText.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        EditText password = findViewById(R.id.newPassword);
+        String val = password.getText().toString().trim();
+
+        String passType = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.!@#$%^&+=])(?=\\S+$).{6,30}$";
+
+        if (!val.matches(passType)) {
+            password.setError("Password must contain more tha 6 characters, a lower case character, a capital case character, a number and symbol");
+            return false;
+        } else if (val.isEmpty()) {
+            password.setError("Password cannot be empty");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean validateConfPass() {
+        EditText password = findViewById(R.id.newPassword);
+        String val1 = password.getText().toString().trim();
+        EditText conf = findViewById(R.id.confirmPassword);
+        String val2 = conf.getText().toString().trim();
+
+        if (val2.isEmpty()) {
+            password.setError("Password cannot be empty");
+            return false;
+        } else if (!val1.equals(val2)) {
+            conf.setError("Passwords do not match");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean validateOccupation() {
+        int selection = rbOccupation.getCheckedRadioButtonId();
+        RadioButton rbLastOption = findViewById(R.id.rbOccupationOther);
+
+        if (selection == -1) {
+            rbLastOption.setError("You must specify your occupation");
+            return false;
+        } else {
+            rbLastOption.setError(null);
+            return true;
+        }
     }
 }

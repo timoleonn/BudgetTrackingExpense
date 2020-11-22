@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,7 +36,13 @@ public class UpdateCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_category);
 
-        reference = FirebaseDatabase.getInstance().getReference("users").child("-sdfsdfsdfsdf").child("categories");
+        //  GET CURRENT USER
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //  GET CURRENT USER UID
+        String currentUserUid = currentUser.getUid();
+
+        reference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid).child("categories");
 
         //  GRAB INTENT FROM CATEGORYACTIVITY
         Intent in = getIntent();

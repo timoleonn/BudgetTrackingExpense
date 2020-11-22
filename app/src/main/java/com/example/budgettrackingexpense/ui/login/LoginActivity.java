@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity  {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                    goToMainActivity();
                 }
                 setResult(Activity.RESULT_OK);
 
@@ -116,10 +116,11 @@ public class LoginActivity extends AppCompatActivity  {
                         passwordEditText.getText().toString());
             }
         };
+
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
+        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -136,29 +137,34 @@ public class LoginActivity extends AppCompatActivity  {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
-
             }
         });
     }
 
+    //  UPDATE UI WITH USER
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        loginUser();
+        goToMainActivity();
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
+    //  SHOW LOGIN FAILED
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-    public void loginUser()
+    //  GO TO MAIN ACTIVITY
+    public void goToMainActivity()
     {
         ProgressBar loadingProgressBar = findViewById(R.id.loading);
         EditText email =  findViewById(R.id.username);
         EditText password = findViewById(R.id.password);
+
         String emailText = email.getText().toString().trim();
         String passwordText = password.getText().toString().trim();
+
         loadingProgressBar.setVisibility(View.VISIBLE);
+
         fAuth = FirebaseAuth.getInstance();
 
         fAuth.signInWithEmailAndPassword(emailText,passwordText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -179,11 +185,6 @@ public class LoginActivity extends AppCompatActivity  {
                 }
             }
         });
-    }
-    public void onClick(View view)
-    {
-
-
     }
 
 }

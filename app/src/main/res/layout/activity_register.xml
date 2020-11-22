@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:background="@drawable/login_background"
     android:orientation="vertical"
+    android:scrollbarThumbHorizontal="@color/black"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -34,6 +35,7 @@
         android:ems="10"
         android:hint="Enter you name and surname"
         android:inputType="textPersonName"
+        android:scrollbarThumbHorizontal="@color/black"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
@@ -96,6 +98,7 @@
         android:ems="10"
         android:hint="Enter the country you are living at"
         android:inputType="textPersonName"
+        android:scrollbarThumbHorizontal="@color/black"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
@@ -111,6 +114,7 @@
         android:ems="10"
         android:hint="Choose a username"
         android:inputType="textPersonName"
+        android:scrollbarThumbHorizontal="@color/black"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
@@ -126,6 +130,7 @@
         android:ems="10"
         android:hint="Enter your Email"
         android:inputType="textEmailAddress"
+        android:scrollbarThumbHorizontal="@color/black"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
@@ -141,6 +146,7 @@
         android:ems="10"
         android:hint="Enter your password"
         android:inputType="textPassword"
+        android:scrollbarThumbHorizontal="@color/black"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
@@ -156,8 +162,37 @@
         android:ems="10"
         android:hint="Confirm your password"
         android:inputType="textPassword"
+        android:scrollbarThumbHorizontal="@color/black"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select your occupation"
+        android:textColor="@color/white" />
+
+    <RadioGroup
+        android:id="@+id/rbOccupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbOccupationStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rbOccupationOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textColor="@color/white" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/loginHere"
@@ -167,27 +202,26 @@
         android:text="Already registerd? Login here"
         android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10sp"
-        android:layout_marginEnd="10sp"
-        android:layout_marginRight="10sp"
-        android:background="@color/white"
-        android:text="Submit"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/white" />
-
     <ProgressBar
         android:id="@+id/pb2"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="76dp"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/submit"
+
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="10sp"
+        android:background="@color/white"
+        android:text="Submit"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="60dp" />
 
 </LinearLayout>

@@ -1,11 +1,13 @@
 package com.example.budgettrackingexpense;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.budgettrackingexpense.ui.login.LoginActivity;
@@ -14,6 +16,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle toggle;
     private Button logout;
 
-
-    public static final String FULLNAME = "";
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null ) {
             goToFragment(new HomeFragment());
         }
+
+        //  GRAB HEADER VALUES SO WE CAN SET THE VALUES FROM THE DATABASE
+        NavigationView mNavigationView = findViewById(R.id.nav_view);
+        TextView tvHeaderFullName = mNavigationView.getHeaderView(0).findViewById(R.id.tv_header_full_name);
+        TextView tvHeaderEmail = mNavigationView.getHeaderView(0).findViewById(R.id.tv_header_email);
+        TextView tvHeaderOccupation = mNavigationView.getHeaderView(0).findViewById(R.id.tv_header_occupation);
+        ImageView ivProfile = mNavigationView.getHeaderView(0).findViewById(R.id.ivProfile);
+
+        //  GET CURRENT USER
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //  GET CURRENT USER UID
+        String currentUserUid = currentUser.getUid();
+        String currentUserEmail = currentUser.getEmail();
+
+
+
+        //  GRAB DATA FROM THE DATABASE BASED ON CURRENT USER'S UID
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String _FULLNAME = snapshot.child("fullname").getValue().toString();
+                String _OCCUPATION = snapshot.child("occupation").getValue().toString();
+                String _GENDER = snapshot.child("gender").getValue().toString();
+
+                tvHeaderFullName.setText(_FULLNAME);
+                tvHeaderEmail.setText(currentUserEmail);
+                tvHeaderOccupation.setText(_OCCUPATION);
+
+                if (_GENDER.equals("Male")) {
+                    ivProfile.setBackgroundResource(R.drawable.ic_iconfinder_malecostume_403022);
+                } else if (_GENDER.equals("Female")) {
+                    ivProfile.setBackgroundResource(R.drawable.ic_iconfinder_female1_403023);
+                } else if (_GENDER.equals("Other")) {
+                    ivProfile.setBackgroundResource(R.drawable.ic_iconfinder_other);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     //  CHECK WHAT BUTTON IS PRESSED ON TOOLBAR TOP
@@ -100,11 +153,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_profile) {
             //
         } else if (id == R.id.nav_logout) {
-            System.out.println("SOMETHING WENT WRONG 1" );
             signOut();
         } else if (id == R.id.nav_rate_us) {
             goToFragment(new RateUsFragment());
         }
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -117,18 +170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.nav_host_fragment, f);
         fragmentTransaction.commit();
     }
+
+    //  SIGN OUT
     public void signOut()
     {
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("SOMETHING WENT WRONG2" );
-                FirebaseAuth.getInstance().signOut();
-                System.out.println("SOMETHING WENT WRONG3" );
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                System.out.println("SOMETHING WENT WRONG4" );
-            }
-        });
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
 }

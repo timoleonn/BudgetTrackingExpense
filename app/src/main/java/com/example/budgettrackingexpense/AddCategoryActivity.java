@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,7 +34,13 @@ public class AddCategoryActivity extends AppCompatActivity {
 
         categories = new Categories();
 
-        reffCategories = FirebaseDatabase.getInstance().getReference("users").child("-sdfsdfsdfsdf");
+        //  GET CURRENT USER
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //  GET CURRENT USER UID
+        String currentUserUid = currentUser.getUid();
+
+        reffCategories = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
 
         btnCreateCategory.setOnClickListener(new View.OnClickListener() {
             @Override
