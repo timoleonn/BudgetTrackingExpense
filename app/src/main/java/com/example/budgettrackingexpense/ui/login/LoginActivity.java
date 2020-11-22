@@ -1,6 +1,5 @@
 package com.example.budgettrackingexpense.ui.login;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,18 +23,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.budgettrackingexpense.MainActivity;
 import com.example.budgettrackingexpense.R;
 import com.example.budgettrackingexpense.RegisterActivity;
-import com.example.budgettrackingexpense.ui.login.LoginViewModel;
-import com.example.budgettrackingexpense.ui.login.LoginViewModelFactory;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,8 +36,8 @@ public class LoginActivity extends AppCompatActivity  {
     private LoginViewModel loginViewModel;
     FirebaseAuth fAuth;
     Button signInGoogle;
-     GoogleSignInClient mGoogleSignInClient;
-     int RC_SIGN_IN= 0;
+//     GoogleSignInClient mGoogleSignInClient;
+//     int RC_SIGN_IN= 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,6 +13,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class AddCategoryActivity extends AppCompatActivity {
 
     public static final String SUCCESSMESSAGE = "";
@@ -42,15 +46,47 @@ public class AddCategoryActivity extends AppCompatActivity {
 
         reffCategories = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
 
+        //  SET FILE NAME
+        String file_name_1 = "categories.txt";
+        String file_name_2 = "budget.txt";
+
         btnCreateCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double budget = Double.parseDouble(etBudget.getText().toString().trim());
+                Long budget = Long.parseLong(etBudget.getText().toString().trim());
                 categories.setName(etCategoryName.getText().toString());
                 categories.setBudget(budget);
 
                 reffCategories.child("categories").child(etCategoryName.getText().toString()).setValue(categories);
 //                reffCategories.child("categories").push().setValue(categories);
+
+                //  WRITE CATEGORY NAME TO FILE
+                try {
+                    FileOutputStream fout = openFileOutput(file_name_1, MODE_APPEND);
+                    fout.write(etCategoryName.getText().toString().getBytes());
+                    fout.close();
+                    System.out.println("SUCCESS");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    System.out.println("1: " + e.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("2: " + e.getMessage());
+                }
+
+                //  WRITE BUDGET TO FILE
+                try {
+                    FileOutputStream fout = openFileOutput(file_name_2, MODE_APPEND);
+                    fout.write(etBudget.getText().toString().getBytes());
+                    fout.close();
+                    System.out.println("SUCCESS");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    System.out.println("1: " + e.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("2: " + e.getMessage());
+                }
 
                 Intent in = new Intent(AddCategoryActivity.this, CategoriesActivity.class);
                 String message = "You have added the category " + etCategoryName.getText().toString() + " successfully!";

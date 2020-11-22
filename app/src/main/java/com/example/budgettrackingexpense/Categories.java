@@ -2,9 +2,9 @@ package com.example.budgettrackingexpense;
 
 public class Categories {
     String name;
-    Double budget;
+    Long budget;
 
-    public Categories(String name, Double budget) {
+    public Categories(String name, Long budget) {
         this.name = name;
         this.budget = budget;
     }
@@ -21,11 +21,17 @@ public class Categories {
         this.name = name;
     }
 
-    public Double getBudget() {
+    public Long getBudget() {
         return budget;
     }
 
-    public void setBudget(Double budget) {
+    public void setBudget(Long budget) {
         this.budget = budget;
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + this.name +
+                ", budget: " + this.budget;
     }
 }

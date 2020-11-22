@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,13 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -25,14 +33,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class HomeFragment extends Fragment {
 
     PieChart pieChart;
+    DatabaseReference databaseReference;
 
-    int LineCount = 0;
+    List<Categories> categoriesList;
+//    int LineCount = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,23 +79,23 @@ public class HomeFragment extends Fragment {
         btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  GET NUMBER OF LINES SO THAT WE KNOW HOW BIG THE ARRAY WILL BE
-                try {
-                    FileInputStream fin = getActivity().openFileInput(file_name);
-                    DataInputStream din = new DataInputStream(fin);
-                    InputStreamReader isr = new InputStreamReader(din);
-                    BufferedReader br = new BufferedReader(isr);
-                    int lines = 0;
-                    while (br.readLine() != null) lines++;
-                    System.out.println("LINES: " + lines);
-                    br.close();
-
-                    LineCount = lines;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                //  GET NUMBER OF LINES SO THAT WE KNOW HOW BIG THE ARRAY WILL BE
+//                try {
+//                    FileInputStream fin = getActivity().openFileInput(file_name);
+//                    DataInputStream din = new DataInputStream(fin);
+//                    InputStreamReader isr = new InputStreamReader(din);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    int lines = 0;
+//                    while (br.readLine() != null) lines++;
+//                    System.out.println("LINES: " + lines);
+//                    br.close();
+//
+//                    LineCount = lines;
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
                 //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
                 //  AND SAVE IT TO AN ARRAY LIST OF LISTS
@@ -150,10 +162,8 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    System.out.println("1: " + e.getMessage());
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("2: " + e.getMessage());
                 }
             }
         });
@@ -185,8 +195,60 @@ public class HomeFragment extends Fragment {
         ArrayList<Integer> colors = new ArrayList<>();
         for (int c: MY_COLORS) colors.add(c);
 
-        //
-        PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(), "");
+        List<Categories> categoriesList = new ArrayList();
+
+        //  GET CURRENT USER
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //  GET CURRENT USER UID
+        String currentUserUid = currentUser.getUid();
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid).child("categories");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds:snapshot.getChildren()) {
+                        Categories data = ds.getValue(Categories.class);
+                        categoriesList.add(data);
+                    }
+
+                } else {
+                    System.out.println("No data found");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        ArrayList<String> categories = new ArrayList();
+
+        try {
+            FileInputStream fin = getActivity().openFileInput("categories.txt");
+            DataInputStream din = new DataInputStream(fin);
+            InputStreamReader isr = new InputStreamReader(din);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) {
+                    categories.add(line);
+                }
+            }
+            br.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories), "");
         pieDataSet.setColors(colors);
         pieDataSet.setValueLineColor(R.color.design_default_color_background);
         pieDataSet.setValueTextSize(18f);
@@ -198,12 +260,21 @@ public class HomeFragment extends Fragment {
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
 
+
         return root;
     }
 
+
     //  PIE CHART DATA
-    private ArrayList<PieEntry> pieChartDataSet() {
+    private ArrayList<PieEntry> pieChartDataSet(ArrayList<String> categories) {
         ArrayList<PieEntry> dataSet = new ArrayList<PieEntry>();
+
+//        System.out.println("1: " + categories);
+
+        for (String category: categories) {
+            System.out.println("1: " + category);
+        }
+
 
         dataSet.add(new PieEntry(10f, "Bills"));
         dataSet.add(new PieEntry(20f, "Food"));
@@ -212,6 +283,8 @@ public class HomeFragment extends Fragment {
         dataSet.add(new PieEntry(15f, "Eating out"));
         dataSet.add(new PieEntry(15f, "Entertainment"));
 
+
         return dataSet;
     }
+
 }
