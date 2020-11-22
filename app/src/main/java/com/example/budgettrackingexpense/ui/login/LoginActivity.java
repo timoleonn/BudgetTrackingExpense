@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-       /* loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity  {
                         passwordEditText.getText().toString());
             }
         });
-        signInGoogle = findViewById(R.id.googleSignIn);
+        /*signInGoogle = findViewById(R.id.googleSignIn);
         signInGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
