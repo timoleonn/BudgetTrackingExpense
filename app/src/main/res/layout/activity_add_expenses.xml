@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".add_income">
+    tools:context=".AddExpenses">
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView"
         android:layout_width="278dp"
         android:layout_height="60dp"
         android:gravity="center"
@@ -24,7 +23,7 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <EditText
-        android:id="@+id/etDate"
+        android:id="@+id/date"
         android:layout_width="152dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -39,11 +38,11 @@
         app:layout_constraintVertical_bias="0.307" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etExpense"
         android:layout_width="145dp"
         android:layout_height="59dp"
         android:ems="10"
-        android:hint="expense"
+        android:hint="Expense"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +52,7 @@
         app:layout_constraintVertical_bias="0.723" />
 
     <EditText
-        android:id="@+id/etNotes"
+        android:id="@+id/etNote"
         android:layout_width="167dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -67,11 +66,10 @@
         app:layout_constraintVertical_bias="0.833" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/addExpenses"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="add"
-        android:text="Add Income"
+        android:text="Add Expense"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -80,7 +78,7 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <Button
-        android:id="@+id/btnTestingTim"
+        android:id="@+id/btnTestingTim2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
@@ -92,7 +90,7 @@
         app:layout_constraintVertical_bias="0.727" />
 
     <Button
-        android:id="@+id/btnTestingTimRead"
+        android:id="@+id/btnTestingTimRead2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Read"
@@ -104,7 +102,7 @@
         app:layout_constraintVertical_bias="0.855" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -116,5 +114,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.206" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

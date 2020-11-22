@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
-        <activity android:name=".UpdateCategoryActivity"></activity>
+        <activity android:name=".AddExpenses"></activity>
+        <activity android:name=".UpdateCategoryActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -32,7 +33,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".Tabbed_Bank_Activity"></activity>
+            android:parentActivityName=".Tabbed_Bank_Activity" />
         <activity
             android:name=".CategoriesActivity"
             android:label="@string/title_activity_categories"
@@ -63,9 +64,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar" />
     </application>
 
 </manifest>

@@ -194,9 +194,5 @@ public class add_income extends AppCompatActivity {
         EditText number=findViewById(R.id.etNumber);
         EditText notes=findViewById(R.id.etNotes);
         EditText date=findViewById(R.id.etDate);
-
-
-
-
     }
 }

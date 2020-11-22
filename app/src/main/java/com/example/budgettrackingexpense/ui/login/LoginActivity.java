@@ -32,6 +32,12 @@ import com.example.budgettrackingexpense.R;
 import com.example.budgettrackingexpense.RegisterActivity;
 import com.example.budgettrackingexpense.ui.login.LoginViewModel;
 import com.example.budgettrackingexpense.ui.login.LoginViewModelFactory;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,7 +47,9 @@ public class LoginActivity extends AppCompatActivity  {
 
     private LoginViewModel loginViewModel;
     FirebaseAuth fAuth;
-
+    Button signInGoogle;
+     GoogleSignInClient mGoogleSignInClient;
+     int RC_SIGN_IN= 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +139,7 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+       /* loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
@@ -139,7 +147,53 @@ public class LoginActivity extends AppCompatActivity  {
                         passwordEditText.getText().toString());
             }
         });
+        signInGoogle = findViewById(R.id.googleSignIn);
+        signInGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.googleSignIn:
+                        signIn();
+                        break;
+                    // ...
+                }
+            }
+        });
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);*/
     }
+
+    /*private void signIn()
+    {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            startActivity(new Intent(this,MainActivity.class));
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
+        }
+    }*/
 
     //  UPDATE UI WITH USER
     private void updateUiWithUser(LoggedInUserView model) {
