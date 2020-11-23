@@ -65,8 +65,8 @@ public class HomeFragment extends Fragment {
         fab_add_expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "ADDED EXPENSE", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent in = new Intent(getContext(), addExpenses.class);
+                startActivity(in);
             }
         });
 

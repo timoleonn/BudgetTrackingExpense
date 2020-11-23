@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mname = findViewById(R.id.name);
         musername = findViewById(R.id.newUsername);

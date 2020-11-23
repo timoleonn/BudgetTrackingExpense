@@ -11,7 +11,7 @@
         android:layout_width="278dp"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="ADD INCOME"
+        android:text="add expense"
         android:textColor="@color/black"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <Button
-        android:id="@+id/btnTestingTim2"
+        android:id="@+id/btnTestingTimexp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
@@ -90,7 +90,7 @@
         app:layout_constraintVertical_bias="0.727" />
 
     <Button
-        android:id="@+id/btnTestingTimRead2"
+        android:id="@+id/btnTestingTimReadexp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Read"
