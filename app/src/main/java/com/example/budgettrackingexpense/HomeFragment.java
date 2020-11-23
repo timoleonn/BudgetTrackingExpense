@@ -32,6 +32,8 @@ public class HomeFragment extends Fragment {
     int categoryCount = 0;
     double[] expensePerCategory;
 
+    String file_name = "expenses.txt";
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -58,8 +60,7 @@ public class HomeFragment extends Fragment {
 
 //        Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
 
-        //  SET FILE NAME
-        String file_name = "test4.txt";
+
 
 //        //  READ FILE
 //        btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
@@ -230,7 +231,7 @@ public class HomeFragment extends Fragment {
         //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
         //  AND SAVE IT TO AN ARRAY LIST OF LISTS
         try {
-            FileInputStream fin = getActivity().openFileInput("test4.txt");
+            FileInputStream fin = getActivity().openFileInput(file_name);
             DataInputStream din = new DataInputStream(fin);
             InputStreamReader isr = new InputStreamReader(din);
             BufferedReader br = new BufferedReader(isr);
@@ -251,7 +252,7 @@ public class HomeFragment extends Fragment {
                 System.out.println(res);
                 for(String myStr: res) {
                     System.out.println(myStr);
-                    //  ADDS THE THREE VARIABLES TO THE STRING ARRAY
+                    //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
                     strList.add(myStr);
                     System.out.println(strList);
                 }
@@ -264,7 +265,7 @@ public class HomeFragment extends Fragment {
 //                System.out.println("1.strList AFTER: " + strList);
 //                System.out.println("2. finalArrayList AFTER: " + finalArrayList);
             }
-//            System.out.println("\nFINAL: " + finalArrayList);
+            System.out.println("\nFINAL: " + finalArrayList);
 
             //  SOME LOCAL VARIABLES
 //            Double total = 0.0;
@@ -273,33 +274,37 @@ public class HomeFragment extends Fragment {
             //  THIS IS AN ARRAY TO HOLD THE TOTAL AMOUNT SPENDED FOR EACH CATEGORY
             expensePerCategory = new double[categoryCount];
 
+            System.out.println("IS EMPTY: " + finalArrayList.isEmpty());
+
             int category_count = 0;
             //  GET ALL CATEGORIES
-            for (String category: categories) {
-                //  ITERATE THROUGH EACH LIST IN THE ARRAY LIST
-                //  TO GRAB THE VALUES AND PROCESS THEM
-                for (int i = 0; i < finalArrayList.size(); i++) {
-                    for (int j = 0; j < finalArrayList.get(i).size(); j++) {
-                        //  J == 1 MEANS THAT IF WE ARE CHECKING THE CATEGORY COLUMN IN THE LIST OF EXPENSES
-                        if (j == 1) {
-                            if (finalArrayList.get(i).get(j).equals(category)) {
-                                expensePerCategory[category_count] += Double.parseDouble((String) finalArrayList.get(i).get(2));
+            if (!finalArrayList.isEmpty()) {
+                for (String category: categories) {
+                    //  ITERATE THROUGH EACH LIST IN THE ARRAY LIST
+                    //  TO GRAB THE VALUES AND PROCESS THEM
+                    for (int i = 0; i < finalArrayList.size(); i++) {
+                        for (int j = 0; j < finalArrayList.get(i).size(); j++) {
+                            //  J == 1 MEANS THAT IF WE ARE CHECKING THE CATEGORY COLUMN IN THE LIST OF EXPENSES
+                            if (j == 1) {
+                                if (finalArrayList.get(i).get(j).equals(category)) {
+                                    expensePerCategory[category_count] += Double.parseDouble((String) finalArrayList.get(i).get(3));
+                                }
                             }
-
                         }
-
                     }
+                    category_count++;
                 }
-                category_count++;
+            } else {
+                expensePerCategory = null;
             }
 
             fin.close();
-            Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories, expensePerCategory), "");
         pieDataSet.setColors(colors);
@@ -321,15 +326,25 @@ public class HomeFragment extends Fragment {
     private ArrayList<PieEntry> pieChartDataSet(ArrayList<String> categories, double[] array) {
         ArrayList<PieEntry> dataSet = new ArrayList<PieEntry>();
 
-        System.out.println("Array length: " + array.length);
-        System.out.println("Value: " + array[0]);
-        System.out.println("Text: " + categories.get(0));
-
         if (array != null) {
+            System.out.println("TIMOLEON 1");
             for (int i = 0; i < array.length; i++) {
+                System.out.println(array[i]);
                 dataSet.add(new PieEntry((float) array[i], categories.get(i)));
             }
+            return dataSet;
         }
+
+        if (array == null) {
+            System.out.println("SIZE: " + categories.size());
+            double zero = 0.0;
+            for (int i = 0; i < categories.size(); i++) {
+                dataSet.add(new PieEntry((float) zero, categories.get(i)));
+                System.out.println("NAME [" + i + "]: " + categories.get(i));
+            }
+        }
+
+
 
         return dataSet;
     }

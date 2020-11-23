@@ -27,6 +27,10 @@ public class AddCategoryActivity extends AppCompatActivity {
     DatabaseReference reffCategories;
     Categories categories;
 
+    //  SET FILE NAME
+    String file_name_1 = "categories.txt";
+    String file_name_2 = "budget.txt";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +49,6 @@ public class AddCategoryActivity extends AppCompatActivity {
         String currentUserUid = currentUser.getUid();
 
         reffCategories = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
-
-        //  SET FILE NAME
-        String file_name_1 = "categories.txt";
-        String file_name_2 = "budget.txt";
 
         btnCreateCategory.setOnClickListener(new View.OnClickListener() {
             @Override

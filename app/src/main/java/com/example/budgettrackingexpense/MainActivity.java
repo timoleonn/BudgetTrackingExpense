@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.budgettrackingexpense.ui.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +51,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //  GRAB INTENT FROM: ADD INCOME OR ADD EXPENSE
+        Intent in = getIntent();
+        if (in.hasExtra(add_income.SUCCESS_MESSAGE_ADD_INCOME)) {
+            String success_message_add_income = in.getStringExtra(add_income.SUCCESS_MESSAGE_ADD_INCOME);
+            Toast.makeText(getApplicationContext(), success_message_add_income, Toast.LENGTH_LONG).show();
+        } else if (in.hasExtra(addExpenses.SUCCESS_MESSAGE_ADD_EXPENSE)) {
+            String success_message_add_income = in.getStringExtra(addExpenses.SUCCESS_MESSAGE_ADD_EXPENSE);
+            Toast.makeText(getApplicationContext(), success_message_add_income, Toast.LENGTH_LONG).show();
+        }
 
         logout = findViewById(R.id.nav_logout);
 

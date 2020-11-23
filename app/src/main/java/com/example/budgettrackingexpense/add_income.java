@@ -27,10 +27,11 @@ import java.util.Calendar;
 
 public class add_income extends AppCompatActivity {
 
-    // TextView tvDate;
+    public static String SUCCESS_MESSAGE_ADD_INCOME = "";
     EditText etDate;
     DatePickerDialog.OnDateSetListener setListener;
 
+    String file_name = "income.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class add_income extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month=month+1;
-                        String date=day+"/"+month+"/"+year;
+                        String date = day+"/"+month+"/"+year;
                         etDate.setText(date);
                     }
                 },year,month,day);
@@ -114,21 +115,14 @@ public class add_income extends AppCompatActivity {
             }
         });
 
-        //  SET DATA (TEMPORARY)
-        //  IN THE APP, WE WILL BE GRABING THE DATA FROM THE FORM
-                
-
-        //  SET FILE NAME
-        String file_name = "test4.txt";
-
         //  WRITE TO FILE
         btnaddincome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String date=etDate.getText().toString();
-                String number=etNumber.getText().toString();
-                String notes=etNotes.getText().toString();
+                String date = etDate.getText().toString();
+                String number = etNumber.getText().toString();
+                String notes = etNotes.getText().toString();
 
 
                 String final_to_write = date + "," + notes + "," + number+ "\n";
@@ -137,64 +131,25 @@ public class add_income extends AppCompatActivity {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
                     fout.write(final_to_write.getBytes());
                     fout.close();
-                    System.out.println("SUCCESS");
+                    Intent in = new Intent(add_income.this, MainActivity.class);
+                    String successMessage = "You have successfully recorded your income of €" + number;
+                    in.putExtra(SUCCESS_MESSAGE_ADD_INCOME, successMessage);
+                    startActivity(in);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    System.out.println("1: " + e.getMessage());
+                    Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("2: " + e.getMessage());
-                }
-            }
-        });
-
-
-        Button btnTestingTimRead=findViewById(R.id.btnTestingTimRead);
-        //  READ FILE
-        btnTestingTimRead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    FileInputStream fin = openFileInput(file_name);
-                    DataInputStream din = new DataInputStream(fin);
-                    InputStreamReader isr = new InputStreamReader(din);
-                    BufferedReader br = new BufferedReader(isr);
-
-                    String strLine;
-                    while((strLine = br.readLine()) != null) {
-                        System.out.println("1: " + strLine);
-                    }
-
-                    fin.close();
-                    Toast.makeText(getApplicationContext(), "Read successfully", Toast.LENGTH_LONG).show();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    System.out.println("1: " + e.getMessage());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("2: " + e.getMessage());
+                    Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.addincome_menu, menu);
         return true;
-
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_add_income) {
-            Intent in = new Intent(this, Settings.class);
-            startActivity(in);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }
