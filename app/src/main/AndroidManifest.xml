@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
-        <activity android:name=".AddExpenses"></activity>
+        <activity
+            android:name=".addExpenses"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity android:name=".UpdateCategoryActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -38,8 +41,13 @@
             android:name=".CategoriesActivity"
             android:label="@string/title_activity_categories"
             android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar" />
+
         <activity android:name=".AddCategoryActivity" />
-        <activity android:name=".RegisterActivity" />
+
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".ui.login.LoginActivity"/>
+
         <activity
             android:name=".Tabbed_Bank_Activity"
             android:label="Banks"
