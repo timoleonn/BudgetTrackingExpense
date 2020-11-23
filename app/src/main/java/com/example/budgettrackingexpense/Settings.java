@@ -1,8 +1,5 @@
 package com.example.budgettrackingexpense;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,8 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Settings extends AppCompatActivity {
 
@@ -43,6 +42,7 @@ public class Settings extends AppCompatActivity {
         } else if (selection == R.id.rbPound) {
             currency = "Pound";
         }
+
     }
         public void theme(View v)
         {

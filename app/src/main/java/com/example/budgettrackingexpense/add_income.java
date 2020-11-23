@@ -3,12 +3,15 @@ package com.example.budgettrackingexpense;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,23 +61,78 @@ public class add_income extends AppCompatActivity {
             }
         });
 
-        Button btnTestingTim = findViewById(R.id.btnTestingTim);
-        Button btnTestingTimRead = findViewById(R.id.btnTestingTimRead);
+
+        Button btnaddincome=findViewById(R.id.btnaddincome);
+        btnaddincome.setEnabled(false);
+
+        etDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!etDate.getText().toString().isEmpty()) {
+                    btnaddincome.setEnabled(true);
+                }
+            }
+        });
+        TextView etNumber=findViewById(R.id.etNumber);
+        btnaddincome.setEnabled(false);
+
+        etNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!etNumber.getText().toString().isEmpty()) {
+                    btnaddincome.setEnabled(true);
+                }
+            }
+        });
+        TextView etNotes=findViewById(R.id.etNotes);
+        btnaddincome.setEnabled(false);
+
+        etNotes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!etNotes.getText().toString().isEmpty()) {
+                    btnaddincome.setEnabled(true);
+                }
+            }
+        });
 
         //  SET DATA (TEMPORARY)
         //  IN THE APP, WE WILL BE GRABING THE DATA FROM THE FORM
-        String date = "20/11/2020";
-        String note = "Food";
-        Double amount = 250.00;
-        String final_to_write = date + "," + note + "," + amount.toString() + "\n";
+                
 
         //  SET FILE NAME
         String file_name = "test4.txt";
 
         //  WRITE TO FILE
-        btnTestingTim.setOnClickListener(new View.OnClickListener() {
+        btnaddincome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String date=etDate.getText().toString();
+                String number=etNumber.getText().toString();
+                String notes=etNotes.getText().toString();
+
+
+                String final_to_write = date + "," + notes + "," + number+ "\n";
+
                 try {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
                     fout.write(final_to_write.getBytes());
@@ -90,6 +148,8 @@ public class add_income extends AppCompatActivity {
             }
         });
 
+
+        Button btnTestingTimRead=findViewById(R.id.btnTestingTimRead);
         //  READ FILE
         btnTestingTimRead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +162,7 @@ public class add_income extends AppCompatActivity {
 
                     String strLine;
                     while((strLine = br.readLine()) != null) {
-                        System.out.println(strLine);
+                        System.out.println("1: " + strLine);
                     }
 
                     fin.close();
@@ -137,10 +197,4 @@ public class add_income extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void add(View v)
-    {
-        EditText number=findViewById(R.id.etNumber);
-        EditText notes=findViewById(R.id.etNotes);
-        EditText date=findViewById(R.id.etDate);
-    }
 }
