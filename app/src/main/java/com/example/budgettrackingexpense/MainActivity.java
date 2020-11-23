@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String currentUserUid = currentUser.getUid();
         String currentUserEmail = currentUser.getEmail();
 
-
-
         //  GRAB DATA FROM THE DATABASE BASED ON CURRENT USER'S UID
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
         databaseReference.addValueEventListener(new ValueEventListener() {

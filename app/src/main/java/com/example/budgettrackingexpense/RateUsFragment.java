@@ -2,6 +2,7 @@ package com.example.budgettrackingexpense;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -14,10 +15,17 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RateUsFragment extends Fragment {
 
-
+    DatabaseReference databaseReference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,29 @@ public class RateUsFragment extends Fragment {
         EditText etFeedback = root.findViewById(R.id.etFeedback);
         RatingBar rbFeedback = root.findViewById(R.id.rbFeedback);
         EditText etFullName = root.findViewById(R.id.etFullName);
-        etFullName.setText(fullName);
+
+        //  GET CURRENT USER
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //  GET CURRENT USER UID
+        String currentUserUid = currentUser.getUid();
+        String currentUserEmail = currentUser.getEmail();
+
+        //  GRAB DATA FROM THE DATABASE BASED ON CURRENT USER'S UID
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String _FULLNAME = snapshot.child("fullname").getValue().toString();
+
+                etFullName.setText(_FULLNAME);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //  PROCESS SUBMIT FEEDBACK
         btn.setOnClickListener(new View.OnClickListener() {
