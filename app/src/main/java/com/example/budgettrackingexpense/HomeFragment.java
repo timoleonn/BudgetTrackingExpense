@@ -173,37 +173,6 @@ public class HomeFragment extends Fragment {
         ArrayList<Integer> colors = new ArrayList<>();
         for (int c: MY_COLORS) colors.add(c);
 
-//        List<Categories> categoriesList = new ArrayList();
-
-//        //  GET CURRENT USER
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        //  GET CURRENT USER UID
-//        String currentUserUid = currentUser.getUid();
-//
-//        //  FETCH
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid).child("categories");
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    for (DataSnapshot ds:snapshot.getChildren()) {
-//                        Categories data = ds.getValue(Categories.class);
-//                        categoriesList.add(data);
-//                    }
-//
-//                } else {
-//                    System.out.println("No data found");
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
         //  CREATE ARRAY LIST OF STRINGS FOR CATEGORIES
         ArrayList<String> categories = new ArrayList();
 
@@ -225,14 +194,11 @@ public class HomeFragment extends Fragment {
             br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         }
-
-//        System.out.println("CATEGORIES: IN ARRAY LIST OF STRINGS");
-//        for (String category: categories) {
-//            System.out.println("\nCAT: " + category);
-//        }
 
         //  READ EXPENSES
         //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
@@ -263,26 +229,15 @@ public class HomeFragment extends Fragment {
                     strList.add(myStr);
                     System.out.println(strList);
                 }
-//                System.out.println("1.strList BEFORE: " + strList);
                 finalArrayList.add(strList);
-//                System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
+
                 //  INITIALIZE AGAIN THE STRLIST SO IT CAN GET NEW VALUES
                 strList = new ArrayList<String>();
-
-//                System.out.println("1.strList AFTER: " + strList);
-//                System.out.println("2. finalArrayList AFTER: " + finalArrayList);
             }
-//            System.out.println("\nFINAL: " + finalArrayList);
-
-            //  SOME LOCAL VARIABLES
-//            Double total = 0.0;
 
             //  INITIALIZED ABOVE
-            //  THIS IS AN ARRAY TO HOLD THE TOTAL AMOUNT SPENDED FOR EACH CATEGORY
+            //  THIS IS AN ARRAY TO HOLD THE TOTAL AMOUNT THAT USER SPENT FOR EACH CATEGORY
             expensePerCategory = new double[categoryCount];
-
-
-
 
             int category_count = 0;
             //  GET ALL CATEGORIES
@@ -302,7 +257,6 @@ public class HomeFragment extends Fragment {
                             if (j == 3) {
                                 totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
                             }
-
                         }
                     }
                     category_count++;
@@ -313,10 +267,11 @@ public class HomeFragment extends Fragment {
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         }
-
 
         //  READ INCOME
         //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
@@ -347,20 +302,13 @@ public class HomeFragment extends Fragment {
                     strList.add(myStr);
                     System.out.println(strList);
                 }
-//                System.out.println("1.strList BEFORE: " + strList);
                 incomeArrayList.add(strList);
-//                System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
+
                 //  INITIALIZE AGAIN THE STRLIST SO IT CAN GET NEW VALUES
                 strList = new ArrayList<String>();
-
-//                System.out.println("1.strList AFTER: " + strList);
-//                System.out.println("2. finalArrayList AFTER: " + finalArrayList);
             }
-//            System.out.println("\nFINAL: " + finalArrayList);
 
-
-            int category_count = 0;
-            //  GET ALL CATEGORIES
+            //  LOOP THROUGH THE INCOME ARRAY LIST SO WE CAN FIND TOTAL INCOME
             if (!incomeArrayList.isEmpty()) {
                 for (int i = 0; i < incomeArrayList.size(); i++) {
                     for (int j = 0; j < incomeArrayList.get(i).size(); j++) {
@@ -374,14 +322,15 @@ public class HomeFragment extends Fragment {
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         }
 
-
+        //  SET TOTAL EXPENSES AND TOTAL INCOME TEXT
         tvTotalExpenses.setText(Double.toString(totalExpenses / 2));
         tvTotalIncome.setText(Double.toString(totalIncome));
-
 
         PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories, expensePerCategory), "");
         pieDataSet.setColors(colors);
@@ -403,21 +352,14 @@ public class HomeFragment extends Fragment {
     private ArrayList<PieEntry> pieChartDataSet(ArrayList<String> categories, double[] array) {
         ArrayList<PieEntry> dataSet = new ArrayList<PieEntry>();
 
+        //  CHECK IF THE ARRAY WITH THE EXPENSES IS NULL, IF NOT THEN IT MEANS WE HAVE EXPENSES
         if (array != null) {
             for (int i = 0; i < array.length; i++) {
-//                System.out.println((float) array[i]);
                 dataSet.add(new PieEntry((float) array[i], categories.get(i)));
             }
         }
 
-//        if (array == null) {
-//            for (int i = 0; i < categories.size(); i++) {
-//                dataSet.add(new PieEntry((float) 0.0, categories.get(i)));
-//            }
-//        }
-
         return dataSet;
-
     }
 
 }
