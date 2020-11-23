@@ -116,7 +116,7 @@ public class add_income extends AppCompatActivity {
 
         //  SET DATA (TEMPORARY)
         //  IN THE APP, WE WILL BE GRABING THE DATA FROM THE FORM
-                
+
 
         //  SET FILE NAME
         String file_name = "test4.txt";
