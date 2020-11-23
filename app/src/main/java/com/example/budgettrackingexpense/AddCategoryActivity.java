@@ -62,8 +62,9 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                 //  WRITE CATEGORY NAME TO FILE
                 try {
+                    String categoryName = etCategoryName.getText().toString() + "\n";
                     FileOutputStream fout = openFileOutput(file_name_1, MODE_APPEND);
-                    fout.write(etCategoryName.getText().toString().getBytes());
+                    fout.write(categoryName.getBytes());
                     fout.close();
                     System.out.println("SUCCESS");
                 } catch (FileNotFoundException e) {

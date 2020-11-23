@@ -64,8 +64,8 @@ public class add_income extends AppCompatActivity {
         //  SET DATA (TEMPORARY)
         //  IN THE APP, WE WILL BE GRABING THE DATA FROM THE FORM
         String date = "20/11/2020";
-        String note = "Monthly";
-        Double amount = 50000.00;
+        String note = "Food";
+        Double amount = 250.00;
         String final_to_write = date + "," + note + "," + amount.toString() + "\n";
 
         //  SET FILE NAME
