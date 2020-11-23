@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,12 +32,18 @@ public class HomeFragment extends Fragment {
 
     int categoryCount = 0;
     double[] expensePerCategory;
+    double totalExpenses = 0;
+    double totalIncome = 0;
 
     String file_name = "expenses.txt";
+    String income_file_name = "income.txt";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
+        TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
 
         //  FAB: ADD INCOME
         FloatingActionButton fab_add_income = root.findViewById(R.id.fab_add);
@@ -227,7 +234,7 @@ public class HomeFragment extends Fragment {
 //            System.out.println("\nCAT: " + category);
 //        }
 
-        //  READ INCOME
+        //  READ EXPENSES
         //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
         //  AND SAVE IT TO AN ARRAY LIST OF LISTS
         try {
@@ -265,7 +272,7 @@ public class HomeFragment extends Fragment {
 //                System.out.println("1.strList AFTER: " + strList);
 //                System.out.println("2. finalArrayList AFTER: " + finalArrayList);
             }
-            System.out.println("\nFINAL: " + finalArrayList);
+//            System.out.println("\nFINAL: " + finalArrayList);
 
             //  SOME LOCAL VARIABLES
 //            Double total = 0.0;
@@ -274,7 +281,8 @@ public class HomeFragment extends Fragment {
             //  THIS IS AN ARRAY TO HOLD THE TOTAL AMOUNT SPENDED FOR EACH CATEGORY
             expensePerCategory = new double[categoryCount];
 
-            System.out.println("IS EMPTY: " + finalArrayList.isEmpty());
+
+
 
             int category_count = 0;
             //  GET ALL CATEGORIES
@@ -290,6 +298,11 @@ public class HomeFragment extends Fragment {
                                     expensePerCategory[category_count] += Double.parseDouble((String) finalArrayList.get(i).get(3));
                                 }
                             }
+                            //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
+                            if (j == 3) {
+                                totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
+                            }
+
                         }
                     }
                     category_count++;
@@ -297,13 +310,77 @@ public class HomeFragment extends Fragment {
             } else {
                 expensePerCategory = null;
             }
-
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        //  READ INCOME
+        //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
+        //  AND SAVE IT TO AN ARRAY LIST OF LISTS
+        try {
+            FileInputStream fin = getActivity().openFileInput(income_file_name);
+            DataInputStream din = new DataInputStream(fin);
+            InputStreamReader isr = new InputStreamReader(din);
+            BufferedReader br = new BufferedReader(isr);
+
+            //  CREATE ARRAY LIST, LIST AND VARIABLE TO HOLD EACH LINE
+            ArrayList<List> incomeArrayList = new ArrayList<>();
+            List<String> strList = new ArrayList<String>();
+            String strLine;
+
+            //  READ EVERY LINE
+            //  SPLIT EACH LINE BASED ON THE COMMA (SEPARATOR)
+            //  EACH VALUE IS ADDED IN A LIST
+            //  LIST GETS ADDED TO ARRAY LIST
+            //  LIST GETS INITIALIZED AGAIN
+            //  REPEAT UNTIL TEXT FILE IS READ THROUGH
+            while((strLine = br.readLine()) != null) {
+                String[] res = strLine.split("[,]", 0);
+                System.out.println(res);
+                for(String myStr: res) {
+                    System.out.println(myStr);
+                    //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
+                    strList.add(myStr);
+                    System.out.println(strList);
+                }
+//                System.out.println("1.strList BEFORE: " + strList);
+                incomeArrayList.add(strList);
+//                System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
+                //  INITIALIZE AGAIN THE STRLIST SO IT CAN GET NEW VALUES
+                strList = new ArrayList<String>();
+
+//                System.out.println("1.strList AFTER: " + strList);
+//                System.out.println("2. finalArrayList AFTER: " + finalArrayList);
+            }
+//            System.out.println("\nFINAL: " + finalArrayList);
+
+
+            int category_count = 0;
+            //  GET ALL CATEGORIES
+            if (!incomeArrayList.isEmpty()) {
+                for (int i = 0; i < incomeArrayList.size(); i++) {
+                    for (int j = 0; j < incomeArrayList.get(i).size(); j++) {
+                        //  J == 2 MEANS THAT IF WE ARE CHECKING THE INCOME COLUMN IN THE LIST OF EXPENSES
+                        if (j == 2) {
+                            totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
+                        }
+                    }
+                }
+            }
+            fin.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        tvTotalExpenses.setText(Double.toString(totalExpenses / 2));
+        tvTotalIncome.setText(Double.toString(totalIncome));
 
 
         PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories, expensePerCategory), "");
@@ -327,26 +404,20 @@ public class HomeFragment extends Fragment {
         ArrayList<PieEntry> dataSet = new ArrayList<PieEntry>();
 
         if (array != null) {
-            System.out.println("TIMOLEON 1");
             for (int i = 0; i < array.length; i++) {
-                System.out.println(array[i]);
+//                System.out.println((float) array[i]);
                 dataSet.add(new PieEntry((float) array[i], categories.get(i)));
             }
-            return dataSet;
         }
 
-        if (array == null) {
-            System.out.println("SIZE: " + categories.size());
-            double zero = 0.0;
-            for (int i = 0; i < categories.size(); i++) {
-                dataSet.add(new PieEntry((float) zero, categories.get(i)));
-                System.out.println("NAME [" + i + "]: " + categories.get(i));
-            }
-        }
-
-
+//        if (array == null) {
+//            for (int i = 0; i < categories.size(); i++) {
+//                dataSet.add(new PieEntry((float) 0.0, categories.get(i)));
+//            }
+//        }
 
         return dataSet;
+
     }
 
 }
