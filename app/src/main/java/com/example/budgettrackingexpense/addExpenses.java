@@ -112,6 +112,9 @@ public class addExpenses extends AppCompatActivity {
                     fout.close();
                     Intent in = new Intent(addExpenses.this, MainActivity.class);
                     String successMessage = "You have successfully recorded your expense of €" + amount.getText().toString() + " for " + spinner.getSelectedItem().toString();
+
+                    // CREATE A NOTIFICATION ABOUT THE TOTAL EXPENSES FROM THE BEGINING
+
                     in.putExtra(SUCCESS_MESSAGE_ADD_EXPENSE, successMessage);
                     startActivity(in);
 //                    System.out.println("SUCCESS");

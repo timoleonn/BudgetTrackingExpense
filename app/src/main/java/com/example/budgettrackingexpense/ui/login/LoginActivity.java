@@ -50,6 +50,14 @@ public class LoginActivity extends AppCompatActivity  {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
+
+        fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() !=null)
+        {
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
+
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -135,6 +143,7 @@ public class LoginActivity extends AppCompatActivity  {
                         passwordEditText.getText().toString());
             }
         });
+
         /*signInGoogle = findViewById(R.id.googleSignIn);
         signInGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +216,6 @@ public class LoginActivity extends AppCompatActivity  {
 
         loadingProgressBar.setVisibility(View.VISIBLE);
 
-        fAuth = FirebaseAuth.getInstance();
 
         fAuth.signInWithEmailAndPassword(emailText,passwordText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

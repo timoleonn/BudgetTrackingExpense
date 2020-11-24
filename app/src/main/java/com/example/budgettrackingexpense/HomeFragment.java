@@ -2,6 +2,7 @@ package com.example.budgettrackingexpense;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +20,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
 public class HomeFragment extends Fragment {
 
     PieChart pieChart;
@@ -34,14 +35,14 @@ public class HomeFragment extends Fragment {
     double[] expensePerCategory;
     double totalExpenses = 0;
     double totalIncome = 0;
-
+    String expense;
     String file_name = "expenses.txt";
     String income_file_name = "income.txt";
+    String filename ="total.txt";
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        expense ="";
         TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
         TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
 
@@ -256,7 +257,8 @@ public class HomeFragment extends Fragment {
                             //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
                             if (j == 3) {
                                 totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
-                            }
+                                }
+
                         }
                     }
                     category_count++;
@@ -315,6 +317,10 @@ public class HomeFragment extends Fragment {
                         //  J == 2 MEANS THAT IF WE ARE CHECKING THE INCOME COLUMN IN THE LIST OF EXPENSES
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
+                            expense = Double.toString(totalIncome);
+//                            Create a bundle for moving the total income to expenses
+                            Intent in = new Intent(getContext(), addExpenses.class);
+                            startActivity(in);
                         }
                     }
                 }
@@ -343,10 +349,8 @@ public class HomeFragment extends Fragment {
         pieChart.setCenterText("Spendings");
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
-
         return root;
     }
-
 
     //  PIE CHART DATA
     private ArrayList<PieEntry> pieChartDataSet(ArrayList<String> categories, double[] array) {
