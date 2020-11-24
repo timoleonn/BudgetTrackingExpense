@@ -26,6 +26,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
+import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,11 +49,12 @@ public class RegisterActivity extends AppCompatActivity  {
     FirebaseAuth fAuth;
     DatabaseReference reff;
 
+    private String register_file_name = "register.txt";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mname = findViewById(R.id.name);
         musername = findViewById(R.id.newUsername);
@@ -61,6 +72,113 @@ public class RegisterActivity extends AppCompatActivity  {
 
         //  LOADING
         pb2 = findViewById(R.id.pb2);
+
+        //  GET FROM SAVING STATE
+        try {
+            FileInputStream fin = openFileInput(register_file_name);
+            DataInputStream din = new DataInputStream(fin);
+            InputStreamReader isr = new InputStreamReader(din);
+            BufferedReader br = new BufferedReader(isr);
+
+            int i = 0;
+            String lines[] = new String[6];
+            String strLine;
+
+            while ((strLine = br.readLine()) != null) {
+                lines[i] = strLine;
+                i++;
+            }
+
+            mname.setText(lines[0]);
+
+            RadioButton male = findViewById(R.id.male);
+            RadioButton female = findViewById(R.id.female);
+            RadioButton other = findViewById(R.id.other);
+            RadioButton occupationStudent = findViewById(R.id.rbOccupationStudent);
+            RadioButton occupationOther = findViewById(R.id.rbOccupationOther);
+
+            if (lines[1].equals("Male")) {
+                male.setChecked(true);
+                female.setChecked(false);
+                other.setChecked(false);
+            } else if (lines[1].equals("Female")) {
+                male.setChecked(false);
+                female.setChecked(true);
+                other.setChecked(false);
+            } else if (lines[1].equals("Other")) {
+                male.setChecked(false);
+                female.setChecked(false);
+                other.setChecked(true);
+            }
+
+            mcountry.setText(lines[2]);
+            musername.setText(lines[3]);
+            memail.setText(lines[4]);
+
+            if (lines[5].equals("Student")) {
+                occupationStudent.setChecked(true);
+                occupationOther.setChecked(false);
+            } else if (lines[5].equals("Other")) {
+                occupationStudent.setChecked(false);
+                occupationOther.setChecked(true);
+            }
+
+            fin.close();
+            Toast.makeText(getApplicationContext(), "You didn't loose anything, all data is still here!", Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
+        }
+
+        //  LOGIN HERE
+        Button btnLoginHere = findViewById(R.id.btnLoginHere);
+        btnLoginHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  SAVING STATE APPLICATION JUST IN CASE OF MISS CLICK
+                try {
+                    FileOutputStream fout = openFileOutput(register_file_name, 0);
+                    String nameText = mname.getText().toString().trim() + "\n";
+                    int selection = rbgroup.getCheckedRadioButtonId();
+                    if (selection == R.id.male) {
+                        gender = "Male" + "\n";
+                    } else if(selection == R.id.female)  {
+                        gender = "Female" + "\n";
+                    } else if(selection == R.id.other) {
+                        gender = "Other" + "\n";
+                    }
+                    String countryText = mcountry.getText().toString().trim() + "\n";
+                    String usernameText = musername.getText().toString().trim() + "\n";
+                    String emailText = memail.getText().toString().trim() + "\n";
+                    int selection2 = rbOccupation.getCheckedRadioButtonId();
+                    if (selection2 == R.id.rbOccupationStudent) {
+                        occupation = "Student" + "\n";
+                    } else if (selection2 == R.id.rbOccupationOther) {
+                        occupation = "Other" + "\n";
+                    }
+
+                    fout.write(nameText.getBytes());
+                    fout.write(gender.getBytes());
+                    fout.write(countryText.getBytes());
+                    fout.write(usernameText.getBytes());
+                    fout.write(emailText.getBytes());
+                    fout.write(occupation.getBytes());
+                    fout.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Oops, something went wrong.", Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Oops, something went wrong.", Toast.LENGTH_LONG).show();
+                }
+
+                Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(in);
+            }
+        });
 
         //  REGISTER BUTTON
         submit.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +241,9 @@ public class RegisterActivity extends AppCompatActivity  {
                 }
             }
         });
+
+        //  SET TITLE
+        getSupportActionBar().setTitle("MoneySavy - Register");
     }
 
     //  VALIDATIONS

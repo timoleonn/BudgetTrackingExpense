@@ -119,11 +119,9 @@ public class add_income extends AppCompatActivity {
         btnaddincome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String date = etDate.getText().toString();
                 String number = etNumber.getText().toString();
                 String notes = etNotes.getText().toString();
-
 
                 String final_to_write = date + "," + notes + "," + number+ "\n";
 

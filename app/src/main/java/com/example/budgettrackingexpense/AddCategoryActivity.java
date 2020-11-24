@@ -69,10 +69,10 @@ public class AddCategoryActivity extends AppCompatActivity {
                     System.out.println("SUCCESS");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    System.out.println("1: " + e.getMessage());
+                    System.out.println("Oops, something went wrong.");
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("2: " + e.getMessage());
+                    System.out.println("Oops, something went wrong.");
                 }
 
                 //  WRITE BUDGET TO FILE

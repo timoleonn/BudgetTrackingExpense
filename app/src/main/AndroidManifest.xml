@@ -11,15 +11,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
+        <activity android:name=".RateUsSuccessActivity"></activity>
         <activity
             android:name=".addExpenses"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".UpdateCategoryActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,13 +41,10 @@
             android:name=".CategoriesActivity"
             android:label="@string/title_activity_categories"
             android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar" />
-
         <activity android:name=".AddCategoryActivity" />
-
         <activity
             android:name=".RegisterActivity"
-            android:parentActivityName=".ui.login.LoginActivity"/>
-
+            android:parentActivityName=".ui.login.LoginActivity" />
         <activity
             android:name=".Tabbed_Bank_Activity"
             android:label="Banks"

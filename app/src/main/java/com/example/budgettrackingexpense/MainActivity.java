@@ -166,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
     //  CALL FRAGMENT
     public void goToFragment(Fragment f) {
         fragmentManager = getSupportFragmentManager();

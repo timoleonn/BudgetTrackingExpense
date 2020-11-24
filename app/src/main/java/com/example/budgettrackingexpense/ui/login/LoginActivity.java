@@ -151,6 +151,9 @@ public class LoginActivity extends AppCompatActivity  {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);*/
+
+        //  SET TITLE
+        getSupportActionBar().setTitle("MoneySavy - Login");
     }
 
     /*private void signIn()

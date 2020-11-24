@@ -194,20 +194,18 @@
             android:textColor="@color/white" />
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/loginHere"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Already registerd? Login here"
-        android:textColor="@color/white" />
-
     <ProgressBar
         android:id="@+id/pb2"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="76dp"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLoginHere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? Login here" />
 
     <Button
         android:id="@+id/submit"

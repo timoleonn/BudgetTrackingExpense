@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -36,26 +39,30 @@ public class RateUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String fullName = "Timoleon Charilaou";
-
         //  SET FRAGMENT TITLE
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Rate us");
-
 
         View root = inflater.inflate(R.layout.fragment_rate_us, container, false);
 
         //  MAIN FORM ELEMENTS
+        EditText etFullName = root.findViewById(R.id.etFullName);
+        RatingBar rbFeedback = root.findViewById(R.id.rbFeedback);
+        RadioGroup rgRecommend = root.findViewById(R.id.rgRecommend);
+        RadioGroup rgBuy = root.findViewById(R.id.rgBuy);
+        CheckBox cbDarkMode = root.findViewById(R.id.cbDarkMode);
+        CheckBox cbCloudSync = root.findViewById(R.id.cbCloudSync);
+        CheckBox cbBanks = root.findViewById(R.id.cbBanks);
+        CheckBox cbCategories = root.findViewById(R.id.cbCategories);
         Button btn = root.findViewById(R.id.btnSubmitFeedback);
         EditText etFeedback = root.findViewById(R.id.etFeedback);
-        RatingBar rbFeedback = root.findViewById(R.id.rbFeedback);
-        EditText etFullName = root.findViewById(R.id.etFullName);
+
+
 
         //  GET CURRENT USER
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //  GET CURRENT USER UID
         String currentUserUid = currentUser.getUid();
-        String currentUserEmail = currentUser.getEmail();
 
         //  GRAB DATA FROM THE DATABASE BASED ON CURRENT USER'S UID
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(currentUserUid);
@@ -63,7 +70,6 @@ public class RateUsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String _FULLNAME = snapshot.child("fullname").getValue().toString();
-
                 etFullName.setText(_FULLNAME);
             }
 
@@ -73,32 +79,53 @@ public class RateUsFragment extends Fragment {
             }
         });
 
-        //  PROCESS SUBMIT FEEDBACK
+        //  PROCESS SUBMIT FEEDBACK AND SEND BUNDLE TO RateUsSuccessActivity
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String fullNameText = etFullName.getText().toString();
                 double FeedbackRating = rbFeedback.getRating();
                 String RatingBarMessage = FeedbackRating + "/6";
+                String recommendText = "", buyText = "", features = "";
+
+                int rbRecommendSelector = rgRecommend.getCheckedRadioButtonId();
+                if (rbRecommendSelector == R.id.rbRecommendYes) {
+                    recommendText = "Yes";
+                } else if (rbRecommendSelector == R.id.rbRecommendNo) {
+                    recommendText = "No";
+                }
+
+                int rbBuySelector = rgBuy.getCheckedRadioButtonId();
+                if (rbBuySelector == R.id.rbBuyYes) {
+                    buyText = "Yes";
+                } else if (rbBuySelector == R.id.rbBuyNo) {
+                    buyText = "No";
+                } else if (rbBuySelector == R.id.rbBuyMaybe) {
+                    buyText = "Maybe";
+                }
+
+                if (cbDarkMode.isChecked())
+                    features += "Dark Mode\n";
+                if (cbCloudSync.isChecked())
+                    features += "Cloud Sync\n";
+                if (cbBanks.isChecked())
+                    features += "Support more banks\n";
+                if (cbCategories.isChecked())
+                    features += "Edit and delete categories\n";
+
                 String etFeedbackText = etFeedback.getText().toString();
 
-//                String message = "Thank you for submitting your feedback!\n" +
-//                        "\nName: " + fullName +
-//                        "\nRating: " + RatingBarMessage +
-//                        "\nMessage: " + etFeedbackText;
+                Bundle finalRatingMessage = new Bundle();
+                finalRatingMessage.putString("name", fullNameText);
+                finalRatingMessage.putString("rating", RatingBarMessage);
+                finalRatingMessage.putString("recommend", recommendText);
+                finalRatingMessage.putString("buy", buyText);
+                finalRatingMessage.putString("features", features);
+                finalRatingMessage.putString("feedback", etFeedbackText);
 
-//                tvFeedbackResult.setText(message);
-                CardView cvFeedback = root.findViewById(R.id.cvFeedback);
-                cvFeedback.setVisibility(View.VISIBLE);
-
-                TextView tvThanks = root.findViewById(R.id.tvThanks);
-                TextView tvName = root.findViewById(R.id.tvName);
-                TextView tvRating = root.findViewById(R.id.tvRating);
-                TextView tvFeedback = root.findViewById(R.id.tvFeedback);
-
-                tvThanks.setText("Thank you for submitting your feedback!");
-                tvName.setText("Name: " + etFullName.getText().toString());
-                tvRating.setText("Rating: " + RatingBarMessage);
-                tvFeedback.setText("Message: " + etFeedbackText);
+                Intent in = new Intent(getActivity(), RateUsSuccessActivity.class);
+                in.putExtras(finalRatingMessage);
+                startActivity(in);
             }
         });
 

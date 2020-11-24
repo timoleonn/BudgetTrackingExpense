@@ -1,157 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".RateUsFragment">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rate us"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please give us some feedback!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.081" />
-
-    <EditText
-        android:id="@+id/etFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter your name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.141" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="How happy are you with our app?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.217" />
-
-    <RatingBar
-        android:id="@+id/rbFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284" />
-
-    <EditText
-        android:id="@+id/etFeedback"
-        android:layout_width="379dp"
-        android:layout_height="107dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Please explain your given rating with a few words"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
-
-    <Button
-        android:id="@+id/btnSubmitFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="submit feedback"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvFeedback"
+    <LinearLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="146dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="45dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmitFeedback">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Rate us"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="0dp"
+            android:text="Please give us some feedback!" />
+
+        <EditText
+            android:id="@+id/etFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:ems="10"
+            android:hint="Enter your name"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="How happy are you with our app?" />
+
+        <RatingBar
+            android:id="@+id/rbFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Would you reccommend this app to a friend?" />
+
+        <RadioGroup
+            android:id="@+id/rgRecommend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbRecommendYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_button_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="8dp"
+                android:text="Yes, totally!"
+                android:textColor="@drawable/radio_button_text_color" />
+
+            <RadioButton
+                android:id="@+id/rbRecommendNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_button_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="8dp"
+                android:text="No, it's bad"
+                android:textColor="@drawable/radio_button_text_color" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Would you pay for such app?" />
+
+        <RadioGroup
+            android:id="@+id/rgBuy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvThanks"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rbBuyYes"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="TextView" />
+                android:background="@drawable/radio_button_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="8dp"
+                android:text="Yes, totally!"
+                android:textColor="@drawable/radio_button_text_color" />
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rbBuyNo"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="TextView" />
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/radio_button_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="8dp"
+                android:text="No, waste of money"
+                android:textColor="@drawable/radio_button_text_color" />
 
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rbBuyMaybe"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="TextView" />
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/radio_button_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="8dp"
+                android:text="Maybe..."
+                android:textColor="@drawable/radio_button_text_color" />
 
-            <TextView
-                android:id="@+id/tvFeedback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="TextView" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </RadioGroup>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="What features would you like to see in the next update?" />
+
+        <CheckBox
+            android:id="@+id/cbDarkMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Dark Mode" />
+
+        <CheckBox
+            android:id="@+id/cbCloudSync"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Cloud Sync" />
+
+        <CheckBox
+            android:id="@+id/cbBanks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Support more banks" />
+
+        <CheckBox
+            android:id="@+id/cbCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Edit and delete categories" />
+
+        <EditText
+            android:id="@+id/etFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:drawableStart="@drawable/ic_baseline_feedback_24"
+            android:drawableLeft="@drawable/ic_baseline_feedback_24"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Write anything else here..."
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/btnSubmitFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="submit feedback"
+            app:cornerRadius="15dp" />
+
+    </LinearLayout>
+
+</ScrollView>
