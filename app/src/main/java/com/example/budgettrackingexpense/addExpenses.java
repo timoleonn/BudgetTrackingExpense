@@ -31,7 +31,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class addExpenses extends AppCompatActivity {
-    //  test
 
     public static String SUCCESS_MESSAGE_ADD_EXPENSE = "";
     EditText  date, note, amount;
