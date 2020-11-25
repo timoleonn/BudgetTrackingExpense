@@ -199,7 +199,6 @@ public class HomeFragment extends Fragment {
             br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
@@ -273,7 +272,6 @@ public class HomeFragment extends Fragment {
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
@@ -332,14 +330,13 @@ public class HomeFragment extends Fragment {
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         }
 
         //  SET TOTAL EXPENSES AND TOTAL INCOME TEXT
-        tvTotalExpenses.setText(Double.toString(totalExpenses / 2));
+        tvTotalExpenses.setText(Double.toString(totalExpenses));
         tvTotalIncome.setText(Double.toString(totalIncome));
 
         PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories, expensePerCategory), "");
