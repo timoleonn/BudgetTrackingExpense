@@ -206,7 +206,11 @@ public class RegisterActivity extends AppCompatActivity  {
                 } else if (selection2 == R.id.rbOccupationOther) {
                     occupation = "Other";
                 }
-
+                if (fAuth.getCurrentUser() !=null)
+                {
+                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                    finish();
+                }
                 //  CHECK IF THE FORM IS OKAY WITH NO ERRORS
                 if (validateFullName() && validateGender() && validateCountry() && validateUsername() && validateEmail() && validatePassword() && validateConfPass() && validateOccupation()) {
                     pb2.setVisibility(View.VISIBLE);
