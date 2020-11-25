@@ -42,11 +42,11 @@ public class AdService extends Service {
                 mainActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        System.out.println("SERVICE STARTED");
                         int_random = rand.nextInt(random_range);
                         StyleableToast.makeText(getApplicationContext(), adArray[int_random], Toast.LENGTH_LONG, R.style.adToast).show();
                     }
                 });
-
             }
         };
 

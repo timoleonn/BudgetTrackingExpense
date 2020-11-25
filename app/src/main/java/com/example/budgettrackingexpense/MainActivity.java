@@ -1,11 +1,13 @@
 package com.example.budgettrackingexpense;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //  CHECK IF FUN FACT SERVICE IS RUNNING
+        SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
+        System.out.println("VALUE: " + sharedPreferences.getBoolean("value", false));
+
+        Intent serviceIntent = new Intent(MainActivity.this, AdService.class);
+        if (sharedPreferences.getBoolean("value", false) == true) {
+            startService(serviceIntent);
+        } else {
+            stopService(serviceIntent);
+        }
 
         //  GRAB INTENT FROM: ADD INCOME OR ADD EXPENSE
         Intent in = getIntent();
