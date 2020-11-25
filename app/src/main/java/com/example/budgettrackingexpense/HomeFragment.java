@@ -199,6 +199,7 @@ public class HomeFragment extends Fragment {
             br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
@@ -272,6 +273,7 @@ public class HomeFragment extends Fragment {
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
@@ -320,6 +322,9 @@ public class HomeFragment extends Fragment {
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
                             expense = Double.toString(totalIncome);
+//                            Create a bundle for moving the total income to expenses
+                            Intent in = new Intent(getContext(), addExpenses.class);
+                            startActivity(in);
                         }
                     }
                 }
@@ -327,6 +332,7 @@ public class HomeFragment extends Fragment {
             fin.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
