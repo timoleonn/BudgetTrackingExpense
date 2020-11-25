@@ -1,9 +1,14 @@
 package com.example.budgettrackingexpense;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,7 +103,12 @@ public class addExpenses extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
+        {
+            NotificationChannel channel = new NotificationChannel("My notification","Notification TItle",NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         //  WRITE TO FILE
         btnAddExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +120,19 @@ public class addExpenses extends AppCompatActivity {
 //                    fout.write(("").getBytes());
                     fout.write(data_to_write.getBytes());
                     fout.close();
+
+                    Intent pass_total = getIntent();
+                    Bundle total = pass_total.getExtras();
+                    String total_expense = "Your total expense up to now is: "+ total.getString("total_expense")+" euros!";
+                    NotificationCompat.Builder notification = new NotificationCompat.Builder(addExpenses.this,"My notification");
+                    notification.setSmallIcon(R.drawable.notifications);
+                    notification.setContentTitle("You have a new notification");
+                    notification.setContentText(total_expense);
+                    notification.setAutoCancel(true);
+
+                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(addExpenses.this);
+                    managerCompat.notify(1,notification.build());
+
                     Intent in = new Intent(addExpenses.this, MainActivity.class);
                     String successMessage = "You have successfully recorded your expense of €" + amount.getText().toString() + " for " + spinner.getSelectedItem().toString();
 
