@@ -42,6 +42,9 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //  SET FRAGMENT TITLE
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
+
         TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
         TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
 

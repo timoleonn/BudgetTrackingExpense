@@ -56,8 +56,6 @@ public class RateUsFragment extends Fragment {
         Button btn = root.findViewById(R.id.btnSubmitFeedback);
         EditText etFeedback = root.findViewById(R.id.etFeedback);
 
-
-
         //  GET CURRENT USER
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
