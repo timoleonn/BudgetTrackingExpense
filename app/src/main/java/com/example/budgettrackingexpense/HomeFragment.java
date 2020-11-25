@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     double[] expensePerCategory;
     double totalExpenses = 0;
     double totalIncome = 0;
-    String expense,income;
+    String expense;
     String file_name = "expenses.txt";
     String income_file_name = "income.txt";
     String filename ="total.txt";
@@ -46,9 +46,29 @@ public class HomeFragment extends Fragment {
         //  SET FRAGMENT TITLE
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
 
+        expense ="";
         TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
         TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
 
+        //  FAB: ADD INCOME
+        FloatingActionButton fab_add_income = root.findViewById(R.id.fab_add);
+        fab_add_income.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getContext(), add_income.class);
+                startActivity(in);
+            }
+        });
+
+        //  FAB: ADD EXPENSE
+        FloatingActionButton fab_add_expense = root.findViewById(R.id.fab_remove);
+        fab_add_expense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getContext(), addExpenses.class);
+                startActivity(in);
+            }
+        });
 
 //        Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
 
@@ -299,6 +319,7 @@ public class HomeFragment extends Fragment {
                         //  J == 2 MEANS THAT IF WE ARE CHECKING THE INCOME COLUMN IN THE LIST OF EXPENSES
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
+                            expense = Double.toString(totalIncome);
                         }
                     }
                 }
@@ -326,39 +347,6 @@ public class HomeFragment extends Fragment {
         pieChart.setCenterText("Spendings");
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
-
-        //  FAB: ADD INCOME
-        FloatingActionButton fab_add_income = root.findViewById(R.id.fab_add);
-        fab_add_income.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                income = Double.toString(totalIncome);
-                Bundle totalIncome = new Bundle();
-                totalIncome.putString("total_expense",income);
-
-                Intent in = new Intent(getContext(), add_income.class);
-                in.putExtras(totalIncome);
-                startActivity(in);
-            }
-        });
-
-        //  FAB: ADD EXPENSE
-        FloatingActionButton fab_add_expense = root.findViewById(R.id.fab_remove);
-        fab_add_expense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                expense = Double.toString(totalExpenses);
-                Bundle totalExpense = new Bundle();
-                totalExpense.putString("total_expense",expense);
-
-                Intent in = new Intent(getContext(), addExpenses.class);
-                in.putExtras(totalExpense);
-                startActivity(in);
-            }
-        });
-
-//        CREATE A BUNDLE WITH THE TOTALS
-//
         return root;
     }
 
