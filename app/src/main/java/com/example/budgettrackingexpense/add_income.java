@@ -1,7 +1,10 @@
 package com.example.budgettrackingexpense;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,6 +30,7 @@ public class add_income extends AppCompatActivity {
     public static String SUCCESS_MESSAGE_ADD_INCOME = "";
     EditText etDate;
     DatePickerDialog.OnDateSetListener setListener;
+    Double new_total,new_amount;
 
     String file_name = "income.txt";
 
@@ -109,7 +115,12 @@ public class add_income extends AppCompatActivity {
                 }
             }
         });
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
+        {
+            NotificationChannel channel = new NotificationChannel("My notification","Notification TItle", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         //  WRITE TO FILE
         btnaddincome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +135,21 @@ public class add_income extends AppCompatActivity {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
                     fout.write(final_to_write.getBytes());
                     fout.close();
+
+                    Intent pass_total = getIntent();
+                    Bundle total = pass_total.getExtras();
+                    new_amount= Double.parseDouble(number);
+                    new_total = Double.parseDouble(total.getString("total_expense")) + new_amount;
+                    String total_expense = "Your total income is:  "+ new_total.toString() +" euros!";
+                    NotificationCompat.Builder notification = new NotificationCompat.Builder(add_income.this,"My notification");
+                    notification.setSmallIcon(R.drawable.notifications);
+                    notification.setContentTitle("You have a new notification");
+                    notification.setContentText(total_expense);
+                    notification.setAutoCancel(true);
+
+                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(add_income.this);
+                    managerCompat.notify(1,notification.build());
+
                     Intent in = new Intent(add_income.this, MainActivity.class);
                     String successMessage = "You have successfully recorded your income of €" + number;
                     in.putExtra(SUCCESS_MESSAGE_ADD_INCOME, successMessage);

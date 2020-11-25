@@ -42,7 +42,7 @@ public class addExpenses extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener setListener;
 
     String file_name = "expenses.txt";
-
+    Double new_total,new_amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +52,7 @@ public class addExpenses extends AppCompatActivity {
         amount = findViewById(R.id.etExpense);
         date = findViewById(R.id.date);
         Spinner spinner = findViewById(R.id.spinner);
+
 
         //  CREATE ARRAY LIST OF STRINGS FOR CATEGORIES
         ArrayList<String> categories = new ArrayList();
@@ -123,7 +124,9 @@ public class addExpenses extends AppCompatActivity {
 
                     Intent pass_total = getIntent();
                     Bundle total = pass_total.getExtras();
-                    String total_expense = "Your total expense up to now is: "+ total.getString("total_expense")+" euros!";
+                    new_amount= Double.parseDouble(amount.getText().toString());
+                    new_total = Double.parseDouble(total.getString("total_expense")) + new_amount;
+                    String total_expense = "Your total expenses is:  "+ new_total.toString() +" euros!";
                     NotificationCompat.Builder notification = new NotificationCompat.Builder(addExpenses.this,"My notification");
                     notification.setSmallIcon(R.drawable.notifications);
                     notification.setContentTitle("You have a new notification");
