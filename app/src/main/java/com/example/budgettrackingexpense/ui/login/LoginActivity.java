@@ -23,6 +23,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.budgettrackingexpense.AdService;
 import com.example.budgettrackingexpense.MainActivity;
 import com.example.budgettrackingexpense.R;
 import com.example.budgettrackingexpense.RegisterActivity;
@@ -226,6 +228,10 @@ public class LoginActivity extends AppCompatActivity  {
                 if (task.isSuccessful())
                 {
                     Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_LONG).show();
+
+                    //  START AD SERVICE
+                    Intent serviceIntent = new Intent(LoginActivity.this, AdService.class);
+                    startService(serviceIntent);
 
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(in);

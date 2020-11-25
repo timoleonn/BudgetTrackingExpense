@@ -157,6 +157,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_profile) {
             //
         } else if (id == R.id.nav_logout) {
+            AdService adService = new AdService();
+            System.out.println("STOPPED");
+            Intent dem = new Intent(MainActivity.this, AdService.class);
+            stopService(dem);
             signOut();
         } else if (id == R.id.nav_rate_us) {
             goToFragment(new RateUsFragment());
