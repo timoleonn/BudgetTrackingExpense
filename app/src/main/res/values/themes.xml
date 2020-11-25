@@ -28,7 +28,7 @@
         <item name="stTextBold">true</item>
         <item name="stTextColor">#FFF</item>
         <item name="stTextSize">14sp</item>
-        <item name="stColorBackground">#0367FC</item>
+        <item name="stColorBackground">@color/purple_200</item>
         <item name="stSolidBackground">true</item>
         <item name="stIconStart">@drawable/ic_baseline_emoji_emotions_24</item>
         <item name="strokeColor">#000</item>
@@ -36,5 +36,11 @@
         <item name="stLength">LONG</item>
         <item name="stGravity">top</item>
         <item name="cornerRadius">3dp</item>
+    </style>
+
+    <!-- CUSTOM RATING BAR -->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/light_gray</item>
+        <item name="colorControlActivated">@color/teal_200</item>
     </style>
 </resources>
