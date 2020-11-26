@@ -139,16 +139,16 @@ public class add_income extends AppCompatActivity {
                     Intent pass_total = getIntent();
                     Bundle total = pass_total.getExtras();
                     new_amount= Double.parseDouble(number);
-                    new_total = Double.parseDouble(total.getString("total_expense")) + new_amount;
-                    String total_expense = "Your total income is:  "+ new_total.toString() +" euros!";
+                    new_total = Double.parseDouble(total.getString("total_income")) + new_amount;
+                    String total_income = "Your total income is:  "+ new_total.toString() +" euros!";
                     NotificationCompat.Builder notification = new NotificationCompat.Builder(add_income.this,"My notification");
                     notification.setSmallIcon(R.drawable.notifications);
                     notification.setContentTitle("You have a new notification");
-                    notification.setContentText(total_expense);
+                    notification.setContentText(total_income);
                     notification.setAutoCancel(true);
 
                     NotificationManagerCompat managerCompat = NotificationManagerCompat.from(add_income.this);
-                    managerCompat.notify(1,notification.build());
+                    managerCompat.notify(2,notification.build());
 
                     Intent in = new Intent(add_income.this, MainActivity.class);
                     String successMessage = "You have successfully recorded your income of €" + number;

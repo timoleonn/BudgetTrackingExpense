@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
         //  SET FRAGMENT TITLE
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
 
-        expense ="";
+
         TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
         TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
 
@@ -300,7 +300,6 @@ public class HomeFragment extends Fragment {
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
                             expense = Double.toString(totalIncome);
-//                            Create a bundle for moving the total income to expenses
                             Intent in = new Intent(getContext(), addExpenses.class);
                             startActivity(in);
                         }
@@ -322,7 +321,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 income = Double.toString(totalIncome);
                 Bundle totalIncome = new Bundle();
-                totalIncome.putString("total_Income",income);
+                totalIncome.putString("total_income",income);
                 Intent in = new Intent(getContext(), add_income.class);
                 in.putExtras(totalIncome);
                 startActivity(in);
