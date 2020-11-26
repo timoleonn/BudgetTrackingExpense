@@ -127,7 +127,6 @@ public class Settings extends AppCompatActivity {
                 fout.write(ans3.getBytes());
                 fout.write(ans4.getBytes());
                 fout.close();
-                System.out.println(List.get(ans));
                 System.out.println("2:saved" + ans1);
                 System.out.println("2:saved" + ans2);
                 System.out.println("2:saved" + ans3);

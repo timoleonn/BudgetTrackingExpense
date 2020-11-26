@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".profileActivity"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:padding="20dp"
+            android:background="#f990b8 ">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_iconfinder_malecostume_403022"
+                android:layout_centerVertical="true">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Users name"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/profile_image"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:includeFontPadding="false"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/Username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="Users username"
+                android:textSize="14sp"
+                android:layout_toRightOf="@id/profile_image"
+                android:layout_below="@+id/fullName"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                >
+            </TextView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_marginTop="-100dp">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="#f990b8"
+                app:cardElevation="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <ImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_account_balance_24"
+                        android:layout_centerHorizontal="true">
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/expense_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="$$$$$"
+                        android:textSize="20sp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView
+                        android:id="@+id/expens_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Expenses"
+                        android:textSize="14sp"
+                        android:layout_below="@+id/expense_label"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        >
+                    </TextView>
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="#f990b8"
+                app:cardElevation="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <ImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_account_balance_24"
+                        android:layout_centerHorizontal="true">
+                    </ImageView>
+                    <TextView
+                        android:id="@+id/income_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="$$$$"
+                        android:textSize="20sp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView
+                        android:id="@+id/income_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Income"
+                        android:textSize="14sp"
+                        android:layout_below="@+id/income_label"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        >
+                    </TextView>
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full name">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_baseline_person_24"
+                    android:drawablePadding="10dp"
+                    android:hint="Kwstakis"></TextView>
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
