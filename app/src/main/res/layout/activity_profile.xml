@@ -1,166 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="goBack"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".profileActivity"
-        android:orientation="vertical">
+        android:layout_height="300dp"
+        android:background="@color/purple_700"
+        android:padding="20dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:padding="20dp"
-            android:background="#f990b8 ">
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_iconfinder_malecostume_403022">
 
-            <ImageView
-                android:id="@+id/profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_iconfinder_malecostume_403022"
-                android:layout_centerVertical="true">
-            </ImageView>
+        </ImageView>
 
-            <TextView
-                android:id="@+id/fullName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Users name"
-                android:textSize="20sp"
-                android:layout_toRightOf="@id/profile_image"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:includeFontPadding="false"
-                >
-            </TextView>
-            <TextView
-                android:id="@+id/Username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="Users username"
-                android:textSize="14sp"
-                android:layout_toRightOf="@id/profile_image"
-                android:layout_below="@+id/fullName"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                >
-            </TextView>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/fullname_field"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_marginTop="-100dp">
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="125dp"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="#f990b8"
-                app:cardElevation="10dp">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp">
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/profile_image"
+            android:includeFontPadding="false"
+            android:text="FULLNAME FIELD"
+            android:textColor="#000"
+            android:textSize="20sp" />
 
-                    <ImageView
-
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_baseline_account_balance_24"
-                        android:layout_centerHorizontal="true">
-                    </ImageView>
-                    <TextView
-                        android:id="@+id/expense_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:includeFontPadding="false"
-                        android:text="$$$$$"
-                        android:textSize="20sp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        >
-                    </TextView>
-                    <TextView
-                        android:id="@+id/expens_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expenses"
-                        android:textSize="14sp"
-                        android:layout_below="@+id/expense_label"
-                        android:layout_centerHorizontal="true"
-                        android:includeFontPadding="false"
-                        >
-                    </TextView>
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="125dp"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                app:cardBackgroundColor="#f990b8"
-                app:cardElevation="10dp">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp">
-
-                    <ImageView
-
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_baseline_account_balance_24"
-                        android:layout_centerHorizontal="true">
-                    </ImageView>
-                    <TextView
-                        android:id="@+id/income_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:includeFontPadding="false"
-                        android:text="$$$$"
-                        android:textSize="20sp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        >
-                    </TextView>
-                    <TextView
-                        android:id="@+id/income_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Income"
-                        android:textSize="14sp"
-                        android:layout_below="@+id/income_label"
-                        android:layout_centerHorizontal="true"
-                        android:includeFontPadding="false"
-                        >
-                    </TextView>
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/username_field"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:orientation="vertical">
+            android:layout_below="@id/fullname_field"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/profile_image"
+            android:includeFontPadding="false"
+            android:text="USERNAME FIELD"
+            android:textSize="16sp"></TextView>
 
-            <TextView
+        <TextView
+            android:id="@+id/ocupation_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_field"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/profile_image"
+            android:includeFontPadding="false"
+            android:text="USER OCUPATION"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-100dp"
+        android:padding="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/purple_200"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Full name">
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_account_balance_24" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/payment_label"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_person_24"
-                    android:drawablePadding="10dp"
-                    android:hint="Kwstakis"></TextView>
-            </TextView>
-        </LinearLayout>
+                    android:layout_centerInParent="true"
+                    android:includeFontPadding="false"
+                    android:text="$123"
+                    android:textSize="20sp" />
 
+                <TextView
+                    android:id="@+id/payment_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/payment_label"
+                    android:layout_centerHorizontal="true"
+                    android:includeFontPadding="false"
+                    android:text="Expense"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/purple_200"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_account_balance_24"
+                    app:srcCompat="@android:drawable/ic_input_add" />
+
+                <TextView
+                    android:id="@+id/income_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:includeFontPadding="false"
+                    android:text="$123"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/income_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/income_label"
+                    android:layout_centerHorizontal="true"
+                    android:includeFontPadding="false"
+                    android:text="Income"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gender">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="10dp"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_menu_share"
+            android:drawablePadding="10dp"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Country">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvcountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="10dp"></TextView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/goToNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goBack"
+        android:text="return" />
+</LinearLayout>
 

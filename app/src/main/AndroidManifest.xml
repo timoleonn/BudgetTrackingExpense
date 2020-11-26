@@ -16,7 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetTrackingExpense">
-        <activity android:name=".profileActivity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity">
+            
+        </activity>
 
         <service
             android:name=".AdService"
