@@ -23,9 +23,7 @@
             android:exported="true"></service>
 
         <activity android:name=".RateUsSuccessActivity" />
-        <activity
-            android:name=".addExpenses"
-            android:parentActivityName=".MainActivity" />
+
         <activity android:name=".UpdateCategoryActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -76,6 +74,10 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.BudgetTrackingExpense.NoActionBar" />
+        <activity
+            android:name=".addExpenses"
+            android:label="Add Expenses"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
