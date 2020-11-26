@@ -56,22 +56,6 @@ public class CategoriesActivity extends AppCompatActivity {
             System.out.println("ERROR: " + ex.getMessage());
         }
 
-        //  GET INTENT FROM UpdateCategoryActivity (SUCCESS MESSAGE)
-        try {
-            successMessageFromUpdateCategory = getIntent().getStringExtra(UpdateCategoryActivity.UPDATEMESSAGE);
-            Toast.makeText(getApplicationContext(), successMessageFromUpdateCategory, Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        }
-
-        //  GET INTENT FROM UpdateCategoryActivity (NO DATA CHANGE MESSAGE)
-        try {
-            noDataChangeMessage = getIntent().getStringExtra(UpdateCategoryActivity.NODATACHANGEMESSAGE);
-            Toast.makeText(getApplicationContext(), noDataChangeMessage, Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        }
-
         recyclerView = findViewById(R.id.rvCategories);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         categories = new ArrayList<>();

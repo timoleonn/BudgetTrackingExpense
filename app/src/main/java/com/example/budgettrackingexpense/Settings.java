@@ -77,7 +77,7 @@ public class Settings extends AppCompatActivity {
 
         System.out.println("1:"+currency);
 
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         String ans="";
         String ans1="";
         String ans2="";
@@ -85,56 +85,41 @@ public class Settings extends AppCompatActivity {
         String ans4="";
         if(cyprus.isChecked())
         {
-            lines.add(ans);
             ans="Cyprus";
-            System.out.println("1:"+ ans);
-
+            lines.add(ans);
         }
         if(astro.isChecked())
         {
+            ans1="AstroBank";
             lines.add(ans1);
-             ans1="AstroBank";
-            System.out.println("1:"+ ans1);
         }
 
         if(hellenic.isChecked())
         {
+            ans2="Hellenic Bank";
             lines.add(ans2);
-             ans2="Hellenic Bank";
-            System.out.println("1:"+ ans2);
         }
 
         if(rcb.isChecked())
         {
+            ans3="Rcb Bank";
             lines.add(ans3);
-             ans3="Rcb Bank";
-            System.out.println("1:"+ ans3);
         }
 
         if(alpha.isChecked())
         {
+            ans4="Alpha Bank";
             lines.add(ans4);
-             ans4="Alpha Bank";
-            System.out.println("1:"+ ans4);
         }
 
-        try{
-            for (int i=0; i<lines.size(); i++) {
-                FileOutputStream fout=openFileOutput(file,0);
-                fout.write(ans.getBytes());
-                fout.write(ans1.getBytes());
-                fout.write(ans2.getBytes());
-                fout.write(ans3.getBytes());
-                fout.write(ans4.getBytes());
-                fout.close();
-                System.out.println("2:saved" + ans1);
-                System.out.println("2:saved" + ans2);
-                System.out.println("2:saved" + ans3);
-                System.out.println("2:saved" + ans4);
+        try {
+            FileOutputStream fout=openFileOutput(file,0);
+            for (String myStr : lines) {
+                fout.write((myStr + "\n").getBytes());
             }
+            fout.close();
 
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
 
