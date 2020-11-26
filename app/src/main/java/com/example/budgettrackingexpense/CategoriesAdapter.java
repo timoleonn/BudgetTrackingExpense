@@ -51,19 +51,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
             super(itemView);
             name = itemView.findViewById(R.id.tvCategoryName);
             budget = itemView.findViewById(R.id.tvBudget);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle categoryInfo = new Bundle();
-                    categoryInfo.putString("categoryName", name.getText().toString());
-                    categoryInfo.putString("budget", budget.getText().toString());
-
-                    Intent in = new Intent(itemView.getContext(), UpdateCategoryActivity.class);
-                    in.putExtras(categoryInfo);
-                    itemView.getContext().startActivity(in);
-                }
-            });
         }
     }
 }
