@@ -45,8 +45,6 @@ public class CategoriesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         String successMessageFromAddCategory;
-        String successMessageFromUpdateCategory;
-        String noDataChangeMessage;
 
         //  GET INTENT FROM AddCategoryActivity (SUCCESS MESSAGE)
         try {
@@ -87,13 +85,10 @@ public class CategoriesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
-
 
         //  ADD CATEGORY
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +99,6 @@ public class CategoriesActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //  BACK BUTTON
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         //  SET TITLE
         getSupportActionBar().setTitle("Categories");
     }
@@ -118,13 +107,6 @@ public class CategoriesActivity extends AppCompatActivity {
     @Override
     public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
         return super.onCreateView(name, context, attrs);
-    }
-
-    //  FOR BACK BUTTON
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     @Override

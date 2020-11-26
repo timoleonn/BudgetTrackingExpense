@@ -72,9 +72,7 @@ public class RateUsFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
         //  PROCESS SUBMIT FEEDBACK AND SEND BUNDLE TO RateUsSuccessActivity
