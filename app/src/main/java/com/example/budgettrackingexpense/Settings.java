@@ -125,4 +125,20 @@ public class Settings extends AppCompatActivity {
 
 
     }
+        public void theme(View v)
+        {
+            Switch sw = findViewById(R.id.switchBright);
+            LinearLayout layout = findViewById(R.id.LinearLayoutSettings);
+
+            if (sw.isChecked())
+            {
+                layout.setBackgroundColor(Color.BLACK);
+                sw.setText("Dark Mode: On");
+            } else {
+                layout.setBackgroundColor(Color.WHITE);
+                sw.setText("Dark Mode: Off");
+
+            }
+
+        }
 }
