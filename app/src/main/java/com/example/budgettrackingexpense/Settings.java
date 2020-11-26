@@ -1,7 +1,5 @@
 package com.example.budgettrackingexpense;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -21,35 +19,6 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Switch swFunfacts = findViewById(R.id.swFunfacts);
-
-        //  SAVE SWITCH STATE IN SHARED PREFERENCES
-        SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
-        swFunfacts.setChecked(sharedPreferences.getBoolean("value", false));
-
-        //  CREATE SERVICE INTENT
-        Intent serviceIntent = new Intent(Settings.this, AdService.class);
-
-        //  SWITCH SET ON CLICK LISTENER
-        swFunfacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (swFunfacts.isChecked()) {
-                    SharedPreferences.Editor editor = getSharedPreferences("swFunFacts", MODE_PRIVATE).edit();
-                    editor.putBoolean("value", true);
-                    editor.apply();
-                    swFunfacts.setChecked(true);
-                    startService(serviceIntent);
-                } else {
-                    SharedPreferences.Editor editor = getSharedPreferences("swFunFacts", MODE_PRIVATE).edit();
-                    editor.putBoolean("value", false);
-                    editor.apply();
-                    swFunfacts.setChecked(false);
-                    stopService(serviceIntent);
-                }
-            }
-        });
     }
 
     public void submit(View v) {
@@ -75,4 +44,20 @@ public class Settings extends AppCompatActivity {
         }
 
     }
+        public void theme(View v)
+        {
+            Switch sw = findViewById(R.id.switchBright);
+            LinearLayout layout = findViewById(R.id.LinearLayoutSettings);
+
+            if (sw.isChecked())
+            {
+                layout.setBackgroundColor(Color.BLACK);
+                sw.setText("Dark Mode: On");
+            } else {
+                layout.setBackgroundColor(Color.WHITE);
+                sw.setText("Dark Mode: Off");
+
+            }
+
+        }
 }
