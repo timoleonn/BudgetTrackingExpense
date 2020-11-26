@@ -10,8 +10,6 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +19,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -51,7 +48,6 @@ public class addExpenses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expenses);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         note = findViewById(R.id.etNote);
         amount = findViewById(R.id.etExpense);
         date = findViewById(R.id.date);
@@ -92,7 +88,6 @@ public class addExpenses extends AppCompatActivity {
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
-        btnAddExpenses.setEnabled(false);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,66 +102,14 @@ public class addExpenses extends AppCompatActivity {
                     }
                 },year,month,day);
                 datePickerDialog.show();
-
             }
         });
-
-        btnAddExpenses.setEnabled(false);
-
-        date.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!date.getText().toString().isEmpty()) {
-                    btnAddExpenses.setEnabled(true);
-                }
-            }
-        });
-        btnAddExpenses.setEnabled(false);
-
-        amount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!amount.getText().toString().isEmpty()) {
-                    btnAddExpenses.setEnabled(true);
-                }
-            }
-        });
-        btnAddExpenses.setEnabled(false);
-
-        note.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!note.getText().toString().isEmpty()) {
-                    btnAddExpenses.setEnabled(true);
-                }
-            }
-        });
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
         {
-            NotificationChannel channel = new NotificationChannel("My notification","This is not the latest android version. Please try updating your device and the launching the application again",NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("My notification","Notification TItle",NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-
         //  WRITE TO FILE
         btnAddExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,16 +157,5 @@ public class addExpenses extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.add_expense_menu, menu);
         return true;
-    }
-    //  CHECK WHAT BUTTON IS PRESSED ON TOOLBAR TOP
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            Intent in = new Intent(this, Settings.class);
-            startActivity(in);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,8 +1,18 @@
 package com.example.budgettrackingexpense.ui.login;
 
 import android.app.Activity;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -14,13 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import com.example.budgettrackingexpense.AdService;
 import com.example.budgettrackingexpense.MainActivity;
 import com.example.budgettrackingexpense.R;
 import com.example.budgettrackingexpense.RegisterActivity;
@@ -225,9 +229,9 @@ public class LoginActivity extends AppCompatActivity  {
                 {
                     Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_LONG).show();
 
-                    /*//  START AD SERVICE
+                    //  START AD SERVICE
                     Intent serviceIntent = new Intent(LoginActivity.this, AdService.class);
-                    startService(serviceIntent);*/
+                    startService(serviceIntent);
 
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(in);
