@@ -229,9 +229,9 @@ public class LoginActivity extends AppCompatActivity  {
                 {
                     Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_LONG).show();
 
-                    //  START AD SERVICE
+                    /*//  START AD SERVICE
                     Intent serviceIntent = new Intent(LoginActivity.this, AdService.class);
-                    startService(serviceIntent);
+                    startService(serviceIntent);*/
 
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(in);
