@@ -197,13 +197,10 @@ public class addExpenses extends AppCompatActivity {
                     String successMessage = "You have successfully recorded your expense of €" + amount.getText().toString() + " for " + spinner.getSelectedItem().toString();
                     in.putExtra(SUCCESS_MESSAGE_ADD_EXPENSE, successMessage);
                     startActivity(in);
-//                    System.out.println("SUCCESS");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    System.out.println("1: " + e.getMessage());
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("2: " + e.getMessage());
                 }
             }
         });

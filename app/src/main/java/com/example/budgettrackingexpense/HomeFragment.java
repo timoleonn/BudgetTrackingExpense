@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
 
         //  READ CURRENCY
         try {
-            FileInputStream fin = getActivity().openFileInput("Currency.txt");
+            FileInputStream fin = getActivity().openFileInput(currency_file_name);
             DataInputStream din = new DataInputStream(fin);
             InputStreamReader isr = new InputStreamReader(din);
             BufferedReader br = new BufferedReader(isr);

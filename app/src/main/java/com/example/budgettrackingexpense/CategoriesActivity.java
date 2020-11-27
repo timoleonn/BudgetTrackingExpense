@@ -121,6 +121,9 @@ public class CategoriesActivity extends AppCompatActivity {
         if (id == R.id.action_go_to_home) {
             Intent in = new Intent(this, MainActivity.class);
             startActivity(in);
+        } else if (id == R.id.action_settings) {
+            Intent in = new Intent(this, Settings.class);
+            startActivity(in);
         }
 
         return super.onOptionsItemSelected(item);
