@@ -47,11 +47,10 @@ public class CategoriesActivity extends AppCompatActivity {
         String successMessageFromAddCategory;
 
         //  GET INTENT FROM AddCategoryActivity (SUCCESS MESSAGE)
-        try {
-            successMessageFromAddCategory = getIntent().getStringExtra(AddCategoryActivity.SUCCESSMESSAGE);
+        Intent in = getIntent();
+        if (in.hasExtra(AddCategoryActivity.SUCCESSMESSAGE)) {
+            successMessageFromAddCategory = in.getStringExtra(AddCategoryActivity.SUCCESSMESSAGE);
             Toast.makeText(getApplicationContext(), successMessageFromAddCategory, Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            System.out.println("ERROR: " + ex.getMessage());
         }
 
         recyclerView = findViewById(R.id.rvCategories);

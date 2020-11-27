@@ -2,7 +2,6 @@ package com.example.budgettrackingexpense;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,12 +36,42 @@ public class HomeFragment extends Fragment {
     String file_name = "expenses.txt";
     String income_file_name = "income.txt";
     String filename ="total.txt";
+    String currency_file_name = "Currency.txt";
+    String currencySymbol = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         //  SET FRAGMENT TITLE
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
+
+        //  READ CURRENCY
+        try {
+            FileInputStream fin = getActivity().openFileInput("Currency.txt");
+            DataInputStream din = new DataInputStream(fin);
+            InputStreamReader isr = new InputStreamReader(din);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) {
+                    currencySymbol = line;
+                }
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+        }
+
+        if (currencySymbol == "EUR") {
+            currencySymbol = "€";
+        } else if (currencySymbol == "USD") {
+            currencySymbol = "$";
+        } else if (currencySymbol == "GBP") {
+            currencySymbol = "£";
+        }
 
         TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
         TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
@@ -261,8 +288,8 @@ public class HomeFragment extends Fragment {
         });
 
         //  SET TOTAL EXPENSES AND TOTAL INCOME TEXT
-        tvTotalExpenses.setText(Double.toString(totalExpenses));
-        tvTotalIncome.setText(Double.toString(totalIncome));
+        tvTotalExpenses.setText(currencySymbol + " " + totalExpenses);
+        tvTotalIncome.setText(currencySymbol + " " + totalIncome);
 
         PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories, expensePerCategory), "");
         pieDataSet.setColors(colors);
@@ -272,7 +299,7 @@ public class HomeFragment extends Fragment {
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.getDescription().setEnabled(false);
-        pieChart.setCenterText("Spendings");
+        pieChart.setCenterText("Spendings (" + currencySymbol + ")");
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
 

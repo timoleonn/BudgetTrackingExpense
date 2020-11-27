@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BudgetTrackingExpense</string>
+    <string name="app_name">MoneySavy</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -14,7 +14,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">MoneySavy</string>
     <string name="prompt_email">enter your email</string>
     <string name="prompt_password">enter your password</string>
     <string name="action_sign_in">LOGIN</string>

@@ -5,19 +5,27 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Settings extends AppCompatActivity {
     private String file="Banks.txt";
     private String file2="Currency.txt";
+    private String currencySymbol = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +33,6 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Switch swFunfacts = findViewById(R.id.swFunfacts);
-
 
         //  SAVE SWITCH STATE IN SHARED PREFERENCES
         SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
@@ -53,6 +60,41 @@ public class Settings extends AppCompatActivity {
                 }
             }
         });
+
+        //  GET CURRENCY RADIO BUTTONS
+        //  IF CURRENCY ALREADY SET, READ THE CURRENCY FILE TO SET RADIO BUTTON CHECKED
+        RadioButton rbEuro = findViewById(R.id.rbEuro);
+        RadioButton rbDollars = findViewById(R.id.rbDollars);
+        RadioButton rbPound = findViewById(R.id.rbPound);
+
+        try {
+            FileInputStream fin = openFileInput("Currency.txt");
+            DataInputStream din = new DataInputStream(fin);
+            InputStreamReader isr = new InputStreamReader(din);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) {
+                    currencySymbol = line;
+                }
+            }
+            br.close();
+
+            System.out.println("ANSWER: " + currencySymbol + " " + (currencySymbol.equals("EUR")));
+            if (currencySymbol.equals("€")) {
+                rbEuro.setChecked(true);
+            } else if (currencySymbol.equals("$")) {
+                rbDollars.setChecked(true);
+            } else if (currencySymbol.equals("£")) {
+                rbPound.setChecked(true);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Oops, something went wrong! 1", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void submit(View v) {
@@ -139,13 +181,14 @@ public class Settings extends AppCompatActivity {
                 System.out.println(lines);
             }
             fout.close();
-
+            Toast.makeText(getApplicationContext(),"Your Submittion is Successful",Toast.LENGTH_LONG).show();
+            Intent in = new Intent(Settings.this, MainActivity.class);
+            startActivity(in);
         } catch (Exception ex) {
             ex.printStackTrace();
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
 
         }
-        Toast.makeText(getApplicationContext(),"Your Submittion is Successful",Toast.LENGTH_LONG).show();
 
     }
 }
