@@ -31,7 +31,6 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/profile_image"
             android:includeFontPadding="false"
-            android:text="FULLNAME FIELD"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -43,7 +42,6 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/profile_image"
             android:includeFontPadding="false"
-            android:text="USERNAME FIELD"
             android:textSize="16sp"></TextView>
 
         <TextView
@@ -54,7 +52,6 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/profile_image"
             android:includeFontPadding="false"
-            android:text="USER OCUPATION"
             android:textSize="12sp" />
     </RelativeLayout>
 
@@ -84,7 +81,7 @@
                     android:src="@drawable/ic_baseline_account_balance_24" />
 
                 <TextView
-                    android:id="@+id/payment_label"
+                    android:id="@+id/expense_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -96,7 +93,7 @@
                     android:id="@+id/payment_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/payment_label"
+                    android:layout_below="@id/expense_label"
                     android:layout_centerHorizontal="true"
                     android:includeFontPadding="false"
                     android:text="Expense"
@@ -173,6 +170,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Email">
 
         </TextView>
@@ -188,6 +186,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Country">
 
         </TextView>

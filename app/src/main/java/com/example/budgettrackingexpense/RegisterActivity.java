@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.budgettrackingexpense.ui.login.LoginActivity;
@@ -22,22 +18,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
-import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity  {
     EditText  mname,mcountry,memail,musername,mpassword,mpasswordconf, moccupation;
@@ -62,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity  {
         mpassword = findViewById(R.id.newPassword);
         mpasswordconf = findViewById(R.id.confirmPassword);
         mcountry = findViewById(R.id.country);
-        submit = findViewById(R.id.submit);
+        submit = findViewById(R.id.sumbition);
 
         rbgroup = findViewById(R.id.rbGroup);
         rbOccupation = findViewById(R.id.rbOccupation);

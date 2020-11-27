@@ -164,7 +164,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(getApplicationContext(), Tabbed_Bank_Activity.class));
             overridePendingTransition(0, 0);
         } else if (id == R.id.nav_profile) {
-            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+
+//            Bundle passExpenseToProfile = new Bundle();
+//            passExpenseToProfile.putString("total_expense",expense);
+//            passExpenseToProfile.putString("total_income",income);
+            Intent in = new Intent(this/*getContext()*/, ProfileActivity.class);
+//            in.putExtras(passExpenseToProfile);
+            startActivity(in);
 
         } else if (id == R.id.nav_logout) {
             AdService adService = new AdService();

@@ -275,6 +275,13 @@ public class HomeFragment extends Fragment {
         pieChart.setCenterText("Spendings");
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
+
+        Bundle pass_to_profile = new Bundle();
+        pass_to_profile.putString("total_expense",expense);
+        pass_to_profile.putString("total_income",income);
+//        Intent passtoProfile =  new Intent(getContext(),ProfileActivity.class);
+//        passtoProfile.putExtras(pass_to_profile);
+//        startActivity(passtoProfile);
         return root;
     }
 
