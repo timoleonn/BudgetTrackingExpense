@@ -127,10 +127,8 @@ public class RegisterActivity extends AppCompatActivity  {
             Toast.makeText(getApplicationContext(), "You didn't loose anything, all data is still here!", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
         }
 
         //  LOGIN HERE
@@ -258,7 +256,6 @@ public class RegisterActivity extends AppCompatActivity  {
             nameText.setError("Full name cannot be empty");
             return false;
         } else {
-            nameText.setError(null);
             return true;
         }
     }
@@ -271,7 +268,6 @@ public class RegisterActivity extends AppCompatActivity  {
             rbLastOption.setError("You must specify your gender");
             return false;
         } else {
-            rbLastOption.setError(null);
             return true;
         }
     }
@@ -283,7 +279,6 @@ public class RegisterActivity extends AppCompatActivity  {
             countryText.setError("Country cannot be empty");
             return false;
         } else {
-            countryText.setError(null);
             return true;
         }
     }
@@ -303,7 +298,6 @@ public class RegisterActivity extends AppCompatActivity  {
             usernameText.setError("Username must have a length > 6");
             return false;
         } else {
-            usernameText.setError(null);
             return true;
         }
     }
@@ -318,7 +312,6 @@ public class RegisterActivity extends AppCompatActivity  {
             emailText.setError("Email must contain '@'");
             return false;
         }else {
-            emailText.setError(null);
             return true;
         }
     }
@@ -365,7 +358,6 @@ public class RegisterActivity extends AppCompatActivity  {
             rbLastOption.setError("You must specify your occupation");
             return false;
         } else {
-            rbLastOption.setError(null);
             return true;
         }
     }
