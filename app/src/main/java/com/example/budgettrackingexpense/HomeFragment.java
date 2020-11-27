@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     double[] expensePerCategory;
     double totalExpenses = 0;
     double totalIncome = 0;
-    String expense,income;
+    String expense, income;
     String file_name = "expenses.txt";
     String income_file_name = "income.txt";
     String filename ="total.txt";
@@ -46,90 +46,8 @@ public class HomeFragment extends Fragment {
         //  SET FRAGMENT TITLE
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
 
-
         TextView tvTotalExpenses = root.findViewById(R.id.tvTotalExpenses);
         TextView tvTotalIncome = root.findViewById(R.id.tvTotalIncome);
-
-//        Button btnTestimgTimRead = root.findViewById(R.id.btnTestimgTimRead);
-
-
-
-//        //  READ FILE
-//        btnTestimgTimRead.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//                //  READ FILE, SPLIT EACH VARIABLE THAT IS SEPARATED WITH A COMMA
-//                //  AND SAVE IT TO AN ARRAY LIST OF LISTS
-//                try {
-//                    FileInputStream fin = getActivity().openFileInput(file_name);
-//                    DataInputStream din = new DataInputStream(fin);
-//                    InputStreamReader isr = new InputStreamReader(din);
-//                    BufferedReader br = new BufferedReader(isr);
-//
-//                    //  CREATE ARRAY LIST, LIST AND VARIABLE TO HOLD EACH LINE
-//                    ArrayList<List> finalArrayList = new ArrayList<>();
-//                    List<String> strList = new ArrayList<String>();
-//                    String strLine;
-//
-//                    //  READ EVERY LINE
-//                    //  SPLIT EACH LINE BASED ON THE COMMA (SEPARATOR)
-//                    //  EACH VALUE IS ADDED IN A LIST
-//                    //  LIST GETS ADDED TO ARRAY LIST
-//                    //  LIST GETS INITIALIZED AGAIN
-//                    //  REPEAT UNTIL TEXT FILE IS READ THROUGH
-//                    while((strLine = br.readLine()) != null) {
-//                        String[] res = strLine.split("[,]", 0);
-//                        System.out.println(res);
-//                        for(String myStr: res) {
-//                            System.out.println(myStr);
-//                            //  ADDS THE THREE VARIABLES TO THE STRING ARRAY
-//                            strList.add(myStr);
-//                            System.out.println(strList);
-//                        }
-//                        System.out.println("1.strList BEFORE: " + strList);
-//                        finalArrayList.add(strList);
-//                        System.out.println("2. finalArrayList BEFORE: " + finalArrayList);
-//                        //  INITIALIZE AGAIN THE STRLIST SO IT CAN GET NEW VALUES
-//                        strList = new ArrayList<String>();
-//
-//                        System.out.println("1.strList AFTER: " + strList);
-//                        System.out.println("2. finalArrayList AFTER: " + finalArrayList);
-//                    }
-//                    System.out.println("\nFINAL: " + finalArrayList);
-//
-//                    //  SOME LOCAL VARIABLES
-//                    Double total = 0.0;
-//
-//                    //  ITERATE THROUGH EACH LIST IN THE ARRAY LIST
-//                    //  TO GRAB THE VALUES AND PROCESS THEM
-//                    for (int i = 0; i < finalArrayList.size(); i++) {
-////                        System.out.println(finalArrayList.get(i) + " ");
-//                        for (int j = 0; j < finalArrayList.get(i).size(); j++) {
-//                            System.out.println(finalArrayList.get(i).get(j) + " ");
-//                            //  PARSE TO DOUBLE THE AMOUNT
-//                            if (j == 2) {
-//                                total += Double.parseDouble((String) finalArrayList.get(i).get(j));
-//                            }
-//
-//                        }
-//                    }
-//
-//                    System.out.println("TOTAL: " + total);
-//
-////                    System.out.println("3.Array List AFTER: " + finalArrayList);
-//
-//
-//                    fin.close();
-//                    Toast.makeText(getContext(), "Read successfully", Toast.LENGTH_LONG).show();
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
         //  PIE CHART
         pieChart = root.findViewById(R.id.pieChart);

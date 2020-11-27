@@ -123,15 +123,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (_GENDER.equals("Other")) {
                     ivProfile.setBackgroundResource(R.drawable.ic_iconfinder_other);
                 }
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
-
     }
 
     //  CHECK WHAT BUTTON IS PRESSED ON TOOLBAR TOP

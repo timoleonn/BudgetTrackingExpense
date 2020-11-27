@@ -3,6 +3,7 @@ package com.example.budgettrackingexpense.ui.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -33,9 +34,25 @@ public class LoginActivity extends AppCompatActivity  {
 
     private LoginViewModel loginViewModel;
     FirebaseAuth fAuth;
-    Button signInGoogle;
-//     GoogleSignInClient mGoogleSignInClient;
-//     int RC_SIGN_IN= 0;
+
+    EditText username, password;
+    ProgressBar loading;
+    Button login, register;
+    TextView tvEmail, tvPassword, tvSlogan;
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            username.setVisibility(View.VISIBLE);
+            password.setVisibility(View.VISIBLE);
+            login.setVisibility(View.VISIBLE);
+            register.setVisibility(View.VISIBLE);
+            tvEmail.setVisibility(View.VISIBLE);
+            tvPassword.setVisibility(View.VISIBLE);
+            tvSlogan.setVisibility(View.INVISIBLE);
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +60,21 @@ public class LoginActivity extends AppCompatActivity  {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        login = findViewById(R.id.login);
+        loading = findViewById(R.id.loading);
+        register = findViewById(R.id.register);
+        tvEmail = findViewById(R.id.tvEmail);
+        tvPassword = findViewById(R.id.tvPassword);
+        tvSlogan = findViewById(R.id.tvSlogan);
+
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        handler.postDelayed(runnable, 2000);
 
 
         fAuth = FirebaseAuth.getInstance();

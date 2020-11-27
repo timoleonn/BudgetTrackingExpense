@@ -17,6 +17,7 @@ import java.util.List;
 
 public class Settings extends AppCompatActivity {
     private String file="Banks.txt";
+    private String file2="Currency.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Switch swFunfacts = findViewById(R.id.swFunfacts);
+
 
         //  SAVE SWITCH STATE IN SHARED PREFERENCES
         SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
@@ -54,28 +56,46 @@ public class Settings extends AppCompatActivity {
     }
 
     public void submit(View v) {
-        CheckBox cyprus = findViewById(R.id.cbCyprus);
-        CheckBox astro = findViewById(R.id.cbAstro);
-        CheckBox hellenic = findViewById(R.id.cbHellenic);
-        CheckBox rcb = findViewById(R.id.cbRcb);
-        CheckBox alpha = findViewById(R.id.cbAlpha);
 
 
         RadioGroup group = findViewById(R.id.rbGroup);
+        List<String> currencies = new ArrayList<>();
 
         String currency = "";
 
         int selection = group.getCheckedRadioButtonId();
 
         if (selection == R.id.rbEuro) {
-            currency = "Euros";
-        } else if (selection == R.id.rbDollars) {
-            currency = "Dollars";
-        } else if (selection == R.id.rbPound) {
-            currency = "Pound";
+            currency = "€";
+            currencies.add(currency);
+        }
+        if (selection == R.id.rbDollars) {
+            currency = "$";
+            currencies.add(currency);
+        }
+        if (selection == R.id.rbPound) {
+            currency = "£";
+            currencies.add(currency);
         }
 
-        System.out.println("1:"+currency);
+        try {
+            FileOutputStream fout=openFileOutput(file2,0);
+            for (String myStr : currencies) {
+                fout.write((myStr + "\n").getBytes());
+                System.out.println(currencies);
+            }
+            fout.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+
+        }
+        CheckBox cyprus = findViewById(R.id.cbCyprus);
+        CheckBox astro = findViewById(R.id.cbAstro);
+        CheckBox hellenic = findViewById(R.id.cbHellenic);
+        CheckBox rcb = findViewById(R.id.cbRcb);
+        CheckBox alpha = findViewById(R.id.cbAlpha);
 
         List<String> lines = new ArrayList<>();
         String ans="";
@@ -85,7 +105,7 @@ public class Settings extends AppCompatActivity {
         String ans4="";
         if(cyprus.isChecked())
         {
-            ans="Cyprus";
+            ans="Bank of Cyprus";
             lines.add(ans);
         }
         if(astro.isChecked())
@@ -116,6 +136,7 @@ public class Settings extends AppCompatActivity {
             FileOutputStream fout=openFileOutput(file,0);
             for (String myStr : lines) {
                 fout.write((myStr + "\n").getBytes());
+                System.out.println(lines);
             }
             fout.close();
 
@@ -124,5 +145,7 @@ public class Settings extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
 
         }
+        Toast.makeText(getApplicationContext(),"Your Submittion is Successful",Toast.LENGTH_LONG).show();
+
     }
 }

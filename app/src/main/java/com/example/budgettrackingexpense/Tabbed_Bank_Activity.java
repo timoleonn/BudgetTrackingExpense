@@ -35,20 +35,10 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        //  Coordinates for Alpha Bank
                         LatLng alpha = new LatLng(34.917018, 33.608868);
-                        LatLng alpha1 = new LatLng(34.916695, 33.623988);
-                        LatLng alpha2 = new LatLng(34.928053, 33.616646);
+                        LatLng alpha1 = new LatLng(35.171103, 33.354261);
+                        LatLng alpha2 = new LatLng(35.163987, 33.318087);
                         LatLng alpha3 = new LatLng(34.930513, 33.637572);
-
-                        //  array/list
-                        //  x, y
-                        //  x1, y1
-
-                        //  for array
-                        //      boc.puParcelable("i", coords)
-
-
 
                         Bundle alphab = new Bundle();
                         alphab.putString("marker", "Alpha Bank");
@@ -63,11 +53,9 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         startActivity(in);
                         break;
                     case 1:
-
                         LatLng astro = new LatLng(35.111182, 33.383313);
                         LatLng astro1 = new LatLng(35.145242, 33.344548);
                         LatLng astro2 = new LatLng(35.154031, 33.361593);
-
 
                         Bundle astrob = new Bundle();
                         astrob.putString("marker", "AstroBank");
@@ -75,13 +63,6 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         astrob.putParcelable("coordinates5", astro1);
                         astrob.putParcelable("coordinates6", astro2);
 
-
-
-//                        intent.putExtra("USER_ID",USER_ID);
-//                        intent.putExtra("FRAGMENT",0);
-//
-//                        intent.putExtra("TITLE",getResources().getString(R.string.Enter_Expense_title));
-//                        intent.putExtra("FILED",getResources().getString(R.string.Enter_Expense_text));
                         Intent in1 = new Intent(Tabbed_Bank_Activity.this,
                                 MapsActivity.class);
                         in1.putExtras(astrob);
@@ -119,17 +100,13 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         cyprusb.putParcelable("coordinates11", cyprus11);
                         cyprusb.putParcelable("coordinates12", cyprus12);
                         cyprusb.putParcelable("coordinates13", cyprus13);
+
                         Intent in2 = new Intent(Tabbed_Bank_Activity.this,
                                 MapsActivity.class);
-//                        intent.putExtra("USER_ID",USER_ID);
-//                        intent.putExtra("FRAGMENT",0);
-//
-//                        intent.putExtra("TITLE",getResources().getString(R.string.Enter_Expense_title));
-//                        intent.putExtra("FILED",getResources().getString(R.string.Enter_Expense_text));
+
                         in2.putExtras(cyprusb);
                         startActivity(in2);
                         break;
-
                     case 3:
                         LatLng hellenic = new LatLng(34.919293, 33.614502);
                         LatLng hellenic1 = new LatLng(34.922267, 33.613418);
@@ -143,17 +120,12 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         hellenicb.putParcelable("coordinates2", hellenic2);
                         hellenicb.putParcelable("coordinates3", hellenic3);
 
-
                         Intent in3 = new Intent(Tabbed_Bank_Activity.this,
                                 MapsActivity.class);
-//                        intent.putExtra("USER_ID",USER_ID);
-//                        intent.putExtra("FRAGMENT",0);
-//
-//                        intent.putExtra("TITLE",getResources().getString(R.string.Enter_Expense_title));
-//                        intent.putExtra("FILED",getResources().getString(R.string.Enter_Expense_text));
                         in3.putExtras(hellenicb);
                         startActivity(in3);
                         break;
+
                     case 4:
                         LatLng rcb = new LatLng(34.919293, 33.614502);
                         LatLng rcb1 = new LatLng(34.922267, 33.613418);
@@ -166,13 +138,10 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         rcbBank.putParcelable("coordinates1", rcb1);
                         rcbBank.putParcelable("coordinates2", rcb2);
                         rcbBank.putParcelable("coordinates3", rcb3);
-//                        fab.setImageDrawable(ContextCompat.getDrawable(Tabbed_Bank_Activity.this, iconIntArray[0]));
+
                         Intent in4 = new Intent(Tabbed_Bank_Activity.this,
                                 MapsActivity.class);
-//                        intent.putExtra("USER_ID",USER_ID);
-//                        intent.putExtra("FRAGMENT",0);
-//                        intent.putExtra("TITLE",getResources().getString(R.string.Enter_Expense_title));
-//                        intent.putExtra("FILED",getResources().getString(R.string.Enter_Expense_text));
+
                         in4.putExtras(rcbBank);
                         startActivity(in4);
 
@@ -185,14 +154,17 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.addincome_menu, menu);
+        getMenuInflater().inflate(R.menu.standard_menu, menu);
         return true;
 
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_add_income) {
+        if (id == R.id.action_go_to_home) {
+            Intent in = new Intent(this, MainActivity.class);
+            startActivity(in);
+        } else if (id == R.id.action_settings) {
             Intent in = new Intent(this, Settings.class);
             startActivity(in);
         }
