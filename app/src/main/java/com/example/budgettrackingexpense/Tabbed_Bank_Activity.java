@@ -36,8 +36,8 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         LatLng alpha = new LatLng(34.917018, 33.608868);
-                        LatLng alpha1 = new LatLng(34.916695, 33.623988);
-                        LatLng alpha2 = new LatLng(34.928053, 33.616646);
+                        LatLng alpha1 = new LatLng(35.171103, 33.354261);
+                        LatLng alpha2 = new LatLng(35.163987, 33.318087);
                         LatLng alpha3 = new LatLng(34.930513, 33.637572);
 
                         Bundle alphab = new Bundle();
