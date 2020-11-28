@@ -45,7 +45,7 @@ public class addExpenses extends AppCompatActivity {
     EditText  date, note, amount;
     DatePickerDialog.OnDateSetListener setListener;
 
-    String file_name = "expenses_2.txt";
+    String file_name = "expenses_3.txt";
     Double new_total,new_amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

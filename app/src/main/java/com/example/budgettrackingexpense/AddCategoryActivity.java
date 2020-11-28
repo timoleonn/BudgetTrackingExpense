@@ -101,7 +101,6 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                 Intent in = new Intent(AddCategoryActivity.this, CategoriesActivity.class);
                 String message = "You have added the category " + etCategoryName.getText().toString() + " successfully!";
-                StyleableToast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG, R.style.customToast).show();
                 in.putExtra(SUCCESSMESSAGE, message);
                 startActivity(in);
             }
