@@ -43,7 +43,7 @@ public class addExpenses extends AppCompatActivity {
     public static String SUCCESS_MESSAGE_ADD_EXPENSE = "";
     EditText  date, note, amount;
     DatePickerDialog.OnDateSetListener setListener;
-    Button hello;
+
     String file_name = "expenses.txt";
     Double new_total,new_amount;
     @Override

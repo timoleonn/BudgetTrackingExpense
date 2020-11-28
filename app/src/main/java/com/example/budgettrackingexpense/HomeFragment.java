@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -279,9 +280,21 @@ public class HomeFragment extends Fragment {
         Bundle pass_to_profile = new Bundle();
         pass_to_profile.putString("total_expense",expense);
         pass_to_profile.putString("total_income",income);
-//        Intent passtoProfile =  new Intent(getContext(),ProfileActivity.class);
-//        passtoProfile.putExtras(pass_to_profile);
-//        startActivity(passtoProfile);
+
+        String data_to_write = expense +","+ income;
+
+        try{
+            FileOutputStream fout = getContext().openFileOutput(file_name, Context.MODE_APPEND);
+//                    fout.write(("").getBytes());
+            fout.write(data_to_write.getBytes());
+            fout.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("1: " + e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("2: " + e.getMessage());
+        }
         return root;
     }
 

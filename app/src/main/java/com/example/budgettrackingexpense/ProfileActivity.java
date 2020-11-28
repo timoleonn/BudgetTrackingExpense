@@ -18,10 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ProfileActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     String USER ="users";
+    String file_name="totals.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +87,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        Intent getValues = getIntent();
-        Bundle total = getValues.getExtras();
-        expense_label.setText(total.getString("total_expense"));
-        income_label.setText(total.getString("total_income"));
+//        Intent getValues = getIntent();
+//        Bundle total = getValues.getExtras();
+//        expense_label.setText(total.getString("total_expense"));
+//        income_label.setText(total.getString("total_income"));
 
 
     }
