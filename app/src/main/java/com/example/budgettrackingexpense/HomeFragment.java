@@ -176,6 +176,7 @@ public class HomeFragment extends Fragment {
             expensePerCategory = new double[categoryCount];
 
             int category_count = 0;
+            totalExpenses = 0;
             //  GET ALL CATEGORIES
             if (!finalArrayList.isEmpty()) {
                 for (String category: categories) {
@@ -191,8 +192,8 @@ public class HomeFragment extends Fragment {
                             }
                             //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
                             if (j == 3) {
-                                System.out.println((Double.parseDouble((String) finalArrayList.get(i).get(3))));
                                 totalExpenses += (Double.parseDouble((String) finalArrayList.get(i).get(3)));
+                                System.out.println("OMG: " + totalExpenses);
                             }
 
                         }
