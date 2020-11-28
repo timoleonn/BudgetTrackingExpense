@@ -41,11 +41,11 @@ public class add_income extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etDate=findViewById(R.id.etDate);
-        Calendar calendar=Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
 
-        final int year=calendar.get(Calendar.YEAR);
-        final int month=calendar.get(Calendar.MONTH);
-        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +54,8 @@ public class add_income extends AppCompatActivity {
                         add_income.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        month=month+1;
-                        String date = day+"/"+month+"/"+year;
+                        month = month + 1;
+                        String date = day + "/" + month + "/" + year;
                         etDate.setText(date);
                     }
                 },year,month,day);
@@ -115,6 +115,7 @@ public class add_income extends AppCompatActivity {
                 }
             }
         });
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
         {
             NotificationChannel channel = new NotificationChannel("My notification","Notification TItle", NotificationManager.IMPORTANCE_DEFAULT);
@@ -156,10 +157,8 @@ public class add_income extends AppCompatActivity {
                     startActivity(in);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
                 }
             }
         });

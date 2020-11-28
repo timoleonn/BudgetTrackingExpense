@@ -3,6 +3,8 @@ package com.example.budgettrackingexpense;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -31,15 +33,20 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Switch swFunfacts = findViewById(R.id.swFunfacts);
 
         //  SAVE SWITCH STATE IN SHARED PREFERENCES
         SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
         swFunfacts.setChecked(sharedPreferences.getBoolean("value", false));
 
-        //  CREATE SERVICE INTENT
+        //  CHECK IF FUN FACT SERVICE IS RUNNING
         Intent serviceIntent = new Intent(Settings.this, AdService.class);
+        if (sharedPreferences.getBoolean("value", false) == true) {
+            startService(serviceIntent);
+        } else {
+            stopService(serviceIntent);
+        }
 
         //  SWITCH SET ON CLICK LISTENER
         swFunfacts.setOnClickListener(new View.OnClickListener() {
@@ -90,11 +97,30 @@ public class Settings extends AppCompatActivity {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Oops, something went wrong! 1", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_go_to_home) {
+            Intent in = new Intent(this, MainActivity.class);
+            Intent serviceIntent = new Intent(Settings.this, AdService.class);
+            stopService(serviceIntent);
+            startActivity(in);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void submit(View v) {
@@ -187,7 +213,6 @@ public class Settings extends AppCompatActivity {
         } catch (Exception ex) {
             ex.printStackTrace();
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
-
         }
 
     }

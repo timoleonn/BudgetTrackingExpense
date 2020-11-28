@@ -44,7 +44,7 @@ public class addExpenses extends AppCompatActivity {
     EditText  date, note, amount;
     DatePickerDialog.OnDateSetListener setListener;
 
-    String file_name = "expenses.txt";
+    String file_name = "expenses_1.txt";
     Double new_total,new_amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +52,12 @@ public class addExpenses extends AppCompatActivity {
         setContentView(R.layout.activity_add_expenses);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        date = findViewById(R.id.date);
+        Calendar calendar = Calendar.getInstance();
+
         note = findViewById(R.id.etNote);
         amount = findViewById(R.id.etExpense);
-        date = findViewById(R.id.date);
+
         Spinner spinner = findViewById(R.id.spinner);
 
 
@@ -87,7 +90,7 @@ public class addExpenses extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         Button btnAddExpenses = findViewById(R.id.btnAddExpenses);
-        Calendar calendar = Calendar.getInstance();
+
 
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
@@ -107,7 +110,6 @@ public class addExpenses extends AppCompatActivity {
                     }
                 },year,month,day);
                 datePickerDialog.show();
-
             }
         });
 
@@ -171,11 +173,17 @@ public class addExpenses extends AppCompatActivity {
         btnAddExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                System.out.println(date.getText().toString());
+                System.out.println(spinner.getSelectedItem().toString());
+                System.out.println(note.getText().toString());
+                System.out.println(amount.getText().toString());
+
                 // GRAB THE DATA FROM THE FORM
                 String data_to_write = date.getText().toString() + "," + spinner.getSelectedItem().toString() + "," + note.getText().toString() + "," + amount.getText().toString() + "\n";
+
                 try {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
-//                    fout.write(("").getBytes());
                     fout.write(data_to_write.getBytes());
                     fout.close();
 

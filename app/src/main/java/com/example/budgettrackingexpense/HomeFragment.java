@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     double totalExpenses = 0;
     double totalIncome = 0;
     String expense, income;
-    String file_name = "expenses.txt";
+    String file_name = "expenses_1.txt";
     String income_file_name = "income.txt";
     String filename ="total.txt";
     String currency_file_name = "Currency.txt";
@@ -155,10 +155,14 @@ public class HomeFragment extends Fragment {
                 String[] res = strLine.split("[,]", 0);
                 System.out.println(res);
                 for(String myStr: res) {
-                    System.out.println(myStr);
-                    //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
-                    strList.add(myStr);
-                    System.out.println(strList);
+                    if (!myStr.equals("null")) {
+                        System.out.println("HOMEFRAGMENT: ");
+                        System.out.println(myStr);
+                        //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
+                        strList.add(myStr);
+                        System.out.println(strList);
+                    }
+
                 }
                 finalArrayList.add(strList);
 
@@ -246,7 +250,6 @@ public class HomeFragment extends Fragment {
                         //  J == 2 MEANS THAT IF WE ARE CHECKING THE INCOME COLUMN IN THE LIST OF EXPENSES
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
-                            expense = Double.toString(totalIncome);
                         }
                     }
                 }

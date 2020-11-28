@@ -113,8 +113,8 @@ public class CategoriesActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.standard_menu, menu);
         return true;
-
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
