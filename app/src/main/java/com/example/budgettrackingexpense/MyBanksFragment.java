@@ -27,7 +27,9 @@ public class MyBanksFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +39,7 @@ public class MyBanksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_banks, container, false);
 
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Banks");
+
 
         ArrayList<List> Banks = new ArrayList();
 
@@ -131,4 +134,6 @@ public class MyBanksFragment extends Fragment {
 
         return view;
     }
+
+
 }

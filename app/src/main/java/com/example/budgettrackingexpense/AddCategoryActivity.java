@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -78,10 +79,10 @@ public class AddCategoryActivity extends AppCompatActivity {
                     System.out.println("SUCCESS");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    System.out.println("Oops, something went wrong.");
+                    StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("Oops, something went wrong.");
+                    StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 }
 
                 //  WRITE BUDGET TO FILE

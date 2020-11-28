@@ -52,6 +52,20 @@
         <item name="cornerRadius">10dp</item>
     </style>
 
+    <style name="mistakeToast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#FFFFFF</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">@color/light_gray</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stIconStart">@mipmap/ic_launcher_mistake</item>
+        <item name="strokeColor">#000</item>
+        <item name="strokeWidth">10dp</item>
+        <item name="stLength">LONG</item>
+        <item name="stGravity">center</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
     <!-- CUSTOM RATING BAR -->
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/light_gray</item>
