@@ -191,12 +191,6 @@ public class HomeFragment extends Fragment {
                                     expensePerCategory[category_count] += Double.parseDouble((String) finalArrayList.get(i).get(3));
                                 }
                             }
-//                            //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
-//                            if (j == 3) {
-//                                totalExpenses += (Double.parseDouble((String) finalArrayList.get(i).get(3)));
-//                                System.out.println("OMG: " + totalExpenses);
-//                            }
-
                         }
                     }
                     category_count++;
@@ -204,7 +198,6 @@ public class HomeFragment extends Fragment {
                 for (int i = 0; i < expensePerCategory.length; i++) {
                     expenseSum += expensePerCategory[i];
                 }
-                System.out.println("EXPENSE SUM: " + expenseSum);
             } else {
                 expensePerCategory = null;
             }

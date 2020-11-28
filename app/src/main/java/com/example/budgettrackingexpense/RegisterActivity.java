@@ -131,7 +131,6 @@ public class RegisterActivity extends AppCompatActivity  {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
         //  LOGIN HERE

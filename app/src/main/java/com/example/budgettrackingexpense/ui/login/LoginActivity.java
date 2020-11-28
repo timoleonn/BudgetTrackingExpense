@@ -253,11 +253,6 @@ public class LoginActivity extends AppCompatActivity  {
                 if (task.isSuccessful())
                 {
                     StyleableToast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG, R.style.customToast).show();
-
-                    /*//  START AD SERVICE
-                    Intent serviceIntent = new Intent(LoginActivity.this, AdService.class);
-                    startService(serviceIntent);*/
-
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(in);
                 }

@@ -196,7 +196,8 @@ public class addExpenses extends AppCompatActivity {
 
                 // GRAB THE DATA FROM THE FORM
                 String data_to_write = date.getText().toString() + "," + spinner.getSelectedItem().toString() + "," + note.getText().toString() + "," + amount.getText().toString() + "\n";
-                //CHOOSE THE RIGHT CURRENCY
+
+                // CHOOSE THE RIGHT CURRENCY
                 try {
                     FileInputStream fin = getApplicationContext().openFileInput(currency_file_name);
                     DataInputStream din = new DataInputStream(fin);
