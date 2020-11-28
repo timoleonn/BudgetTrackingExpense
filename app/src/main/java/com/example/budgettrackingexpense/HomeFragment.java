@@ -213,7 +213,7 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getContext(),  "Oops, something went wrong!", Toast.LENGTH_LONG, R.style.mistakeToast).show();
         }
 
         //  READ INCOME
