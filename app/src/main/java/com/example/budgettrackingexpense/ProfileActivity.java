@@ -2,9 +2,11 @@ package com.example.budgettrackingexpense;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,14 +28,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     String USER ="users";
-    String fileName="totals.txt";
-    String currency_file_name = "Currency.txt";
-    String income , expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,10 @@ public class ProfileActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.tvemail);
         TextView country = findViewById(R.id.tvcountry);
         ImageView profile_image = findViewById(R.id.profile_image);
-        TextView expense_label = findViewById(R.id.expense_label);
-        TextView income_label = findViewById(R.id.income_label);
+
+
+//        TextView expense_label = findViewById(R.id.expense_label);
+//        TextView income_label = findViewById(R.id.income_label);
 
         //  GET CURRENT USER
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -94,35 +98,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         //  READ INCOME AND EXPENSE
-//        try {
-//            FileInputStream fin = getApplicationContext().openFileInput(fileName);
-//            DataInputStream din = new DataInputStream(fin);
-//            InputStreamReader isr = new InputStreamReader(din);
-//            BufferedReader br = new BufferedReader(isr);
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                String[] tokens = line.split("[,]", 0);
-//                System.out.println(tokens);
-//                for(String myStr: tokens) {
-//                    System.out.println(myStr);
-//                    //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
-//                    double latitude = Double.parseDouble(tokens[0]);
-//                    double longitude = Double.parseDouble(tokens[1]);
-//
-//                    String total_expense =String.valueOf(latitude);
-//                    String total_income =String.valueOf(longitude);
-//                    expense_label.setText(total_expense);
-//                    income_label.setText(total_income);
-//                }
-//
-//            }
-//            br.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
-//        }
+//        expense_label.setText(HomeFragment.Global.global_expense);
+//        income_label.setText(HomeFragment.Global.global_income);
     }
     public void goBack(View v)
     {

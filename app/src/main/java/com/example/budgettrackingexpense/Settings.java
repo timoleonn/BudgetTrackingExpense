@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.muddzdev.styleabletoast.StyleableToast;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -190,7 +192,7 @@ public class Settings extends AppCompatActivity {
 
         if(rcb.isChecked())
         {
-            ans3="Rcb Bank";
+            ans3="RCB Bank";
             lines.add(ans3);
         }
 
@@ -207,7 +209,7 @@ public class Settings extends AppCompatActivity {
                 System.out.println(lines);
             }
             fout.close();
-            Toast.makeText(getApplicationContext(),"Your Submittion is Successful",Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getApplicationContext(), "Your Submittion was successful", Toast.LENGTH_LONG, R.style.customToast).show();
             Intent in = new Intent(Settings.this, MainActivity.class);
             startActivity(in);
         } catch (Exception ex) {
