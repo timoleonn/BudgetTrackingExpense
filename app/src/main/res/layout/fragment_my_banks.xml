@@ -18,7 +18,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/cyprus"
+        android:id="@+id/cbcyprus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -26,7 +26,7 @@
         android:text="Bank of Cyprus" />
 
     <Button
-        android:id="@+id/hellenic"
+        android:id="@+id/cbhellenic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -34,7 +34,7 @@
         android:text="Hellenic Bank" />
 
     <Button
-        android:id="@+id/alpha"
+        android:id="@+id/cbalpha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -42,7 +42,7 @@
         android:text="Alpha Bank" />
 
     <Button
-        android:id="@+id/rcb"
+        android:id="@+id/rcbBank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -50,7 +50,7 @@
         android:text="Rcb Bank" />
 
     <Button
-        android:id="@+id/astro"
+        android:id="@+id/cbastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

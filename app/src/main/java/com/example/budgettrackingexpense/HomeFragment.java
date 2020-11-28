@@ -187,7 +187,7 @@ public class HomeFragment extends Fragment {
                             //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
                             if (j == 3) {
                                 totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
-                                }
+                            }
 
                         }
                     }
