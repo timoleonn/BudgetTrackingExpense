@@ -42,19 +42,19 @@
         android:text="Alpha Bank" />
 
     <Button
-        android:id="@+id/rcbBank"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:onClick="rcb"
-        android:text="Rcb Bank" />
-
-    <Button
         android:id="@+id/cbastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:onClick="astro"
         android:text="AstroBank" />
+
+    <Button
+        android:id="@+id/rcb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="rcb"
+        android:text="RCB Bank" />
 
 </LinearLayout>

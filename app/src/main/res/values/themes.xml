@@ -26,7 +26,7 @@
     <!-- CUSTOM AD TOAST -->
     <style name="adToast">
         <item name="stTextBold">true</item>
-        <item name="stTextColor">#FFF</item>
+        <item name="stTextColor">#FFFFFF</item>
         <item name="stTextSize">14sp</item>
         <item name="stColorBackground">@color/purple_200</item>
         <item name="stSolidBackground">true</item>
@@ -36,6 +36,20 @@
         <item name="stLength">LONG</item>
         <item name="stGravity">top</item>
         <item name="cornerRadius">3dp</item>
+    </style>
+
+    <style name="customToast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#FFFFFF</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">@color/light_gray</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stIconStart">@mipmap/ic_launcher_tick</item>
+        <item name="strokeColor">#000</item>
+        <item name="strokeWidth">10dp</item>
+        <item name="stLength">LONG</item>
+        <item name="stGravity">center</item>
+        <item name="cornerRadius">10dp</item>
     </style>
 
     <!-- CUSTOM RATING BAR -->
