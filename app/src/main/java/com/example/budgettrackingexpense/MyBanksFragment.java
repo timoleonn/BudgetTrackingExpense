@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayout;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -140,7 +140,8 @@ public class MyBanksFragment extends Fragment {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getContext(),  "Oops, something went wrong!", Toast.LENGTH_LONG, R.style.mistakeToast).show();
+
         }
 
         return view;

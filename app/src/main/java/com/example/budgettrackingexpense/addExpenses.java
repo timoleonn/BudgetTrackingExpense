@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.muddzdev.styleabletoast.StyleableToast;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -211,7 +213,7 @@ public class addExpenses extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(getApplicationContext(),  "Oops, something went wrong!", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 }
 
                 if (currencySymbol == "EUR") {
@@ -247,8 +249,10 @@ public class addExpenses extends AppCompatActivity {
                     startActivity(in);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                    StyleableToast.makeText(getApplicationContext(),  "Oops, something went wrong!", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    StyleableToast.makeText(getApplicationContext(),  "Oops, something went wrong!", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 }
             }
         });

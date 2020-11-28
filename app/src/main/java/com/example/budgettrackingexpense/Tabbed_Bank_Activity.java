@@ -132,10 +132,10 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        LatLng rcb = new LatLng(34.919293, 33.614502);
-                        LatLng rcb1 = new LatLng(34.922267, 33.613418);
-                        LatLng rcb2 = new LatLng(34.930839, 33.621196);
-                        LatLng rcb3=new LatLng(34.928693, 33.637203);
+                        LatLng rcb = new LatLng(35.162696, 33.365252);
+                        LatLng rcb1 = new LatLng(35.142851, 33.374077);
+                        LatLng rcb2 = new LatLng(35.162924, 33.317830);
+                        LatLng rcb3=new LatLng(34.920541, 33.616785);
 
                         Bundle rcbBank = new Bundle();
                         rcbBank.putString("marker", "Hellenic Bank");
