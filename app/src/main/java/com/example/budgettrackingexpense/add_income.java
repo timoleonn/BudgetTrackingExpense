@@ -22,9 +22,13 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.muddzdev.styleabletoast.StyleableToast;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 
 public class add_income extends AppCompatActivity {
@@ -32,6 +36,8 @@ public class add_income extends AppCompatActivity {
     public static String SUCCESS_MESSAGE_ADD_INCOME = "";
     TextView etDate;
     Double new_total,new_amount;
+    String currency_file_name="Currency.txt";
+    String currencySymbol = "";
     Boolean dateIsFilled =false, notesAreFilled = false, amountIsFilled = false;
 
     String file_name = "income.txt";
@@ -141,7 +147,32 @@ public class add_income extends AppCompatActivity {
 
                 String final_to_write = date + "," + notes + "," + number+ "\n";
                 System.out.println(final_to_write);
+                try {
+                    FileInputStream fin = getApplicationContext().openFileInput(currency_file_name);
+                    DataInputStream din = new DataInputStream(fin);
+                    InputStreamReader isr = new InputStreamReader(din);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        if (!line.isEmpty()) {
+                            currencySymbol = line;
+                        }
+                    }
+                    br.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+                }
 
+                if (currencySymbol == "EUR") {
+                    currencySymbol = "€";
+                } else if (currencySymbol == "USD") {
+                    currencySymbol = "$";
+                } else if (currencySymbol == "GBP") {
+                    currencySymbol = "£";
+                }
                 try {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
                     fout.write(final_to_write.getBytes());
@@ -151,7 +182,7 @@ public class add_income extends AppCompatActivity {
                     Bundle total = pass_total.getExtras();
                     new_amount= Double.parseDouble(number);
                     new_total = Double.parseDouble(total.getString("total_income")) + new_amount;
-                    String total_income = "Your total income is:  "+ new_total.toString() +" euros!";
+                    String total_income = "Your total income is:  "+ currencySymbol + new_total.toString();
                     NotificationCompat.Builder notification = new NotificationCompat.Builder(add_income.this,"My notification");
                     notification.setSmallIcon(R.drawable.notifications);
                     notification.setContentTitle("You have a new notification");

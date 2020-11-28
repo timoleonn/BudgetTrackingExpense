@@ -231,7 +231,7 @@ public class addExpenses extends AppCompatActivity {
                     Bundle total = pass_total.getExtras();
                     new_amount= Double.parseDouble(amount.getText().toString());
                     new_total = Double.parseDouble(total.getString("total_expense")) + new_amount;
-                    String total_expense = "Your total expenses is:  "+ new_total.toString() +" "+ currencySymbol;
+                    String total_expense = "Your total expenses is:  "+ currencySymbol + new_total.toString() ;
                     NotificationCompat.Builder notification = new NotificationCompat.Builder(addExpenses.this,"My notification");
                     notification.setSmallIcon(R.drawable.notifications);
                     notification.setContentTitle("You have a new notification");
