@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -101,7 +100,6 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                 Intent in = new Intent(AddCategoryActivity.this, CategoriesActivity.class);
                 String message = "You have added the category " + etCategoryName.getText().toString() + " successfully!";
-                StyleableToast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG, R.style.customToast).show();
                 in.putExtra(SUCCESSMESSAGE, message);
                 startActivity(in);
             }

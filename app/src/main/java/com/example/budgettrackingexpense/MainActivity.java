@@ -1,15 +1,24 @@
 package com.example.budgettrackingexpense;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.budgettrackingexpense.ui.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -20,20 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent in = getIntent();
         if (in.hasExtra(add_income.SUCCESS_MESSAGE_ADD_INCOME)) {
             String success_message_add_income = in.getStringExtra(add_income.SUCCESS_MESSAGE_ADD_INCOME);
-            Toast.makeText(getApplicationContext(), success_message_add_income, Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getApplicationContext(), success_message_add_income, Toast.LENGTH_LONG, R.style.customToast).show();
         } else if (in.hasExtra(addExpenses.SUCCESS_MESSAGE_ADD_EXPENSE)) {
             String success_message_add_income = in.getStringExtra(addExpenses.SUCCESS_MESSAGE_ADD_EXPENSE);
-            Toast.makeText(getApplicationContext(), success_message_add_income, Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getApplicationContext(), success_message_add_income, Toast.LENGTH_LONG, R.style.customToast).show();
         }
 
         logout = findViewById(R.id.nav_logout);

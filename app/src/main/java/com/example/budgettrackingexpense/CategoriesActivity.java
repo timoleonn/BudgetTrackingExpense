@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class CategoriesActivity extends AppCompatActivity {
         Intent in = getIntent();
         if (in.hasExtra(AddCategoryActivity.SUCCESSMESSAGE)) {
             successMessageFromAddCategory = in.getStringExtra(AddCategoryActivity.SUCCESSMESSAGE);
-            Toast.makeText(getApplicationContext(), successMessageFromAddCategory, Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getApplicationContext(), successMessageFromAddCategory, Toast.LENGTH_LONG, R.style.customToast).show();
         }
 
         recyclerView = findViewById(R.id.rvCategories);
