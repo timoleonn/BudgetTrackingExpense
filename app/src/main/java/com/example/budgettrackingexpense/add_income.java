@@ -31,8 +31,8 @@ public class add_income extends AppCompatActivity {
 
     public static String SUCCESS_MESSAGE_ADD_INCOME = "";
     TextView etDate;
-    DatePickerDialog.OnDateSetListener setListener;
     Double new_total,new_amount;
+    Boolean dateIsFilled =false, notesAreFilled = false, amountIsFilled = false;
 
     String file_name = "income.txt";
 
@@ -49,6 +49,9 @@ public class add_income extends AppCompatActivity {
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        Button btnaddincome=findViewById(R.id.btnaddincome);
+        btnaddincome.setEnabled(false);
+
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,14 +63,10 @@ public class add_income extends AppCompatActivity {
                         String date = day + "/" + month + "/" + year;
                         etDate.setText(date);
                     }
-                },year,month,day);
+                }, year, month, day);
                 datePickerDialog.show();
             }
         });
-
-
-        Button btnaddincome=findViewById(R.id.btnaddincome);
-        btnaddincome.setEnabled(false);
 
         etDate.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,30 +78,15 @@ public class add_income extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!etDate.getText().toString().isEmpty()) {
-                    btnaddincome.setEnabled(true);
+                    dateIsFilled = true;
+                    if (dateIsFilled && notesAreFilled && amountIsFilled) {
+                        btnaddincome.setEnabled(true);
+                    }
                 }
             }
         });
-        TextView etNumber=findViewById(R.id.etNumber);
-        btnaddincome.setEnabled(false);
 
-        etNumber.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!etNumber.getText().toString().isEmpty()) {
-                    btnaddincome.setEnabled(true);
-                }
-            }
-        });
         TextView etNotes=findViewById(R.id.etNotes);
-        btnaddincome.setEnabled(false);
-
         etNotes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -113,10 +97,33 @@ public class add_income extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!etNotes.getText().toString().isEmpty()) {
-                    btnaddincome.setEnabled(true);
+                    notesAreFilled = true;
+                    if (dateIsFilled && notesAreFilled && amountIsFilled) {
+                        btnaddincome.setEnabled(true);
+                    }
                 }
             }
         });
+
+        TextView etNumber=findViewById(R.id.etNumber);
+        etNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!etNumber.getText().toString().isEmpty()) {
+                    amountIsFilled = true;
+                    if (dateIsFilled && notesAreFilled && amountIsFilled) {
+                        btnaddincome.setEnabled(true);
+                    }
+                }
+            }
+        });
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O )
         {

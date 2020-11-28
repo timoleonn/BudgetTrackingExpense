@@ -37,10 +37,11 @@ public class addExpenses extends AppCompatActivity {
     public static String SUCCESS_MESSAGE_ADD_EXPENSE = "";
     public static String NO_CATEGORY_MESSAGE = "";
     EditText note, amount;
-    DatePickerDialog.OnDateSetListener setListener;
     TextView date;
     String file_name = "expenses_3.txt";
     Double new_total,new_amount;
+    Boolean dateIsFilled =false, notesAreFilled = false, amountIsFilled = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,14 +92,12 @@ public class addExpenses extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-
-
         Button btnAddExpenses = findViewById(R.id.btnAddExpenses);
-
 
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
+
         btnAddExpenses.setEnabled(false);
 
         date.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +117,6 @@ public class addExpenses extends AppCompatActivity {
             }
         });
 
-        btnAddExpenses.setEnabled(false);
-
         date.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -130,11 +127,13 @@ public class addExpenses extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!date.getText().toString().isEmpty()) {
-                    btnAddExpenses.setEnabled(true);
+                    dateIsFilled = true;
+                    if (dateIsFilled && notesAreFilled && amountIsFilled) {
+                        btnAddExpenses.setEnabled(true);
+                    }
                 }
             }
         });
-        btnAddExpenses.setEnabled(false);
 
         amount.addTextChangedListener(new TextWatcher() {
             @Override
@@ -146,7 +145,10 @@ public class addExpenses extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!amount.getText().toString().isEmpty()) {
-                    btnAddExpenses.setEnabled(true);
+                    amountIsFilled = true;
+                    if (dateIsFilled && notesAreFilled && amountIsFilled) {
+                        btnAddExpenses.setEnabled(true);
+                    }
                 }
             }
         });
@@ -162,7 +164,10 @@ public class addExpenses extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!note.getText().toString().isEmpty()) {
-                    btnAddExpenses.setEnabled(true);
+                    notesAreFilled = true;
+                    if (dateIsFilled && notesAreFilled && amountIsFilled) {
+                        btnAddExpenses.setEnabled(true);
+                    }
                 }
             }
         });

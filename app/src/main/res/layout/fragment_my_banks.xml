@@ -7,24 +7,29 @@
     android:orientation="vertical"
     tools:context=".MyBanksFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:text="My Banks"
-        android:textColor="#3F51B5"
-        android:textSize="36sp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Select your Banks from Settings to make the Buttons enable:"
-        android:textSize="24sp" />
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Select your banks from the Settings to create your own bookmark page for quick access"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/cbcyprus"

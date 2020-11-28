@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -39,7 +41,6 @@ public class MyBanksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_banks, container, false);
 
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Banks");
-
 
         ArrayList<List> Banks = new ArrayList();
 
@@ -88,35 +89,45 @@ public class MyBanksFragment extends Fragment {
                     cy.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            int page = 2;
                             Intent in = new Intent(getActivity().getApplication(), Tabbed_Bank_Activity.class);
+                            in.putExtra("page", page);
                             startActivity(in);
                         }
                     });
                     astrob.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            int page = 1;
                             Intent in = new Intent(getActivity().getApplication(), Tabbed_Bank_Activity.class);
+                            in.putExtra("page", page);
                             startActivity(in);
                         }
                     });
                     hel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            int page = 3;
                             Intent in = new Intent(getActivity().getApplication(), Tabbed_Bank_Activity.class);
+                            in.putExtra("page", page);
                             startActivity(in);
                         }
                     });
                     rcb.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            int page = 4;
                             Intent in = new Intent(getActivity().getApplication(), Tabbed_Bank_Activity.class);
+                            in.putExtra("page", page);
                             startActivity(in);
                         }
                     });
                     alphaB.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            int page = 0;
                             Intent in = new Intent(getActivity().getApplication(), Tabbed_Bank_Activity.class);
+                            in.putExtra("page", page);
                             startActivity(in);
                         }
                     });
