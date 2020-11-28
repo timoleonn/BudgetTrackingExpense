@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -302,22 +303,9 @@ public class HomeFragment extends Fragment {
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
 
-        String data_to_write = expense +","+ income;
+//        Global.global_expense  = expense;
+//        Global.global_income = income;
 
-//        try{
-//            FileOutputStream fout = getContext().openFileOutput(fileName, Context.MODE_APPEND);
-//
-////            fout.write(("").getBytes());
-//            fout.write(data_to_write.getBytes());
-//            fout.close();
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//            System.out.println("1: " + e.getMessage());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.out.println("2: " + e.getMessage());
-//        }
         return root;
     }
 
@@ -334,5 +322,9 @@ public class HomeFragment extends Fragment {
 
         return dataSet;
     }
+//    public static class Global {
+//        public static String global_income = "";
+//        public static String global_expense="";
+//    }
 
 }
