@@ -42,9 +42,9 @@ public class addExpenses extends AppCompatActivity {
 
     public static String SUCCESS_MESSAGE_ADD_EXPENSE = "";
     public static String NO_CATEGORY_MESSAGE = "";
-    EditText  date, note, amount;
+    EditText note, amount;
     DatePickerDialog.OnDateSetListener setListener;
-
+    TextView date;
     String file_name = "expenses_2.txt";
     Double new_total,new_amount;
     @Override
@@ -110,13 +110,14 @@ public class addExpenses extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DatePickerDialog datePickerDialog=new DatePickerDialog(
                         addExpenses.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month=month+1;
                         String dateinsert = day+"/"+month+"/"+year;
-                        date.setText(dateinsert);
+                       date.setText(dateinsert);
                     }
                 },year,month,day);
                 datePickerDialog.show();
