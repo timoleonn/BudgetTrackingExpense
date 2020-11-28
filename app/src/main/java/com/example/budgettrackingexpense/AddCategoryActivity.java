@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +68,6 @@ public class AddCategoryActivity extends AppCompatActivity {
                 categories.setBudget(budget);
 
                 reffCategories.child("categories").child(etCategoryName.getText().toString()).setValue(categories);
-//                reffCategories.child("categories").push().setValue(categories);
 
                 //  WRITE CATEGORY NAME TO FILE
                 try {
@@ -117,5 +118,26 @@ public class AddCategoryActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.standard_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_go_to_home) {
+            Intent in = new Intent(this, MainActivity.class);
+            startActivity(in);
+        } else if (id == R.id.action_settings) {
+            Intent in = new Intent(this, Settings.class);
+            startActivity(in);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

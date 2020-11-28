@@ -131,6 +131,7 @@ public class add_income extends AppCompatActivity {
                 String notes = etNotes.getText().toString();
 
                 String final_to_write = date + "," + notes + "," + number+ "\n";
+                System.out.println(final_to_write);
 
                 try {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
