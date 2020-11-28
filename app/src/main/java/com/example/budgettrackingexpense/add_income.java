@@ -28,7 +28,7 @@ import java.util.Calendar;
 public class add_income extends AppCompatActivity {
 
     public static String SUCCESS_MESSAGE_ADD_INCOME = "";
-    EditText etDate;
+    TextView etDate;
     DatePickerDialog.OnDateSetListener setListener;
     Double new_total,new_amount;
 

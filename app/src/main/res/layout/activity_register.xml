@@ -227,6 +227,6 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:backgroundTint="@color/white"
-        app:cornerRadius="60dp" />
+        app:cornerRadius="60dp"/>
 
 </LinearLayout>
