@@ -128,7 +128,6 @@ public class HomeFragment extends Fragment {
             br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            StyleableToast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
         } catch (IOException e) {
             e.printStackTrace();
             StyleableToast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();

@@ -223,8 +223,7 @@ public class RegisterActivity extends AppCompatActivity  {
                     fAuth.createUserWithEmailAndPassword(emailtext,passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
+                            if(task.isSuccessful()) {
                                 User information = new User(name, gender, username, country, occupation);
 
                                 FirebaseDatabase.getInstance().getReference("users")
@@ -234,9 +233,19 @@ public class RegisterActivity extends AppCompatActivity  {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()) {
                                             StyleableToast.makeText(RegisterActivity.this, "The user registered succesfully", Toast.LENGTH_LONG, R.style.customToast).show();
+
+                                            String currencySymbol = "€";
+                                            try {
+                                                FileOutputStream fout = openFileOutput("Currency.txt",0);
+                                                fout.write((currencySymbol + "\n").getBytes());
+                                                fout.close();
+                                            } catch (Exception ex) {
+                                                ex.printStackTrace();
+                                                Toast.makeText(getApplicationContext(),"Oops, Something went wrong",Toast.LENGTH_LONG).show();
+                                            }
+
                                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                        }
-                                        else {
+                                        } else {
                                             Toast.makeText(RegisterActivity.this, "The user  was not registered succesfully",Toast.LENGTH_SHORT);
                                         }
                                     }

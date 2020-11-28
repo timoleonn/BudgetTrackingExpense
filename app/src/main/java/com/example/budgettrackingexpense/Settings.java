@@ -166,8 +166,6 @@ public class Settings extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
         swFunfacts.setChecked(sharedPreferences.getBoolean("value", false));
 
-
-
         //  CHECK IF FUN FACT SERVICE IS RUNNING
         Intent serviceIntent = new Intent(Settings.this, AdService.class);
         if (sharedPreferences.getBoolean("value", false) == true) {
@@ -284,8 +282,7 @@ public class Settings extends AppCompatActivity {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
-
+            Toast.makeText(getApplicationContext(),"1Something went wrong",Toast.LENGTH_LONG).show();
         }
         CheckBox cyprus = findViewById(R.id.cbCyprus);
         CheckBox astro = findViewById(R.id.cbAstro);
