@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MyBanksFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="My Banks" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="My Banks"
+        android:textColor="#3F51B5"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/cyprus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="cyprus"
+        android:text="Bank of Cyprus" />
+
+    <Button
+        android:id="@+id/hellenic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="hellenic"
+        android:text="Hellenic Bank" />
+
+    <Button
+        android:id="@+id/alpha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="alpha"
+        android:text="Alpha Bank" />
+
+    <Button
+        android:id="@+id/rcb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="rcb"
+        android:text="Rcb Bank" />
+
+    <Button
+        android:id="@+id/astro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="astro"
+        android:text="AstroBank" />
+
+</LinearLayout>

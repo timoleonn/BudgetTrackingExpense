@@ -44,7 +44,12 @@
         android:id="@+id/btnUpdateCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:text="Create Category"
-        app:cornerRadius="20dp" />
+        app:cornerRadius="15dp" />
 </LinearLayout>

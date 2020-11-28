@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Euro"
+            android:text="Euro (€)"
             android:textColor="@android:color/holo_red_dark" />
 
         <RadioButton
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Dollars"
+            android:text="Dollars ($)"
             android:textColor="@android:color/holo_red_dark" />
 
         <RadioButton
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="English Pound"
+            android:text="Pound sterling (£)"
             android:textColor="@android:color/holo_red_dark" />
     </RadioGroup>
 

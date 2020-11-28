@@ -20,12 +20,13 @@ import java.util.List;
 
 public class MyBanksFragment extends Fragment {
     private String file = "Banks.txt";
-    int banking=0;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         ArrayList<List> Banks = new ArrayList();
 
         try {
@@ -34,7 +35,7 @@ public class MyBanksFragment extends Fragment {
             InputStreamReader isr = new InputStreamReader(din);
             BufferedReader br = new BufferedReader(isr);
             String strLine;
-            while((strLine = br.readLine()) != null) {
+            while ((strLine = br.readLine()) != null) {
                 String[] res = strLine.split("[,]", 0);
                 System.out.println(res);
                 for (String myStr : res) {
@@ -44,8 +45,6 @@ public class MyBanksFragment extends Fragment {
                     System.out.println(Banks);
                 }
             }
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -57,6 +56,10 @@ public class MyBanksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Banks");
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_banks, container, false);
 
