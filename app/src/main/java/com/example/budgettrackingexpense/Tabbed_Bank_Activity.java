@@ -155,6 +155,8 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
             }
         });
 
+        //  SET TITLE
+        getSupportActionBar().setTitle("All Banks");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

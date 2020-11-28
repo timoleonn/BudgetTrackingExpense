@@ -14,7 +14,8 @@
         android:layout_margin="20dp"
         android:text="Add Category"
         android:textColor="@color/black"
-        android:textSize="28sp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etCategoryName"

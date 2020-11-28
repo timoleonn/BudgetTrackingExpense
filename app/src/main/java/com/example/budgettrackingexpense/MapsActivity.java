@@ -36,7 +36,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.addincome_menu, menu);
+        getMenuInflater().inflate(R.menu.standard_menu, menu);
         return true;
 
     }
@@ -44,7 +44,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_add_income) {
+        if (id == R.id.action_go_to_home) {
+            Intent in = new Intent(this, MainActivity.class);
+            startActivity(in);
+        } else if (id == R.id.action_settings) {
             Intent in = new Intent(this, Settings.class);
             startActivity(in);
         }

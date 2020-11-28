@@ -100,11 +100,15 @@ public class ProfileActivity extends AppCompatActivity {
         Date currentTime = Calendar.getInstance().getTime();
         String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
 
-        String[] splitDate =formattedDate.split(",");
+        String[] splitDate = formattedDate.split(",");
         Log.d("myLOG", currentTime.toString());
         Log.d("myLOG", formattedDate);
         day.setText(formattedDate);
+
+        //  SET TITLE
+        getSupportActionBar().setTitle("My Profile");
     }
+
     public void goBack(View v)
     {
         Intent in = new Intent(this,MainActivity.class);
