@@ -1,28 +1,28 @@
 package com.example.budgettrackingexpense;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -128,9 +128,10 @@ public class HomeFragment extends Fragment {
             br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            StyleableToast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
         }
 
         //  READ EXPENSES

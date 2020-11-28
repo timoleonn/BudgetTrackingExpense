@@ -9,16 +9,18 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +30,7 @@ import java.util.Calendar;
 public class add_income extends AppCompatActivity {
 
     public static String SUCCESS_MESSAGE_ADD_INCOME = "";
-    EditText etDate;
+    TextView etDate;
     DatePickerDialog.OnDateSetListener setListener;
     Double new_total,new_amount;
 
@@ -158,8 +160,10 @@ public class add_income extends AppCompatActivity {
                     startActivity(in);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                    StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 }
             }
         });
@@ -170,5 +174,16 @@ public class add_income extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.addincome_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_add_income) {
+            Intent in = new Intent(this, Settings.class);
+            startActivity(in);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

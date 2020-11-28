@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 public class LoginActivity extends AppCompatActivity  {
 
@@ -251,7 +252,7 @@ public class LoginActivity extends AppCompatActivity  {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    Toast.makeText(getApplicationContext(),"Login Successful!",Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG, R.style.customToast).show();
 
                     /*//  START AD SERVICE
                     Intent serviceIntent = new Intent(LoginActivity.this, AdService.class);
@@ -262,7 +263,7 @@ public class LoginActivity extends AppCompatActivity  {
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(),"Failed to login.Please check your credentials!",Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(getApplicationContext(), "Failed to login.Please check your credentials!", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                     Intent in = new Intent(LoginActivity.this, LoginActivity.class);
                     startActivity(in);
                 }

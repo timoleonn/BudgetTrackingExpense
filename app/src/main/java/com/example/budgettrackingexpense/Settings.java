@@ -335,12 +335,13 @@ public class Settings extends AppCompatActivity {
                 System.out.println(lines);
             }
             fout.close();
-            StyleableToast.makeText(getApplicationContext(), "Your Submittion was successful", Toast.LENGTH_LONG, R.style.customToast).show();
+            StyleableToast.makeText(getApplicationContext(), "Your options for Banks and the Currency has been added succeesful!", Toast.LENGTH_LONG, R.style.customToast).show();
             Intent in = new Intent(Settings.this, MainActivity.class);
             startActivity(in);
         } catch (Exception ex) {
             ex.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
+
         }
     }
 }

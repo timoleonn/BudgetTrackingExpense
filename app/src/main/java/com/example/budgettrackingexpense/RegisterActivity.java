@@ -1,8 +1,5 @@
 package com.example.budgettrackingexpense;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +10,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.budgettrackingexpense.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -232,7 +233,7 @@ public class RegisterActivity extends AppCompatActivity  {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()) {
-                                            Toast.makeText(RegisterActivity.this, "The user registered succesfully",Toast.LENGTH_SHORT);
+                                            StyleableToast.makeText(RegisterActivity.this, "The user registered succesfully", Toast.LENGTH_LONG, R.style.customToast).show();
                                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                         }
                                         else {

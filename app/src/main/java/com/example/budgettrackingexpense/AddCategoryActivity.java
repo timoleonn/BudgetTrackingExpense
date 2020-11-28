@@ -79,10 +79,10 @@ public class AddCategoryActivity extends AppCompatActivity {
                     System.out.println("SUCCESS");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    System.out.println("Oops, something went wrong.");
+                    StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("Oops, something went wrong.");
+                    StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 }
 
                 //  WRITE BUDGET TO FILE
