@@ -50,7 +50,7 @@ public class AdService extends Service {
             }
         };
 
-        timer.schedule(hourlyTask,0l, 120000);
+        timer.schedule(hourlyTask,0l, 10000);
         return super.onStartCommand(in, flag, startId);
     }
 

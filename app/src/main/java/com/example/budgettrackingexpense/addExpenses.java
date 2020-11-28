@@ -41,10 +41,11 @@ import java.util.Date;
 public class addExpenses extends AppCompatActivity {
 
     public static String SUCCESS_MESSAGE_ADD_EXPENSE = "";
+    public static String NO_CATEGORY_MESSAGE = "";
     EditText  date, note, amount;
     DatePickerDialog.OnDateSetListener setListener;
 
-    String file_name = "expenses.txt";
+    String file_name = "expenses_2.txt";
     Double new_total,new_amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +53,13 @@ public class addExpenses extends AppCompatActivity {
         setContentView(R.layout.activity_add_expenses);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        date = findViewById(R.id.date);
+        Calendar calendar = Calendar.getInstance();
+
         note = findViewById(R.id.etNote);
         amount = findViewById(R.id.etExpense);
-        date = findViewById(R.id.date);
-        Spinner spinner = findViewById(R.id.spinner);
 
+        Spinner spinner = findViewById(R.id.spinner);
 
         //  CREATE ARRAY LIST OF STRINGS FOR CATEGORIES
         ArrayList<String> categories = new ArrayList();
@@ -82,12 +85,22 @@ public class addExpenses extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //  CHECK IF CATEGORIES IS EMPTY, IF SO INTENT TO ADD A CATEGORY
+        if (categories.isEmpty()) {
+            String noCategoryMessage = "Please add a category first before adding an expense!";
+            Intent in = new Intent(addExpenses.this, AddCategoryActivity.class);
+            in.putExtra(NO_CATEGORY_MESSAGE, noCategoryMessage);
+            startActivity(in);
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+
+
         Button btnAddExpenses = findViewById(R.id.btnAddExpenses);
-        Calendar calendar = Calendar.getInstance();
+
 
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
@@ -107,7 +120,6 @@ public class addExpenses extends AppCompatActivity {
                     }
                 },year,month,day);
                 datePickerDialog.show();
-
             }
         });
 
@@ -171,11 +183,17 @@ public class addExpenses extends AppCompatActivity {
         btnAddExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                System.out.println(date.getText().toString());
+                System.out.println(spinner.getSelectedItem().toString());
+                System.out.println(note.getText().toString());
+                System.out.println(amount.getText().toString());
+
                 // GRAB THE DATA FROM THE FORM
                 String data_to_write = date.getText().toString() + "," + spinner.getSelectedItem().toString() + "," + note.getText().toString() + "," + amount.getText().toString() + "\n";
+
                 try {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
-//                    fout.write(("").getBytes());
                     fout.write(data_to_write.getBytes());
                     fout.close();
 

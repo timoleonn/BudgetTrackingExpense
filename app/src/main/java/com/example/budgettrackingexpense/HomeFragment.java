@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,9 @@ public class HomeFragment extends Fragment {
     double totalExpenses = 0;
     double totalIncome = 0;
     String expense, income;
-    String file_name = "expenses.txt";
+    String file_name = "expenses_2.txt";
     String income_file_name = "income.txt";
-    String filename ="total.txt";
+    String fileName ="total.txt";
     String currency_file_name = "Currency.txt";
     String currencySymbol = "";
 
@@ -155,10 +156,14 @@ public class HomeFragment extends Fragment {
                 String[] res = strLine.split("[,]", 0);
                 System.out.println(res);
                 for(String myStr: res) {
-                    System.out.println(myStr);
-                    //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
-                    strList.add(myStr);
-                    System.out.println(strList);
+                    if (!myStr.contains("null")) {
+                        System.out.println("HOMEFRAGMENT: ");
+                        System.out.println(myStr);
+                        //  ADDS THE FOUR VARIABLES TO THE STRING ARRAY
+                        strList.add(myStr);
+                        System.out.println(strList);
+                    }
+
                 }
                 finalArrayList.add(strList);
 
@@ -186,7 +191,8 @@ public class HomeFragment extends Fragment {
                             }
                             //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
                             if (j == 3) {
-                                totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
+                                System.out.println((Double.parseDouble((String) finalArrayList.get(i).get(3))));
+                                totalExpenses += (Double.parseDouble((String) finalArrayList.get(i).get(3)));
                             }
 
                         }
@@ -246,7 +252,6 @@ public class HomeFragment extends Fragment {
                         //  J == 2 MEANS THAT IF WE ARE CHECKING THE INCOME COLUMN IN THE LIST OF EXPENSES
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
-                            expense = Double.toString(totalIncome);
                         }
                     }
                 }
@@ -303,24 +308,9 @@ public class HomeFragment extends Fragment {
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
 
-        Bundle pass_to_profile = new Bundle();
-        pass_to_profile.putString("total_expense",expense);
-        pass_to_profile.putString("total_income",income);
+//        Global.global_expense  = expense;
+//        Global.global_income = income;
 
-        String data_to_write = expense +","+ income;
-
-        try{
-            FileOutputStream fout = getContext().openFileOutput(file_name, Context.MODE_APPEND);
-//                    fout.write(("").getBytes());
-            fout.write(data_to_write.getBytes());
-            fout.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("1: " + e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("2: " + e.getMessage());
-        }
         return root;
     }
 
@@ -337,5 +327,9 @@ public class HomeFragment extends Fragment {
 
         return dataSet;
     }
+//    public static class Global {
+//        public static String global_income = "";
+//        public static String global_expense="";
+//    }
 
 }

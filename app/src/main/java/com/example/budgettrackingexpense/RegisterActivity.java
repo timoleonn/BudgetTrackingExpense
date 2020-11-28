@@ -87,7 +87,11 @@ public class RegisterActivity extends AppCompatActivity  {
             RadioButton occupationStudent = findViewById(R.id.rbOccupationStudent);
             RadioButton occupationOther = findViewById(R.id.rbOccupationOther);
 
-            if (lines[1].equals("Male")) {
+            if (lines[1].equals("")) {
+                male.setChecked(false);
+                female.setChecked(false);
+                other.setChecked(false);
+            } else if (lines[1].equals("Male")) {
                 male.setChecked(true);
                 female.setChecked(false);
                 other.setChecked(false);
@@ -105,7 +109,13 @@ public class RegisterActivity extends AppCompatActivity  {
             musername.setText(lines[3]);
             memail.setText(lines[4]);
 
-            if (lines[5].equals("Student")) {
+            System.out.println("IS EMPTY: " + lines[5].isEmpty());
+            System.out.println("1: " + lines[5]);
+
+            if (lines[5].equals("")) {
+                occupationStudent.setChecked(false);
+                occupationOther.setChecked(false);
+            } else if (lines[5].equals("Student")) {
                 occupationStudent.setChecked(true);
                 occupationOther.setChecked(false);
             } else if (lines[5].equals("Other")) {
@@ -137,15 +147,21 @@ public class RegisterActivity extends AppCompatActivity  {
                         gender = "Female" + "\n";
                     } else if(selection == R.id.other) {
                         gender = "Other" + "\n";
+                    } else {
+                        gender = "\n";
                     }
+
                     String countryText = mcountry.getText().toString().trim() + "\n";
                     String usernameText = musername.getText().toString().trim() + "\n";
                     String emailText = memail.getText().toString().trim() + "\n";
+
                     int selection2 = rbOccupation.getCheckedRadioButtonId();
                     if (selection2 == R.id.rbOccupationStudent) {
                         occupation = "Student" + "\n";
                     } else if (selection2 == R.id.rbOccupationOther) {
                         occupation = "Other" + "\n";
+                    } else {
+                        occupation = "\n";
                     }
 
                     fout.write(nameText.getBytes());

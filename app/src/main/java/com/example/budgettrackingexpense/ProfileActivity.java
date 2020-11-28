@@ -2,13 +2,16 @@ package com.example.budgettrackingexpense;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,15 +21,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     String USER ="users";
-    String file_name="totals.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +50,10 @@ public class ProfileActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.tvemail);
         TextView country = findViewById(R.id.tvcountry);
         ImageView profile_image = findViewById(R.id.profile_image);
-        TextView expense_label = findViewById(R.id.expense_label);
-        TextView income_label = findViewById(R.id.income_label);
+
+
+//        TextView expense_label = findViewById(R.id.expense_label);
+//        TextView income_label = findViewById(R.id.income_label);
 
         //  GET CURRENT USER
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -86,13 +97,9 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-
-//        Intent getValues = getIntent();
-//        Bundle total = getValues.getExtras();
-//        expense_label.setText(total.getString("total_expense"));
-//        income_label.setText(total.getString("total_income"));
-
-
+        //  READ INCOME AND EXPENSE
+//        expense_label.setText(HomeFragment.Global.global_expense);
+//        income_label.setText(HomeFragment.Global.global_income);
     }
     public void goBack(View v)
     {
