@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
     String expense, income;
     String file_name = "expenses_2.txt";
     String income_file_name = "income.txt";
-    String filename ="total.txt";
+    String fileName ="total.txt";
     String currency_file_name = "Currency.txt";
     String currencySymbol = "";
 
@@ -307,24 +307,22 @@ public class HomeFragment extends Fragment {
         pieChart.getLegend().setEnabled(false);
         pieChart.animate();
 
-        Bundle pass_to_profile = new Bundle();
-        pass_to_profile.putString("total_expense",expense);
-        pass_to_profile.putString("total_income",income);
-
         String data_to_write = expense +","+ income;
 
-        try{
-            FileOutputStream fout = getContext().openFileOutput(file_name, Context.MODE_APPEND);
-//                    fout.write(("").getBytes());
-            fout.write(data_to_write.getBytes());
-            fout.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("1: " + e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("2: " + e.getMessage());
-        }
+//        try{
+//            FileOutputStream fout = getContext().openFileOutput(fileName, Context.MODE_APPEND);
+//
+////            fout.write(("").getBytes());
+//            fout.write(data_to_write.getBytes());
+//            fout.close();
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            System.out.println("1: " + e.getMessage());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("2: " + e.getMessage());
+//        }
         return root;
     }
 
