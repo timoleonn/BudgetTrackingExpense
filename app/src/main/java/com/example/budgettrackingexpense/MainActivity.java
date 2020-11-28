@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             overridePendingTransition(0, 0);
         } else if (id == R.id.nav_profile) {
 
-//            Bundle passExpenseToProfile = new Bundle();
+            Bundle passExpenseToProfile = new Bundle();
 //            passExpenseToProfile.putString("total_expense",expense);
 //            passExpenseToProfile.putString("total_income",income);
             Intent in = new Intent(this/*getContext()*/, ProfileActivity.class);

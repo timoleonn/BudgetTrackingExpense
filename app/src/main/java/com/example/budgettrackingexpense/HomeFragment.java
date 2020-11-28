@@ -1,5 +1,6 @@
 package com.example.budgettrackingexpense;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -185,7 +187,7 @@ public class HomeFragment extends Fragment {
                             //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
                             if (j == 3) {
                                 totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
-                                }
+                            }
 
                         }
                     }
@@ -245,8 +247,6 @@ public class HomeFragment extends Fragment {
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
                             expense = Double.toString(totalIncome);
-                            Intent in = new Intent(getContext(), addExpenses.class);
-                            startActivity(in);
                         }
                     }
                 }
@@ -306,9 +306,21 @@ public class HomeFragment extends Fragment {
         Bundle pass_to_profile = new Bundle();
         pass_to_profile.putString("total_expense",expense);
         pass_to_profile.putString("total_income",income);
-//        Intent passtoProfile =  new Intent(getContext(),ProfileActivity.class);
-//        passtoProfile.putExtras(pass_to_profile);
-//        startActivity(passtoProfile);
+
+        String data_to_write = expense +","+ income;
+
+        try{
+            FileOutputStream fout = getContext().openFileOutput(file_name, Context.MODE_APPEND);
+//                    fout.write(("").getBytes());
+            fout.write(data_to_write.getBytes());
+            fout.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("1: " + e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("2: " + e.getMessage());
+        }
         return root;
     }
 
