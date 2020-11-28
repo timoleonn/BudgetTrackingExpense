@@ -125,11 +125,13 @@ public class RegisterActivity extends AppCompatActivity  {
             }
 
             fin.close();
-            Toast.makeText(getApplicationContext(), "You didn't loose anything, all data is still here!", Toast.LENGTH_LONG).show();
+            StyleableToast.makeText(getApplicationContext(),  "You didn't loose anything, all data is still here!", Toast.LENGTH_LONG, R.style.customToast).show();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
 
         //  LOGIN HERE
@@ -174,10 +176,10 @@ public class RegisterActivity extends AppCompatActivity  {
                     fout.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Oops, something went wrong.", Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(getApplicationContext(),  "Oops, something went wrong.", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Oops, something went wrong.", Toast.LENGTH_LONG).show();
+                    StyleableToast.makeText(getApplicationContext(),  "Oops, something went wrong.", Toast.LENGTH_LONG, R.style.mistakeToast).show();;
                 }
 
                 Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -241,17 +243,17 @@ public class RegisterActivity extends AppCompatActivity  {
                                                 fout.close();
                                             } catch (Exception ex) {
                                                 ex.printStackTrace();
-                                                Toast.makeText(getApplicationContext(),"Oops, Something went wrong",Toast.LENGTH_LONG).show();
+                                                StyleableToast.makeText(getApplicationContext(),  "Oops, something went wrong.", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                                             }
 
                                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                         } else {
-                                            Toast.makeText(RegisterActivity.this, "The user  was not registered succesfully",Toast.LENGTH_SHORT);
+                                            StyleableToast.makeText(RegisterActivity.this,  "The user  was not registered succesfully", Toast.LENGTH_LONG, R.style.mistakeToast).show();
                                         }
                                     }
                                 });
                             } else {
-                                Toast.makeText(getApplicationContext(), "Error: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                StyleableToast.makeText(getApplicationContext(),"Error: " + task.getException().getMessage(), Toast.LENGTH_LONG, R.style.mistakeToast).show();
                                 pb2.setVisibility(View.INVISIBLE);
                             }
                         }
