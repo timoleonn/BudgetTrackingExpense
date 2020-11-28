@@ -54,17 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //  CHECK IF FUN FACT SERVICE IS RUNNING
-        SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
-        System.out.println("VALUE: " + sharedPreferences.getBoolean("value", false));
-
-        Intent serviceIntent = new Intent(MainActivity.this, AdService.class);
-        if (sharedPreferences.getBoolean("value", false) == true) {
-            startService(serviceIntent);
-        } else {
-            stopService(serviceIntent);
-        }
-
         //  GRAB INTENT FROM: ADD INCOME OR ADD EXPENSE
         Intent in = getIntent();
         if (in.hasExtra(add_income.SUCCESS_MESSAGE_ADD_INCOME)) {
