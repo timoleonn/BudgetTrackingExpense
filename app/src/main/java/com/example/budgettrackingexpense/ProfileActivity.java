@@ -33,13 +33,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity {
-    FirebaseDatabase database;
     DatabaseReference userRef;
     String USER ="users";
-    String fileName="totals.txt";
-    String currency_file_name = "Currency.txt";
-    String income , expense;
-    TextView month,day,year;
+    TextView day;
 
 
     @Override
@@ -55,12 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.tvemail);
         TextView country = findViewById(R.id.tvcountry);
         ImageView profile_image = findViewById(R.id.profile_image);
-         month = findViewById(R.id.month);
-         year = findViewById(R.id.year);
          day = findViewById(R.id.day);
-
-//        TextView expense_label = findViewById(R.id.expense_label);
-//        TextView income_label = findViewById(R.id.income_label);
 
         //  GET CURRENT USER
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -105,8 +96,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         //  READ INCOME AND EXPENSE
-//        expense_label.setText(HomeFragment.Global.global_expense);
-//        income_label.setText(HomeFragment.Global.global_income);
 
         Date currentTime = Calendar.getInstance().getTime();
         String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
@@ -114,13 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
         String[] splitDate =formattedDate.split(",");
         Log.d("myLOG", currentTime.toString());
         Log.d("myLOG", formattedDate);
-        year.setText(splitDate[2]);
-        month.setText(splitDate[1]);
-        day.setText(splitDate[0]);
-
-        Log.d("myLOG", splitDate[0].trim());
-        Log.d("myLOG", splitDate[1].trim());
-        Log.d("myLOG", splitDate[2].trim());
+        day.setText(formattedDate);
     }
     public void goBack(View v)
     {
@@ -128,9 +111,4 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(in);
 
     }
-
-//    public void goToBanks(View v)
-//    {
-//        startActivity(new Intent(this,MyBanksFragment.class));
-//    }
 }
