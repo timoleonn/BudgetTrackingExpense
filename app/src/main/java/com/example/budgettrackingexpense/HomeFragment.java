@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -186,7 +187,7 @@ public class HomeFragment extends Fragment {
                             //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
                             if (j == 3) {
                                 totalExpenses += Double.parseDouble((String) finalArrayList.get(i).get(3));
-                                }
+                            }
 
                         }
                     }
@@ -246,8 +247,6 @@ public class HomeFragment extends Fragment {
                         if (j == 2) {
                             totalIncome += Double.parseDouble((String) incomeArrayList.get(i).get(2));
                             expense = Double.toString(totalIncome);
-                            Intent in = new Intent(getContext(), addExpenses.class);
-                            startActivity(in);
                         }
                     }
                 }
