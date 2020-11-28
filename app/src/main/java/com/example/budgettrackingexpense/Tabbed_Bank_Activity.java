@@ -23,6 +23,11 @@ public class Tabbed_Bank_Activity extends AppCompatActivity {
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
+
+        int defaultPageFromMyBanks = 0;
+        int page = getIntent().getIntExtra("page", defaultPageFromMyBanks);
+        viewPager.setCurrentItem(page);
+
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fabGoToBanks);
