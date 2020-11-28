@@ -38,7 +38,7 @@ public class addExpenses extends AppCompatActivity {
     public static String NO_CATEGORY_MESSAGE = "";
     EditText note, amount;
     DatePickerDialog.OnDateSetListener setListener;
-
+    TextView date;
     String file_name = "expenses_3.txt";
     Double new_total,new_amount;
     @Override
