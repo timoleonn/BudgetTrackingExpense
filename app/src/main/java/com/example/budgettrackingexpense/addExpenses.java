@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -39,7 +40,9 @@ public class addExpenses extends AppCompatActivity {
     EditText note, amount;
     TextView date;
     String file_name = "expenses_3.txt";
+    String currency_file_name="Currency.txt";
     Double new_total,new_amount;
+    String currencySymbol = "";
     Boolean dateIsFilled =false, notesAreFilled = false, amountIsFilled = false;
 
     @Override
@@ -191,6 +194,33 @@ public class addExpenses extends AppCompatActivity {
 
                 // GRAB THE DATA FROM THE FORM
                 String data_to_write = date.getText().toString() + "," + spinner.getSelectedItem().toString() + "," + note.getText().toString() + "," + amount.getText().toString() + "\n";
+                //CHOOSE THE RIGHT CURRENCY
+                try {
+                    FileInputStream fin = getApplicationContext().openFileInput(currency_file_name);
+                    DataInputStream din = new DataInputStream(fin);
+                    InputStreamReader isr = new InputStreamReader(din);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        if (!line.isEmpty()) {
+                            currencySymbol = line;
+                        }
+                    }
+                    br.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Oops, something went wrong!", Toast.LENGTH_LONG).show();
+                }
+
+                if (currencySymbol == "EUR") {
+                    currencySymbol = "€";
+                } else if (currencySymbol == "USD") {
+                    currencySymbol = "$";
+                } else if (currencySymbol == "GBP") {
+                    currencySymbol = "£";
+                }
 
                 try {
                     FileOutputStream fout = openFileOutput(file_name, MODE_APPEND);
@@ -201,7 +231,7 @@ public class addExpenses extends AppCompatActivity {
                     Bundle total = pass_total.getExtras();
                     new_amount= Double.parseDouble(amount.getText().toString());
                     new_total = Double.parseDouble(total.getString("total_expense")) + new_amount;
-                    String total_expense = "Your total expenses is:  "+ new_total.toString() +" euros!";
+                    String total_expense = "Your total expenses is:  "+ new_total.toString() +" "+ currencySymbol;
                     NotificationCompat.Builder notification = new NotificationCompat.Builder(addExpenses.this,"My notification");
                     notification.setSmallIcon(R.drawable.notifications);
                     notification.setContentTitle("You have a new notification");
@@ -222,6 +252,8 @@ public class addExpenses extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     @Override
