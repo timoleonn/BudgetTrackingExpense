@@ -41,6 +41,7 @@ import java.util.Date;
 public class addExpenses extends AppCompatActivity {
 
     public static String SUCCESS_MESSAGE_ADD_EXPENSE = "";
+    public static String NO_CATEGORY_MESSAGE = "";
     EditText  date, note, amount;
     DatePickerDialog.OnDateSetListener setListener;
 
@@ -59,7 +60,6 @@ public class addExpenses extends AppCompatActivity {
         amount = findViewById(R.id.etExpense);
 
         Spinner spinner = findViewById(R.id.spinner);
-
 
         //  CREATE ARRAY LIST OF STRINGS FOR CATEGORIES
         ArrayList<String> categories = new ArrayList();
@@ -85,9 +85,19 @@ public class addExpenses extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //  CHECK IF CATEGORIES IS EMPTY, IF SO INTENT TO ADD A CATEGORY
+        if (categories.isEmpty()) {
+            String noCategoryMessage = "Please add a category first before adding an expense!";
+            Intent in = new Intent(addExpenses.this, AddCategoryActivity.class);
+            in.putExtra(NO_CATEGORY_MESSAGE, noCategoryMessage);
+            startActivity(in);
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+
 
         Button btnAddExpenses = findViewById(R.id.btnAddExpenses);
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +36,13 @@ public class AddCategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
+
+        //  GRAB INTENT FROM ADD EXPENSES WHEN THERE ARE NO CATEGORIES
+        Intent in = getIntent();
+        if (in.hasExtra(addExpenses.NO_CATEGORY_MESSAGE)) {
+            String NO_CATEGORY_MESSAGE = in.getStringExtra(addExpenses.NO_CATEGORY_MESSAGE);
+            Toast.makeText(getApplicationContext(), NO_CATEGORY_MESSAGE, Toast.LENGTH_LONG).show();
+        }
 
         etCategoryName = findViewById(R.id.etCategoryName);
         etBudget = findViewById(R.id.etBudget);
