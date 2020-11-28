@@ -36,11 +36,12 @@ public class HomeFragment extends Fragment {
     double totalExpenses = 0;
     double totalIncome = 0;
     String expense, income;
-    String file_name = "expenses_2.txt";
+    String file_name = "expenses_3.txt";
     String income_file_name = "income.txt";
     String fileName ="total.txt";
     String currency_file_name = "Currency.txt";
     String currencySymbol = "";
+    Double expenseSum = 0.0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -191,16 +192,20 @@ public class HomeFragment extends Fragment {
                                     expensePerCategory[category_count] += Double.parseDouble((String) finalArrayList.get(i).get(3));
                                 }
                             }
-                            //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
-                            if (j == 3) {
-                                totalExpenses += (Double.parseDouble((String) finalArrayList.get(i).get(3)));
-                                System.out.println("OMG: " + totalExpenses);
-                            }
+//                            //  J == 3 MEANS THAT WE ARE CHECKING THE EXPENSE COLUMN IN THE LIST OF EXPENSES
+//                            if (j == 3) {
+//                                totalExpenses += (Double.parseDouble((String) finalArrayList.get(i).get(3)));
+//                                System.out.println("OMG: " + totalExpenses);
+//                            }
 
                         }
                     }
                     category_count++;
                 }
+                for (int i = 0; i < expensePerCategory.length; i++) {
+                    expenseSum += expensePerCategory[i];
+                }
+                System.out.println("EXPENSE SUM: " + expenseSum);
             } else {
                 expensePerCategory = null;
             }
@@ -295,7 +300,7 @@ public class HomeFragment extends Fragment {
         });
 
         //  SET TOTAL EXPENSES AND TOTAL INCOME TEXT
-        tvTotalExpenses.setText(currencySymbol + " " + totalExpenses);
+        tvTotalExpenses.setText(currencySymbol + " " + expenseSum);
         tvTotalIncome.setText(currencySymbol + " " + totalIncome);
 
         PieDataSet pieDataSet = new PieDataSet(pieChartDataSet(categories, expensePerCategory), "");

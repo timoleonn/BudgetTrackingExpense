@@ -3,10 +3,12 @@ package com.example.budgettrackingexpense;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -38,9 +40,133 @@ public class Settings extends AppCompatActivity {
 
         Switch swFunfacts = findViewById(R.id.swFunfacts);
 
+        CheckBox cbCyprus = findViewById(R.id.cbCyprus);
+        CheckBox cbHellenic = findViewById(R.id.cbHellenic);
+        CheckBox cbRcb = findViewById(R.id.cbRcb);
+        CheckBox cbAstro = findViewById(R.id.cbAstro);
+        CheckBox cbAlpha = findViewById(R.id.cbAlpha);
+
+        //  SAVE CHECKBOX STATE
+        SharedPreferences cbCyprusSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editorCyprus = cbCyprusSharedPreferences.edit();
+        if (cbCyprusSharedPreferences.getBoolean("checkedCyprus", false) == true) {
+            cbCyprus.setChecked(true);
+            System.out.println("Cyprus 1");
+        } else {
+            System.out.println(cbCyprusSharedPreferences.contains("checkedCyprus"));
+            System.out.println(cbCyprusSharedPreferences.getBoolean("checkedCyprus", false) == true);
+            cbCyprus.setChecked(false);
+            System.out.println("Cyprus 2");
+        }
+        cbCyprus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbCyprus.isChecked()) {
+                    System.out.println("Tim1");
+                    editorCyprus.putBoolean("checkedCyprus", true);
+                } else {
+                    System.out.println("Tim2");
+                    editorCyprus.putBoolean("checkedCyprus", false);
+                }
+                editorCyprus.apply();
+            }
+        });
+
+
+        SharedPreferences cbHellenicSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editorHellenic = cbHellenicSharedPreferences.edit();
+        if (cbHellenicSharedPreferences.getBoolean("checkedHellenic", false) == true) {
+            cbHellenic.setChecked(true);
+            System.out.println("Cyprus 3");
+        } else {
+            cbHellenic.setChecked(false);
+            System.out.println("Cyprus 4");
+        }
+        cbHellenic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbHellenic.isChecked()) {
+                    editorHellenic.putBoolean("checkedHellenic", true);
+                    editorHellenic.apply();
+                } else {
+                    editorHellenic.putBoolean("checkedHellenic", false);
+                    editorHellenic.apply();
+                }
+            }
+        });
+
+
+        SharedPreferences cbRcbSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editorRcb = cbRcbSharedPreferences.edit();
+        if (cbRcbSharedPreferences.getBoolean("checkedRcb", false) == true) {
+            cbRcb.setChecked(true);
+            System.out.println("Cyprus 5");
+        } else {
+            cbRcb.setChecked(false);
+            System.out.println("Cyprus 6");
+        }
+        cbRcb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbRcb.isChecked()) {
+                    editorRcb.putBoolean("checkedRcb", true);
+                    editorRcb.apply();
+                } else {
+                    editorRcb.putBoolean("checkedRcb", false);
+                    editorRcb.apply();
+                }
+            }
+        });
+
+        SharedPreferences cbAstroSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editorAstro = cbAstroSharedPreferences.edit();
+        if (cbAstroSharedPreferences.getBoolean("checkedAstro", false) == true) {
+            cbAstro.setChecked(true);
+            System.out.println("Cyprus 7");
+        } else {
+            cbAstro.setChecked(false);
+            System.out.println("Cyprus 8");
+        }
+        cbAstro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbAstro.isChecked()) {
+                    editorAstro.putBoolean("checkedAstro", true);
+                    editorAstro.apply();
+                } else {
+                    editorAstro.putBoolean("checkedAstro", false);
+                    editorAstro.apply();
+                }
+            }
+        });
+
+        SharedPreferences cbAlphaSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editorAlpha = cbAlphaSharedPreferences.edit();
+        if (cbAlphaSharedPreferences.getBoolean("checkedAlpha", false) == true) {
+            cbAlpha.setChecked(true);
+            System.out.println("Cyprus 9");
+        } else {
+            cbAlpha.setChecked(false);
+            System.out.println("Cyprus 10");
+        }
+        cbAlpha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbAlpha.isChecked()) {
+                    editorAlpha.putBoolean("checkedAlpha", true);
+                    editorAlpha.apply();
+                } else {
+                    editorAlpha.putBoolean("checkedAlpha", false);
+                    editorAlpha.apply();
+                }
+            }
+        });
+
         //  SAVE SWITCH STATE IN SHARED PREFERENCES
         SharedPreferences sharedPreferences = getSharedPreferences("swFunFacts", MODE_PRIVATE);
         swFunfacts.setChecked(sharedPreferences.getBoolean("value", false));
+
+
 
         //  CHECK IF FUN FACT SERVICE IS RUNNING
         Intent serviceIntent = new Intent(Settings.this, AdService.class);
@@ -217,6 +343,5 @@ public class Settings extends AppCompatActivity {
             StyleableToast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG, R.style.mistakeToast).show();
 
         }
-
     }
 }

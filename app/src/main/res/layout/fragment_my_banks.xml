@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,40 +30,65 @@
         android:id="@+id/cbcyprus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:onClick="cyprus"
-        android:text="Bank of Cyprus" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="Bank of Cyprus"
+        app:cornerRadius="15dp" />
 
     <Button
         android:id="@+id/cbhellenic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:onClick="hellenic"
-        android:text="Hellenic Bank" />
-
-    <Button
-        android:id="@+id/cbalpha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:onClick="alpha"
-        android:text="Alpha Bank" />
-
-    <Button
-        android:id="@+id/cbastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:onClick="astro"
-        android:text="AstroBank" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="Hellenic Bank"
+        app:cornerRadius="15dp"/>
 
     <Button
         android:id="@+id/rcb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:onClick="rcb"
-        android:text="RCB Bank" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="RCB Bank"
+        app:cornerRadius="15dp"/>
+
+    <Button
+        android:id="@+id/cbastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="AstroBank"
+        app:cornerRadius="15dp"/>
+
+    <Button
+        android:id="@+id/cbalpha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="Alpha Bank"
+        app:cornerRadius="15dp"/>
 
 </LinearLayout>
